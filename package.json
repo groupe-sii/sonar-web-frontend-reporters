@@ -1,0 +1,15 @@
+{
+  "devDependencies": {
+    "gulp": "^3.6.0",
+    "gulp-csslint": "^0.1.4",
+    "gulp-htmlhint": "^0.0.8",
+    "gulp-jshint": "^1.7.1",
+    "gulp-istanbul": "^0.2.0",
+    "gulp-clean": "^0.2.4",
+    "gulp-karma": "^0.0.4",
+    "gulp-load-plugins": "^0.7.1",
+    "gulp-util": "^2.2.20",
+    "map-stream": "^0.0.5"
+  }
+}
+
