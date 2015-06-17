@@ -7,7 +7,7 @@ var jsSources = ['../app/scripts/**/*.js'];
 var htmlSources = ["../app/*.html"];
 
 // path to the report generation folder ending with /
-var reportsPath = "report";
+var reportsPath = "report/";
 
 var gulp = require('gulp');
 var $ = require('gulp-load-plugins')();
