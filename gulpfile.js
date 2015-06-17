@@ -1,16 +1,19 @@
-var projectName = "Devoxx-Game";
-var projectPath = "/var/lib/jenkins/workspace/devoxx-game-front/";
+var projectName = "<project name>";
+var projectPath = "<path to the project>";
 
+// path to source files
 var cssSources = ['../app/styles/*.css'];
 var jsSources = ['../app/scripts/**/*.js'];
 var htmlSources = ["../app/*.html"];
 
+// path to the report generation folder ending with /
+var reportsPath = "report";
 
 var gulp = require('gulp');
 var $ = require('gulp-load-plugins')();
     
 var CSSReporter = require("./cssReporter.js");
-var cssReporter = new CSSReporter("cssHint.json");
+var cssReporter = new CSSReporter(reportsPath+"cssHint.json");
 gulp.task('styles', function() {
   cssReporter.openReporter(projectName, projectPath);
   return gulp.src(cssSources)
@@ -20,7 +23,7 @@ gulp.task('styles', function() {
 });
 
 var JSReporter = require("./jsReporter.js");
-var jsReporter = new JSReporter("jsHint.json");
+var jsReporter = new JSReporter(reportsPath+"jsHint.json");
 gulp.task('scripts', function() {
   jsReporter.openReporter(projectName, projectPath);
   return gulp.src(jsSources)
@@ -31,7 +34,7 @@ gulp.task('scripts', function() {
 });
 
 var HTMLReporter = require("./htmlReporter.js");
-var htmlReporter = new HTMLReporter("htmlHint.json");
+var htmlReporter = new HTMLReporter(reportsPath+"htmlHint.json");
 gulp.task('html', function() {
   htmlReporter.openReporter(projectName, projectPath);
   return gulp.src(htmlSources)
