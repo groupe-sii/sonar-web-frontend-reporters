@@ -24,7 +24,7 @@
     "url": "https://github.com/groupe-sii/sonar-web-frontend-reporters/issues"
   },
   "homepage": "https://github.com/groupe-sii/sonar-web-frontend-reporters#readme",
-  "devDependencies": {
+  "dependencies": {
     "eslint-plugin-angular": "^0.12.0",
     "gulp": "^3.6.0",
     "gulp-clean": "^0.2.4",
