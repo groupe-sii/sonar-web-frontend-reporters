@@ -6,7 +6,7 @@ var Model = require('./reporterModel'),
     os = require('os'),
     inherits = require('util').inherits,
 
-    BASE_PROJECT = path.normalize(__dirname + ((os.platform() === 'win32' || os.platform() === 'win64') ? '\\..\\..' : '/../..'));
+    BASE_PROJECT = path.normalize(__dirname);
 
 function ESLintReporter(reportFile) {
     Model.call(this, reportFile);
@@ -35,8 +35,8 @@ ESLintReporter.prototype.reporter = function(results) {
         var file = results[i];
         readFile(file.filePath).then(function(data) {
             var fileNbViolations = global.selfESR.openFileIssues({
-                    path: file.filePath,
-                    contents: data,
+                    path : file.filePath,
+		    contents: data,
                     cwd: BASE_PROJECT
                 }, null, /^(\s+)?\n$/gm),
                 errorCount = file.messages.length,
@@ -66,7 +66,7 @@ ESLintReporter.prototype.reporter = function(results) {
                 }
                 ruleId = message.ruleId.replace('angular/', '');
                 fs.appendFileSync(global.selfESR.reportFile, '{\n\t\t"line" : ' + message.line + ',\n\t\t' +
-                    '"message" : "' + message.message + '",\n\t\t' +
+                    '"message" : "' + message.message.replace(/["']/g, '\'') + '",\n\t\t' +
                     '"description" : "",\n\t\t' +
                     '"rulekey" : "' + ruleId + '",\n\t\t' +
                     '"severity" : "' + severity + '",\n\t\t' +

@@ -37,8 +37,8 @@ SCSSReporter.prototype.reporter = function(file, stream) {
             }
 
             fs.appendFileSync(global.selfSCSSR.reportFile, '{\n\t\t"line" : ' + (result.line ? result.line : null) + ',\n\t\t' +
-                '"message" : "' + result.reason + '",\n\t\t' +
-                '"description" : "' + result.reason + '",\n\t\t' +
+                '"message" : "' + result.reason.replace(/["']/g, '\'') + '",\n\t\t' +
+                '"description" : "' + result.reason.replace(/["']/g, '\'') + '",\n\t\t' +
                 '"rulekey" : "' + result.linter + '",\n\t\t' +
                 '"severity" : "' + severity + '",\n\t\t' +
                 '"reporter" : "scsslint",\n\t\t' +

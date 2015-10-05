@@ -1,25 +1,28 @@
-var projectName = "<project name>";
-var projectPath = "<path to the project>";
+var projectName = "Dream-It";
+var projectPath = "/home/swat/Dream-It-webapp/src";
 
 // path to source files
-var cssSources = ['../app/styles/*.css'];
-var jsSources = ['../app/scripts/**/*.js'];
-var htmlSources = ["../app/*.html"];
+var scssSources = ['../src/{app, components}/**/*.scss'];
+var jsSources = ['../src/{app, components}/**/*.js'];
+var htmlSources = ["../src/{app, components}/**/*.html"];
 
 // path to the report generation folder ending with /
 var reportsPath = "report/";
 
 var gulp = require('gulp');
-var $ = require('gulp-load-plugins')();
+var $ = require('gulp-load-plugins')({
+        pattern: ['gulp-*']
+    });
     
-var CSSReporter = require("./cssReporter.js");
-var cssReporter = new CSSReporter(reportsPath+"cssHint.json");
+var SCSSReporter = require("./scssReporter.js");
+var scssReporter = new SCSSReporter(reportsPath+"scssHint.json");
 gulp.task('styles', function() {
-  cssReporter.openReporter(projectName, projectPath);
-  return gulp.src(cssSources)
-    .pipe($.csslint())
-    .pipe($.csslint.reporter(cssReporter.reporter.bind(cssReporter)))
-    .on('end', cssReporter.closeReporter.bind(cssReporter));
+  scssReporter.openReporter(projectName, projectPath);
+  return gulp.src(scssSources)
+    .pipe($.scssLint({
+	customReport: scssReporter.reporter.bind(scssReporter)	
+    }))
+    .on('end', scssReporter.closeReporter.bind(scssReporter));
 });
 
 var JSReporter = require("./jsReporter.js");
@@ -30,6 +33,21 @@ gulp.task('scripts', function() {
     .pipe($.jshint())
     .pipe(jsReporter.reporter)
     .on('end', jsReporter.closeReporter.bind(jsReporter));
+    ;
+});
+
+
+
+var ESReporter = require("./esLintReporter.js");
+var esReporter = new ESReporter(reportsPath+"eslint-angular.json");
+gulp.task('eslint', function() {
+  esReporter.openReporter(projectName, projectPath);
+  return gulp.src(jsSources)
+    .pipe($.eslint({
+		reset: true
+	}))
+    .pipe($.eslint.format(esReporter.reporter))
+    //.on('end', esReporter.closeReporter.bind(esReporter));
     ;
 });
 
@@ -46,10 +64,10 @@ gulp.task('html', function() {
 });
 
 gulp.task('clean', function() {
-  return gulp.src(['csslint.txt'], {read: false})
-    .pipe($.clean());
+    return gulp.src(['report/*', 'coverage/*'])
+    .pipe($.clean())
 });
 
 gulp.task('default', ['clean'], function() {
-    gulp.start('styles', 'scripts', 'html');
+    gulp.start('styles', 'scripts', 'eslint', 'html');
 });
