@@ -1,5 +1,31 @@
 {
+  "name": "sonar-web-frontend-reporters",
+  "description": "This is a repo of SII continuous integration build system dedicated to Front-end webapps. This repo provides all the reporters written by SII for the generic [Sonarqube plugin](https://github.com/groupe-sii/sonar-web-client-plugin)",
+  "version": "1.0.0",
+  "main": "sonarWebReporters.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/groupe-sii/sonar-web-frontend-reporters.git"
+  },
+  "keywords": [
+    "reporters",
+    "jshint",
+    "scsslint",
+    "csslint",
+    "htmlhint",
+    "eslint"
+  ],
+  "author": "Cédric Le Gallo <cedric.legallo@gmail.com> (http://www.groupe-sii.com/)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/groupe-sii/sonar-web-frontend-reporters/issues"
+  },
+  "homepage": "https://github.com/groupe-sii/sonar-web-frontend-reporters#readme",
   "devDependencies": {
+    "eslint-plugin-angular": "^0.12.0",
     "gulp": "^3.6.0",
     "gulp-clean": "^0.2.4",
     "gulp-csslint": "^0.1.4",
@@ -19,6 +45,7 @@
     "karma-junit-sonarqube-reporter": "0.0.1",
     "karma-phantomjs-launcher": "^0.2.1",
     "map-stream": "^0.0.5",
-    "phantomjs": "^1.9.18"
+    "phantomjs": "^1.9.18",
+    "q": "^1.4.1"
   }
 }

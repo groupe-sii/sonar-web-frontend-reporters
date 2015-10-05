@@ -1,3 +1,4 @@
+//sample gulpfile
 var projectName = "Dream-It";
 var projectPath = "/home/swat/Dream-It-webapp/src";
 
@@ -13,20 +14,19 @@ var gulp = require('gulp');
 var $ = require('gulp-load-plugins')({
         pattern: ['gulp-*']
     });
+var SonarWebReporters = require("./sonarWebReporters.js");
     
-var SCSSReporter = require("./scssReporter.js");
-var scssReporter = new SCSSReporter(reportsPath+"scssHint.json");
+var scssReporter = new SonarWebReporters.SCSSReporter(reportsPath+"scssHint.json");
 gulp.task('styles', function() {
   scssReporter.openReporter(projectName, projectPath);
   return gulp.src(scssSources)
     .pipe($.scssLint({
-	customReport: scssReporter.reporter.bind(scssReporter)	
+  customReport: scssReporter.reporter.bind(scssReporter)  
     }))
     .on('end', scssReporter.closeReporter.bind(scssReporter));
 });
 
-var JSReporter = require("./jsReporter.js");
-var jsReporter = new JSReporter(reportsPath+"jsHint.json");
+var jsReporter = new SonarWebReporters.JSReporter(reportsPath+"jsHint.json");
 gulp.task('scripts', function() {
   jsReporter.openReporter(projectName, projectPath);
   return gulp.src(jsSources)
@@ -38,21 +38,19 @@ gulp.task('scripts', function() {
 
 
 
-var ESReporter = require("./esLintReporter.js");
-var esReporter = new ESReporter(reportsPath+"eslint-angular.json");
+var esReporter = new SonarWebReporters.ESReporter(reportsPath+"eslint-angular.json");
 gulp.task('eslint', function() {
   esReporter.openReporter(projectName, projectPath);
   return gulp.src(jsSources)
     .pipe($.eslint({
-		reset: true
-	}))
+    reset: true
+  }))
     .pipe($.eslint.format(esReporter.reporter))
     //.on('end', esReporter.closeReporter.bind(esReporter));
     ;
 });
 
-var HTMLReporter = require("./htmlReporter.js");
-var htmlReporter = new HTMLReporter(reportsPath+"htmlHint.json");
+var htmlReporter = new SonarWebReporters.HTMLReporter(reportsPath+"htmlHint.json");
 gulp.task('html', function() {
   htmlReporter.openReporter(projectName, projectPath);
   return gulp.src(htmlSources)
