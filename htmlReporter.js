@@ -28,12 +28,12 @@ HTMLReporter.prototype.reporter = function(file) {
                 break;
             case 'warning':
                 severity = 'MINOR';
-                nbViolations[self.MINOR]++;
+                self.nbViolations[self.MINOR]++;
                 fileNbViolations[self.MINOR]++;
                 break;
             default:
                 severity = 'INFO';
-                nbViolations[self.INFO]++;
+                self.nbViolations[self.INFO]++;
                 fileNbViolations[self.INFO]++;
                 break;
         }
@@ -49,5 +49,4 @@ HTMLReporter.prototype.reporter = function(file) {
     this.closeFileIssues(fileNbViolations);
 };
 
-console.log(HTMLReporter.prototype.reporter);
 module.exports = HTMLReporter;
