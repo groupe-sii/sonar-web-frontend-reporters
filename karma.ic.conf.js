@@ -81,7 +81,7 @@ module.exports = function(config) {
     plugins: [
 	'karma-jasmine'
 	//, 'karma-junit-reporter'
-        , 'karma-junit-sonarqube-reporter'
+    , 'karma-junit7-sonarqube-reporter'
 	, 'ec-karma-junit-reporter23'
 	, 'karma-coverage'
 	, 'karma-bower'
