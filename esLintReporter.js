@@ -8,9 +8,10 @@ var Model = require('./reporterModel'),
 
     BASE_PROJECT = path.normalize(__dirname);
 
-function ESLintReporter(reportFile) {
+function ESLintReporter(reportFile, base) {
     Model.call(this, reportFile);
     global.selfESR = this;
+    global.base = base || BASE_PROJECT;
 }
 
 inherits(ESLintReporter, Model);
@@ -37,7 +38,7 @@ ESLintReporter.prototype.reporter = function(results) {
             var fileNbViolations = global.selfESR.openFileIssues({
                     path : file.filePath,
 		    contents: data,
-                    cwd: BASE_PROJECT
+                    base: global.base
                 }, null, /^(\s+)?\n$/gm),
                 errorCount = file.messages.length,
                 d = (new Date()).getTime(),
