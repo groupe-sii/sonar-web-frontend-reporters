@@ -6,12 +6,12 @@ var Model = require('./reporterModel'),
     os = require('os'),
     inherits = require('util').inherits,
 
-    BASE_PROJECT = path.normalize(__dirname);
+    BASE_PROJECT = path.normalize(__dirname.substring(0, __dirname.indexOf('/node_')+1));
 
 function ESLintReporter(reportFile, base) {
     Model.call(this, reportFile);
     global.selfESR = this;
-    global.base = base || BASE_PROJECT;
+    global.base = BASE_PROJECT + base;
 }
 
 inherits(ESLintReporter, Model);
