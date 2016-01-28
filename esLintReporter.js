@@ -69,7 +69,7 @@ ESLintReporter.prototype.reporter = function(results) {
                 fs.appendFileSync(global.selfESR.reportFile, '{\n\t\t"line" : ' + message.line + ',\n\t\t' +
                     '"message" : "' + message.message.replace(/["']/g, '\'') + '",\n\t\t' +
                     '"description" : "",\n\t\t' +
-                    '"rulekey" : "' + ruleId + '",\n\t\t' +
+                    '"rulekey" : "ng_' + ruleId.replace(/-/g, '_') + '",\n\t\t' +
                     '"severity" : "' + severity + '",\n\t\t' +
                     '"reporter" : "eslint",\n\t\t' +
                     '"creationDate" : ' + d + '\n\t\t' + ((index < errorCount - 1) ? '},' : '}'));
