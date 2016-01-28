@@ -11,7 +11,7 @@ var Model = require('./reporterModel'),
 function ESLintReporter(reportFile, base) {
     Model.call(this, reportFile);
     global.selfESR = this;
-    global.base = BASE_PROJECT + base;
+    global.base = BASE_PROJECT + base + path.sep;
 }
 
 inherits(ESLintReporter, Model);
@@ -36,8 +36,8 @@ ESLintReporter.prototype.reporter = function(results) {
         var file = results[i];
         readFile(file.filePath).then(function(data) {
             var fileNbViolations = global.selfESR.openFileIssues({
-                    path : file.filePath,
-		    contents: data,
+                    path : BASE_PROJECT + file.filePath,
+                    contents: data,
                     base: global.base
                 }, null, /^(\s+)?\n$/gm),
                 errorCount = file.messages.length,
