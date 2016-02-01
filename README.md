@@ -3,7 +3,7 @@ This is a repo of SII continuous integration build system dedicated to Front-end
 
 # Tutorial
 
-An exaple project is available here : https://github.com/groupe-sii/sonar-web-frontend-helloworld
+An example project is available here : https://github.com/groupe-sii/sonar-web-frontend-helloworld
 
 # Informations for Sonarqube
 The export file for Sonarqube is a JSON file providing all informations a Sonarqube issue might have :
