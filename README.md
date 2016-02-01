@@ -1,6 +1,10 @@
 # front-end-continuous-integration
 This is a repo of SII continuous integration build system dedicated to Front-end webapps. This repo provides all the reporters written by SII for the generic [Sonarqube plugin](https://github.com/groupe-sii/sonar-web-client-plugin)
 
+# Tutorial
+
+An exaple project is available here : https://github.com/groupe-sii/sonar-web-frontend-helloworld
+
 # Informations for Sonarqube
 The export file for Sonarqube is a JSON file providing all informations a Sonarqube issue might have :
 * Project Description
