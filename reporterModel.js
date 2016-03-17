@@ -3,6 +3,8 @@ var fs = require('fs'),
     path = require('path'),
     version = '1.1.0';
 
+    BASE_PROJECT = path.normalize(__dirname.substring(0, __dirname.indexOf('/node_')+1));
+
 function ReporterModel(reportFile) {
     this.nbFiles = 0;
     this.nbComments = 0;
@@ -20,11 +22,11 @@ ReporterModel.prototype.MAJOR = 2;
 ReporterModel.prototype.MINOR = 3;
 ReporterModel.prototype.INFO = 4;
 
-ReporterModel.prototype.openReporter = function(projectName, projectPath, projectType) {
+ReporterModel.prototype.openReporter = function(projectName, projectType) {
     fs.writeFileSync(this.reportFile, '{\n' +
         '"language" : "' + projectType + '",\n' +
         '"project" : "' + projectName + '",\n' +
-        '"projectPath" : "' + projectPath + '",\n' +
+        '"projectPath" : "' + BASE_PROJECT + '",\n' +
         '"version" : "' + version + '",\n' +
         '"files" : [');
 };
