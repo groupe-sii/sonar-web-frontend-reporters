@@ -36,7 +36,7 @@ ESLintReporter.prototype.reporter = function(results) {
         var file = results[i];
         readFile(file.filePath).then(function(data) {
             var fileNbViolations = global.selfESR.openFileIssues({
-                    path : file.filePath,
+                    path : BASE_PROJECT + file.filePath,
                     contents: data,
                     base: global.selfESR.base
                 }, null, /^(\s+)?\n$/gm),
