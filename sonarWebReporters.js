@@ -1,7 +1,16 @@
 'use strict';
 
 var gulp = require('gulp'),
+		mkdirp = require('mkdirp'),
+		fs = require('fs'),
 		run = require('run-sequence');
+
+function createReportPath(reportPath){
+	var path = reportPath.substring(0,reportPath.lastIndexOf("/"));
+	if (!fs.existsSync(path)){
+		mkdirp.sync(path);
+	}
+}
 
 function SonarWebReporters() {
 		this.SCSSReporter = require('./scssReporter.js');
@@ -15,9 +24,10 @@ function SonarWebReporters() {
 			if (options.css){
 				var csslint = require('gulp-csslint'),
 					cssSources = options.css.src || options.css.sources || "src/**/*.css",
-					cssPath = options.css.report || "csslint.json",
+					cssPath = options.css.report || "reports/sonar/csslint.json",
 					cssTask = options.css.task || "ci-csslint",
 					cssReporter = new this.CSSReporter(cssPath);
+					createReportPath(cssPath);
 
 					gulp.task(cssTask, function() {
 							cssReporter.openReporter(projectName, cssPath);
@@ -26,16 +36,16 @@ function SonarWebReporters() {
 									.pipe(csslint.reporter(cssReporter.reporter.bind(cssReporter)))
 									.on('end', cssReporter.closeReporter.bind(cssReporter));
 					});
-
 					tasks.push(cssTask);
-				
 			}
+
 			if (options.scss){
 				var scsslint = require('gulp-scss-lint'),
 					scssSources = options.scss.src || options.scss.sources || "src/**/*.scss",
-					scssPath = options.scss.report || "scsslint.json",
+					scssPath = options.scss.report || "reports/sonar/scsslint.json",
 					scssTask = options.scss.task || "ci-scsslint",
 					scssReporter = new this.SCSSReporter(scssPath);
+					createReportPath(scssPath);
 
 					gulp.task(scssTask, function() {
 							scssReporter.openReporter(projectName, scssPath);
@@ -45,56 +55,53 @@ function SonarWebReporters() {
 									}))
 									.on('end', scssReporter.closeReporter.bind(scssReporter));
 					});
-
 					tasks.push(scssTask);
-				
 			}
 
 			if (options.html){
 				var htmlhint = require('gulp-htmlhint'),
 					htmlSources = options.html.src || options.html.sources || "src/**/*.html",
-					htmlPath = options.html.report || "htmlhint.json",
+					htmlPath = options.html.report || "reports/sonar/htmlhint.json",
 					htmlTask = options.html.task || "ci-htmlhint",
 					htmlReporter = new this.HTMLReporter(htmlPath);
+					createReportPath(htmlPath);
 
 					gulp.task(htmlTask, function() {
 							htmlReporter.openReporter(projectName, htmlPath);
 							return gulp.src(htmlSources)
 									.pipe(htmlhint())
-        					.pipe(htmlhint.reporter(htmlReporter.reporter.bind(htmlReporter)))
+									.pipe(htmlhint.reporter(htmlReporter.reporter.bind(htmlReporter)))
 									.on('end', htmlReporter.closeReporter.bind(htmlReporter));
 					});
-
 					tasks.push(htmlTask);
-				
 			}
 
 			if (options.js){
 				var jshint = require('gulp-jshint'),
 					jsSources = options.js.src || options.js.sources || "src/**/*.js",
-					jsPath = options.js.report || "jshint.json",
+					jsPath = options.js.report || "reports/sonar/jshint.json",
 					jsTask = options.js.task || "ci-jshint",
 					jsReporter = new this.JSReporter(jsPath);
+					createReportPath(jsPath);
 
 					gulp.task(jsTask, function() {
 							jsReporter.openReporter(projectName, jsPath);
 							return gulp.src(jsSources)
 									.pipe(jshint())
-        					.pipe(jsReporter.reporter)
+									.pipe(jsReporter.reporter)
 									.on('end', jsReporter.closeReporter.bind(jsReporter));
 					});
-
 					tasks.push(jsTask);
-				
 			}
 
 			if (options.eslint){
 				var eslint = require('gulp-eslint'),
 					eslintSources = options.eslint.src || options.eslint.sources || "src/**/*.js",
-					eslintPath = options.eslint.report || "eslint-angular.json",
+					eslintPath = options.eslint.report || "reports/sonar/eslint-angular.json",
 					eslintTask = options.eslint.task || "ci-eslint",
-					eslintbase = options.eslint.base || "",
+					eslintbase = options.eslint.base || "src",
 					eslintReporter = new this.ESReporter(eslintPath, eslintbase);
+					createReportPath(eslintTask);
 
 					gulp.task(eslintTask, function() {
 							eslintReporter.openReporter(projectName, eslintPath);
@@ -102,11 +109,9 @@ function SonarWebReporters() {
 									.pipe(eslint({
 										reset: true
 									}))
-        					.pipe(eslint.format(eslintReporter.reporter));
+									.pipe(eslint.format(eslintReporter.reporter));
 					});
-
 					tasks.push(eslintTask);
-				
 			}
 			return run(tasks);
 		}
