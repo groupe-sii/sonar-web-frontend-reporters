@@ -1,7 +1,7 @@
 {
   "name": "sonar-web-frontend-reporters",
   "description": "This is a repo of SII continuous integration build system dedicated to Front-end webapps. This repo provides all the reporters written by SII for the generic [Sonarqube plugin](https://github.com/groupe-sii/sonar-web-client-plugin)",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "main": "sonarWebReporters.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

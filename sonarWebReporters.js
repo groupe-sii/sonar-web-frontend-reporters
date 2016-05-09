@@ -18,6 +18,7 @@ function SonarWebReporters() {
 		this.ESReporter = require('./esLintReporter.js');
 		this.HTMLReporter = require('./htmlReporter.js');
 		this.CSSReporter = require('./cssReporter.js');
+		this.TSLINTReporter = require('./tslintReporter.js');
 
 		this.launchReporters = function(options){
 			var tasks = [], projectName = options.project || options.projectName || "";
@@ -146,7 +147,7 @@ function SonarWebReporters() {
 					});
 					tasks.push(tsTask);
 			}
-			
+
 			return run(tasks);
 		}
 }
