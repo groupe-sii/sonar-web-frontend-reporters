@@ -113,6 +113,40 @@ function SonarWebReporters() {
 					});
 					tasks.push(eslintTask);
 			}
+
+			if (options.ts){
+				var tslint = require('gulp-tslint'),
+					tsSources = options.ts.src || options.ts.sources || "src/**/*.ts",
+					tsPath = options.ts.report || "reports/sonar/tslint.json",
+					tsTask = options.ts.task || "ci-tslint",
+					tsReporter = new this.TSLINTReporter(tsPath);
+					createReportPath(tsPath);
+
+					const testReporter = function (output, file, options) {
+					    console.log("Found " + output.length + " errors in " + file.path);
+					};
+
+					gulp.task(tsTask, function() {
+							tsReporter.openReporter(projectName, tsPath);
+							return gulp.src(tsSources)
+									.pipe(tslint())
+
+									.pipe(tslint.report(tsReporter.reporter, {
+							          emitError: false,
+						              sort: true,
+						              bell: true,
+						              fullPath: true
+						          	}))
+									//.pipe(tslint.report(tsReporter.reporter.bind(tsReporter)))
+
+									/*.pipe(tslint.report(tsReporter, {
+								          emitError: false
+									  }))*/
+									.on('end', tsReporter.closeReporter.bind(tsReporter));
+					});
+					tasks.push(tsTask);
+			}
+			
 			return run(tasks);
 		}
 }
