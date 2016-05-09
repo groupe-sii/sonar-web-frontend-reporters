@@ -20,7 +20,8 @@ gulp.task('lint', function() {
         scss : true,//activate scss linter with default values
         html : true,//activate html linter with default values
         js : true,//activate js linter with default values
-        eslint : true//activate eslint for angular linter with default values
+        eslint : true,//activate eslint for angular linter with default values
+        tslint : true//activate tslint with default values
     });
 });
 ```
@@ -29,7 +30,7 @@ gulp lint
 ```
 All params for launchReporters are optional, if you dont pass them, they'll skip linters. We rarely need to scan both css and scss for example.
 #Configuration
-Since not all project will match the default values, you can customize it, each reporter has params : 
+Since not all project will match the default values, you can customize it, each reporter has params :
 
 * src : the gulp.src params to use for the task, probably the only one you'll have to override
 * report : the report json file path to use
@@ -40,7 +41,7 @@ Since not all project will match the default values, you can customize it, each 
 ```Javascript
 gulp.task('lint', function() {
     return SonarWebReporters.launchReporters({
-        project: projectName, 
+        project: projectName,
         css : {
           src : "src/**/*.scss",
           report : "reports/sonar/csslint.json",
@@ -66,6 +67,11 @@ gulp.task('lint', function() {
           report : "reports/sonar/eslint-angular.json",
           task : "ci-eslint",
           base : "src"
+        },
+        tslint : {
+          src : "src/**/*.ts",
+          report : "reports/sonar/tslint.json",
+          task : "ci-tslint"
         }
     });
 });
@@ -103,6 +109,7 @@ The export files for Sonarqube are JSON files providing all informations a Sonar
   * issues : Array of issues in the file
 * Issue description
   * line : The line where the issue occurs in the file
+  * col : The column where the issue occurs in the line
   * message : Summary of the issue
   * description : Long test descrtibing the issue
   * rulekey : The unique identifier of the issue
@@ -119,9 +126,9 @@ A Reporter must be open before being passed to linter/hinter plugin, and closed 
 * [CSSlint](http://csslint.net/)
 * [SCSSLint](https://github.com/brigade/scss-lint)
 * [ESLint angular](https://github.com/Gillespie59/eslint-plugin-angular)
+* [TSLint](http://palantir.github.io/tslint/)
 
 #Roadmap
-New reporters will be added over time, with new webtechnologies incoming : 
+New reporters will be added over time, with new webtechnologies incoming :
 
-* TypeScript linter
 * Angular2 linter
