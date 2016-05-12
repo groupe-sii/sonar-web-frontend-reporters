@@ -21,7 +21,7 @@ gulp.task('lint', function() {
         html : true,//activate html linter with default values
         js : true,//activate js linter with default values
         eslint : true,//activate eslint for angular linter with default values
-        tslint : true//activate tslint with default values
+        ts : true//activate tslint with default values
     });
 });
 ```
@@ -68,7 +68,7 @@ gulp.task('lint', function() {
           task : "ci-eslint",
           base : "src"
         },
-        tslint : {
+        ts : {
           src : "src/**/*.ts",
           report : "reports/sonar/tslint.json",
           task : "ci-tslint"
