@@ -43,7 +43,7 @@ gulp.task('lint', function() {
     return SonarWebReporters.launchReporters({
         project: projectName,
         css : {
-          src : "src/**/*.scss",
+          src : "src/**/*.css",
           report : "reports/sonar/csslint.json",
           task : "ci-csslint"
         },
@@ -53,17 +53,17 @@ gulp.task('lint', function() {
           task : "ci-scsslint"
         },
         html : {
-          src : "src/**/*.scss",
+          src : "src/**/*.html",
           report : "reports/sonar/htmlhint.json",
           task : "ci-htmlhint"
         },
         js : {
-          src : "src/**/*.scss",
+          src : "src/**/*.js",
           report : "reports/sonar/jshint.json",
           task : "ci-jshint"
         },
         eslint : {
-          src : "src/**/*.scss",
+          src : "src/**/*.js",
           report : "reports/sonar/eslint-angular.json",
           task : "ci-eslint",
           base : "src"
