@@ -1,4 +1,10 @@
 # sonar-wed-frontend-reporters
+
+[![NPM version][npm-image]][npm-url] [![Dependency Status][daviddm-image]][daviddm-url]
+
+[npm-image]: https://badge.fury.io/js/sonar-web-frontend-reporters.svg
+[npm-url]: https://npmjs.org/package/sonar-web-frontend-reporters
+
 This is a repo for SII continuous integration build system dedicated to Front-end webapps. This repo provides all the linters reporters written by SII for the generic [Sonarqube plugin](https://github.com/groupe-sii/sonar-web-client-plugin). Usage is based on gulp.
 
 #Getting started
