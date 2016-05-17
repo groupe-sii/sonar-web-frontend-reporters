@@ -1,6 +1,6 @@
 # sonar-wed-frontend-reporters
 
-[![NPM version][npm-image]][npm-url] [![Dependency Status][daviddm-image]][daviddm-url]
+[![NPM version][npm-image]][npm-url]
 
 [npm-image]: https://badge.fury.io/js/sonar-web-frontend-reporters.svg
 [npm-url]: https://npmjs.org/package/sonar-web-frontend-reporters
