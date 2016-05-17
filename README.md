@@ -72,7 +72,10 @@ gulp.task('lint', function() {
           src : "src/**/*.ts",
           report : "reports/sonar/tslint.json",
           task : "ci-tslint"
-        }
+      },
+      callback: function() {
+          console.log('Linting ended !');
+      }
     });
 });
 ```

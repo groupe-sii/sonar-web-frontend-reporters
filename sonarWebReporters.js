@@ -148,7 +148,11 @@ function SonarWebReporters() {
 					tasks.push(tsTask);
 			}
 
-			return run(tasks);
+			if (options.callback) {
+				return run(tasks, options.callback);
+			} else {
+				return run(tasks);
+			}
 		}
 }
 
