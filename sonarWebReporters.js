@@ -2,7 +2,7 @@
 
 var gulp = require('gulp'),
 		mkdirp = require('mkdirp'),
-		fs = require('fs'),
+		fs = require('fs-extra'),
 		run = require('run-sequence');
 
 function createReportPath(reportPath){
@@ -33,7 +33,7 @@ function SonarWebReporters() {
 					gulp.task(cssTask, function() {
 							cssReporter.openReporter(projectName, cssPath);
 							return gulp.src(cssSources)
-									.pipe(csslint())
+									.pipe(csslint(options.css.rulesFile))
 									.pipe(csslint.reporter(cssReporter.reporter.bind(cssReporter)))
 									.on('end', cssReporter.closeReporter.bind(cssReporter));
 					});
@@ -52,7 +52,8 @@ function SonarWebReporters() {
 							scssReporter.openReporter(projectName, scssPath);
 							return gulp.src(scssSources)
 									.pipe(scsslint({
-										customReport: scssReporter.reporter.bind(scssReporter)
+										customReport: scssReporter.reporter.bind(scssReporter),
+										config: options.scss.rulesFile || null
 									}))
 									.on('end', scssReporter.closeReporter.bind(scssReporter));
 					});
@@ -70,7 +71,9 @@ function SonarWebReporters() {
 					gulp.task(htmlTask, function() {
 							htmlReporter.openReporter(projectName, htmlPath);
 							return gulp.src(htmlSources)
-									.pipe(htmlhint())
+									.pipe(htmlhint({
+										htmlhintrc: options.html.rulesFile || null
+									}))
 									.pipe(htmlhint.reporter(htmlReporter.reporter.bind(htmlReporter)))
 									.on('end', htmlReporter.closeReporter.bind(htmlReporter));
 					});
@@ -82,13 +85,19 @@ function SonarWebReporters() {
 					jsSources = options.js.src || options.js.sources || "src/**/*.js",
 					jsPath = options.js.report || "reports/sonar/jshint.json",
 					jsTask = options.js.task || "ci-jshint",
-					jsReporter = new this.JSReporter(jsPath);
+					jsReporter = new this.JSReporter(jsPath),
+					jshintConfig = {};
 					createReportPath(jsPath);
+
+					if(options.js.rulesFile) {
+						jshintConfig = fs.readJsonSync(process.cwd() + '/' + options.js.rulesFile);
+						jshintConfig.lookup = false;
+					}
 
 					gulp.task(jsTask, function() {
 							jsReporter.openReporter(projectName, jsPath);
 							return gulp.src(jsSources)
-									.pipe(jshint())
+									.pipe(jshint(jshintConfig))
 									.pipe(jsReporter.reporter)
 									.on('end', jsReporter.closeReporter.bind(jsReporter));
 					});
@@ -108,7 +117,8 @@ function SonarWebReporters() {
 							eslintReporter.openReporter(projectName, eslintPath);
 							return gulp.src(eslintSources)
 									.pipe(eslint({
-										reset: true
+										reset: true,
+										configFile: options.eslint.rulesFile
 									}))
 									.pipe(eslint.format(eslintReporter.reporter));
 					});
@@ -130,19 +140,13 @@ function SonarWebReporters() {
 					gulp.task(tsTask, function() {
 							tsReporter.openReporter(projectName, tsPath);
 							return gulp.src(tsSources)
-									.pipe(tslint())
-
+									.pipe(tslint(options.ts.rulesFile))
 									.pipe(tslint.report(tsReporter.reporter, {
 							          emitError: false,
 						              sort: true,
 						              bell: true,
 						              fullPath: true
 						          	}))
-									//.pipe(tslint.report(tsReporter.reporter.bind(tsReporter)))
-
-									/*.pipe(tslint.report(tsReporter, {
-								          emitError: false
-									  }))*/
 									.on('end', tsReporter.closeReporter.bind(tsReporter));
 					});
 					tasks.push(tsTask);

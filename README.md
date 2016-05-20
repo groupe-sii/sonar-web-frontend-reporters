@@ -40,6 +40,7 @@ Since not all project will match the default values, you can customize it, each 
 
 * src : the gulp.src params to use for the task, probably the only one you'll have to override
 * report : the report json file path to use
+* rulesFile : the rules file to use
 * task : the gulp task name to use for the report
 * base : (for eslint only) the base folder for seeking sources
 
@@ -51,37 +52,43 @@ gulp.task('lint', function() {
         css : {
           src : "src/**/*.css",
           report : "reports/sonar/csslint.json",
+          rulesFile : ".csslintrc",
           task : "ci-csslint"
         },
         scss : {
           src : "src/**/*.scss",
           report : "reports/sonar/scsslint.json",
+          rulesFile : ".scsslintrc",
           task : "ci-scsslint"
         },
         html : {
           src : "src/**/*.html",
           report : "reports/sonar/htmlhint.json",
+          rulesFile : ".htmlhintrc",
           task : "ci-htmlhint"
         },
         js : {
           src : "src/**/*.js",
           report : "reports/sonar/jshint.json",
+          rulesFile : ".jshintrc",
           task : "ci-jshint"
         },
         eslint : {
           src : "src/**/*.js",
           report : "reports/sonar/eslint-angular.json",
+          rulesFile : ".eslintrc",
           task : "ci-eslint",
           base : "src"
         },
         ts : {
           src : "src/**/*.ts",
           report : "reports/sonar/tslint.json",
+          rulesFile : "tslint.json",
           task : "ci-tslint"
-      },
-      callback: function() {
+        },
+        callback: function() {
           console.log('Linting ended !');
-      }
+        }
     });
 });
 ```
@@ -140,4 +147,4 @@ A Reporter must be open before being passed to linter/hinter plugin, and closed 
 #Roadmap
 New reporters will be added over time, with new webtechnologies incoming :
 
-* Angular2 linter
+* Angular2 linter / Codelyzer
