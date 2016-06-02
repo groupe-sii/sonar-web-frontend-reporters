@@ -20,8 +20,8 @@ TSLintReporter.prototype.reporter = function(errors, file) {
         global.selfTSR.nbViolations[global.selfTSR.INFO]++;
         fileNbViolations[global.selfTSR.INFO]++;
 
-        fs.appendFileSync(global.selfTSR.reportFile, '{\n\t\t"line" : ' + error.startPosition.line + ',\n\t\t' +
-            '"col" : ' + error.startPosition.character + ',\n\t\t' +
+        fs.appendFileSync(global.selfTSR.reportFile, '{\n\t\t"line" : ' + (error.startPosition.line + 1) + ',\n\t\t' +
+            '"col" : ' + (error.startPosition.character + 1) + ',\n\t\t' +
             '"message" : "' + error.failure.replace(/["']/g, '\'') + '",\n\t\t' +
             '"description" : "' + error.failure.replace(/["']/g, '\'') + '",\n\t\t' +
             '"rulekey" : "' + error.ruleName + '",\n\t\t' +
