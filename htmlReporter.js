@@ -38,8 +38,8 @@ HTMLReporter.prototype.reporter = function(file) {
                 break;
         }
         fs.appendFileSync(self.reportFile, '{\n\t\t"line" : ' + message.line + ',\n\t\t' +
-            '"message" : "' + message.message.replace(/["']/g, '\'') + '",\n\t\t' +
-            '"description" : "' + message.rule.description.replace(/["']/g, '\'') + '",\n\t\t' +
+            '"message" : ' + JSON.stringify(message.message) + ',\n\t\t' +
+            '"description" : ' + JSON.stringify(message.rule.description) + ',\n\t\t' +
             '"rulekey" : "' + message.rule.id + '",\n\t\t' +
             '"severity" : "' + severity + '",\n\t\t' +
             '"reporter" : "htmlhint",\n\t\t' +
