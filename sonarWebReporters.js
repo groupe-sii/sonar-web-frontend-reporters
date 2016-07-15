@@ -16,6 +16,7 @@ function SonarWebReporters() {
 		this.SCSSReporter = require('./scssReporter.js');
 		this.JSReporter = require('./jsReporter.js');
 		this.ESReporter = require('./esLintReporter.js');
+		this.ESAngularReporter = require('./esLintAngularReporter.js');
 		this.HTMLReporter = require('./htmlReporter.js');
 		this.CSSReporter = require('./cssReporter.js');
 		this.TSLINTReporter = require('./tslintReporter.js');
@@ -23,7 +24,7 @@ function SonarWebReporters() {
 		this.launchReporters = function(options){
 			var tasks = [], projectName = options.project || options.projectName || "";
 			if (options.css){
-				var csslint = require('gulp-csslint'),
+				var csslint = options.css.linter || require('gulp-csslint'),
 					cssSources = options.css.src || options.css.sources || "src/**/*.css",
 					cssPath = options.css.report || "reports/sonar/csslint.json",
 					cssTask = options.css.task || "ci-csslint",
@@ -41,7 +42,7 @@ function SonarWebReporters() {
 			}
 
 			if (options.scss){
-				var scsslint = require('gulp-scss-lint'),
+				var scsslint = options.scss.linter || require('gulp-scss-lint'),
 					scssSources = options.scss.src || options.scss.sources || "src/**/*.scss",
 					scssPath = options.scss.report || "reports/sonar/scsslint.json",
 					scssTask = options.scss.task || "ci-scsslint",
@@ -61,7 +62,7 @@ function SonarWebReporters() {
 			}
 
 			if (options.html){
-				var htmlhint = require('gulp-htmlhint'),
+				var htmlhint = options.html.linter || require('gulp-htmlhint'),
 					htmlSources = options.html.src || options.html.sources || "src/**/*.html",
 					htmlPath = options.html.report || "reports/sonar/htmlhint.json",
 					htmlTask = options.html.task || "ci-htmlhint",
@@ -81,7 +82,7 @@ function SonarWebReporters() {
 			}
 
 			if (options.js){
-				var jshint = require('gulp-jshint'),
+				var jshint = options.js.linter || require('gulp-jshint'),
 					jsSources = options.js.src || options.js.sources || "src/**/*.js",
 					jsPath = options.js.report || "reports/sonar/jshint.json",
 					jsTask = options.js.task || "ci-jshint",
@@ -104,14 +105,35 @@ function SonarWebReporters() {
 					tasks.push(jsTask);
 			}
 
+			if (options.eslint_angular) {
+            var eslintAngular = options.eslint_angular.linter || require('gulp-eslint'),
+                eslintAngularSources = options.eslint_angular.src || options.eslint_angular.sources || "src/**/*.js",
+                eslintAngularPath = options.eslint_angular.report || "reports/sonar/eslint-angular.json",
+                eslintAngularTask = options.eslint_angular.task || "ci-eslint-angular",
+                eslintAngularBase = options.eslint_angular.base || "src",
+                eslintAngularReporter = new this.ESAngularReporter(eslintAngularPath, eslintAngularBase);
+            createReportPath(eslintAngularPath);
+
+            gulp.task(eslintAngularTask, function () {
+                eslintAngularReporter.openReporter(projectName, eslintAngularPath);
+                return gulp.src(eslintAngularSources)
+                    .pipe(eslint({
+                        reset: true,
+                        configFile: options.eslint_angular.rulesFile
+                    }))
+                    .pipe(eslintAngular.format(eslintAngularReporter.reporter));
+            });
+            tasks.push(eslintAngularTask);
+        }
+
 			if (options.eslint){
-				var eslint = require('gulp-eslint'),
+				var eslint = options.eslint.linter || require('gulp-eslint'),
 					eslintSources = options.eslint.src || options.eslint.sources || "src/**/*.js",
 					eslintPath = options.eslint.report || "reports/sonar/eslint-angular.json",
 					eslintTask = options.eslint.task || "ci-eslint",
-					eslintbase = options.eslint.base || "src",
-					eslintReporter = new this.ESReporter(eslintPath, eslintbase);
-					createReportPath(eslintTask);
+					eslintBase = options.eslint.base || "src",
+					eslintReporter = new this.ESReporter(eslintPath, eslintBase);
+					createReportPath(eslintPath);
 
 					gulp.task(eslintTask, function() {
 							eslintReporter.openReporter(projectName, eslintPath);
@@ -126,7 +148,7 @@ function SonarWebReporters() {
 			}
 
 			if (options.ts){
-				var tslint = require('gulp-tslint'),
+				var tslint = options.ts.linter || require('gulp-tslint'),
 					tsSources = options.ts.src || options.ts.sources || "src/**/*.ts",
 					tsPath = options.ts.report || "reports/sonar/tslint.json",
 					tsTask = options.ts.task || "ci-tslint",

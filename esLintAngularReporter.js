@@ -8,15 +8,15 @@ var Model = require('./reporterModel'),
 
     BASE_PROJECT = path.normalize(__dirname.substring(0, __dirname.indexOf('/node_')+1));
 
-function ESLintReporter(reportFile, base) {
+function ESLintAngularReporter(reportFile, base) {
     Model.call(this, reportFile);
     global.selfESR = this;
     global.selfESR.base = BASE_PROJECT + base + path.sep;
 }
 
-inherits(ESLintReporter, Model);
+inherits(ESLintAngularReporter, Model);
 
-ESLintReporter.prototype.reporter = function(results) {
+ESLintAngularReporter.prototype.reporter = function(results) {
 
     var readFile = function(file) {
         var _d = q.defer();
@@ -65,10 +65,11 @@ ESLintReporter.prototype.reporter = function(results) {
                         fileNbViolations[global.selfESR.INFO]++;
                         break;
                 }
+                ruleId = message.ruleId.replace('angular/', '');
                 fs.appendFileSync(global.selfESR.reportFile, '{\n\t\t"line" : ' + message.line + ',\n\t\t' +
                     '"message" : "' + message.message.replace(/["']/g, '\'') + '",\n\t\t' +
                     '"description" : "",\n\t\t' +
-                    '"rulekey" : "' + message.ruleId + '",\n\t\t' +
+                    '"rulekey" : "ng_' + ruleId.replace(/-/g, '_') + '",\n\t\t' +
                     '"severity" : "' + severity + '",\n\t\t' +
                     '"reporter" : "eslint",\n\t\t' +
                     '"creationDate" : ' + d + '\n\t\t' + ((index < errorCount - 1) ? '},' : '}'));
@@ -88,4 +89,4 @@ ESLintReporter.prototype.reporter = function(results) {
     loop();
 
 };
-module.exports = ESLintReporter;
+module.exports = ESLintAngularReporter;
