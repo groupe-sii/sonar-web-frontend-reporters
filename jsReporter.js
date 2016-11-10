@@ -38,8 +38,8 @@ JSReporter.prototype.reporter = map(function(file, cb) {
                     break;
             }
             fs.appendFileSync(global.selfJSR.reportFile, '{\n\t\t"line" : ' + message.line + ',\n\t\t' +
-                '"message" : "' + message.reason.replace(/["']/g, '\'') + '",\n\t\t' +
-                '"description" : "' + message.raw.replace(/["']/g, '\'') + '",\n\t\t' +
+                '"message" : "' +  JSON.stringify(message.reason) + '",\n\t\t' +
+                '"description" : "' +  JSON.stringify(message.raw) + '",\n\t\t' +
                 '"rulekey" : "' + message.code + '",\n\t\t' +
                 '"severity" : "' + severity + '",\n\t\t' +
                 '"reporter" : "jshint",\n\t\t' +

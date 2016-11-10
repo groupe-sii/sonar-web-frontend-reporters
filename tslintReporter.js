@@ -22,8 +22,8 @@ TSLintReporter.prototype.reporter = function(errors, file) {
 
         fs.appendFileSync(global.selfTSR.reportFile, '{\n\t\t"line" : ' + (error.startPosition.line + 1) + ',\n\t\t' +
             '"col" : ' + (error.startPosition.character + 1) + ',\n\t\t' +
-            '"message" : "' + error.failure.replace(/["']/g, '\'') + '",\n\t\t' +
-            '"description" : "' + error.failure.replace(/["']/g, '\'') + '",\n\t\t' +
+            '"message" : "' +  JSON.stringify(error.failure) + '",\n\t\t' +
+            '"description" : "' + JSON.stringify(error.failure) + '",\n\t\t' +
             '"rulekey" : "' + error.ruleName + '",\n\t\t' +
             '"severity" : "' + severity + '",\n\t\t' +
             '"reporter" : "tslint",\n\t\t' +

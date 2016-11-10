@@ -66,7 +66,7 @@ ESLintReporter.prototype.reporter = function(results) {
                         break;
                 }
                 fs.appendFileSync(global.selfESR.reportFile, '{\n\t\t"line" : ' + message.line + ',\n\t\t' +
-                    '"message" : "' + message.message.replace(/["']/g, '\'') + '",\n\t\t' +
+                    '"message" : "' +  JSON.stringify(message.message) + '",\n\t\t' +
                     '"description" : "",\n\t\t' +
                     '"rulekey" : "' + message.ruleId + '",\n\t\t' +
                     '"severity" : "' + severity + '",\n\t\t' +
