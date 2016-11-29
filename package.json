@@ -1,8 +1,11 @@
 {
   "name": "sonar-web-frontend-reporters",
   "description": "This is a repo of SII continuous integration build system dedicated to Front-end webapps. This repo provides all the reporters written by SII for the generic [Sonarqube plugin](https://github.com/groupe-sii/sonar-web-client-plugin)",
-  "version": "2.1.2",
-  "main": "sonarWebReporters.js",
+  "version": "3.0.0",
+  "main": "index.js",
+  "bin": {
+    "sreporter": "./index.js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -21,7 +24,9 @@
   ],
   "author": "Cédric Le Gallo <cedric.legallo@gmail.com> (http://www.groupe-sii.com/)",
   "contributors": [
-    "Vincent Ogloblinsky"
+    "Vincent Ogloblinsky",
+    "Olivier Le Lay",
+    "Valentin Got"
   ],
   "license": "ISC",
   "bugs": {
@@ -30,18 +35,6 @@
   "homepage": "https://github.com/groupe-sii/sonar-web-frontend-reporters#readme",
   "dependencies": {
     "eslint-plugin-angular": "^0.12.0",
-    "fs-extra": "^0.30.0",
-    "gulp": "^3.6.0",
-    "gulp-csslint": "^0.1.5",
-    "gulp-eslint": "^1.1.1",
-    "gulp-htmlhint": "0.0.8",
-    "gulp-jshint": "^1.12.0",
-    "gulp-scss-lint": "^0.3.0",
-    "gulp-tslint": "^5.0.0",
-    "map-stream": "0.0.5",
-    "mkdirp": "^0.5.1",
-    "q": "^1.4.1",
-    "run-sequence": "^1.1.5",
-    "tslint": "^3.9.0"
+    "fs-extra": "^0.30.0"
   }
 }
