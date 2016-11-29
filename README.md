@@ -106,10 +106,10 @@ You can still use the Gulp version by installing `sonar-web-frontend-reporters@2
 However, you can also use it with Gulp this way:
 
 ```js
-var CSSLintReporter = require('sonar-web-frontend-reporters').CSSLintReporter;
+let CSSLintReporter = require('sonar-web-frontend-reporters').CSSLintReporter;
 
 gulp.task('csslint:reporter', (done) => {
-  var cssLintReporter = new CSSLintReporter({
+  let cssLintReporter = new CSSLintReporter({
     src      : 'src/**/*.css',
     report   : 'reports/sonar/csslint.json',
     rulesFile: '.csslintrc'
