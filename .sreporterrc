@@ -5,5 +5,10 @@
     "src": "./samples/src/**/*.css",
     "report": "reports/sonar/csslint.json",
     "rulesFile": "./samples/.csslintrc"
-  }
+  },
+  "eslint": {
+      "src": "./samples/src/**/*.js",
+      "report": "reports/sonar/eslint.json",
+      "rulesFile": "./samples/.eslintrc"
+    }
 }

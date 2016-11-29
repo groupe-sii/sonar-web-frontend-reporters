@@ -2,7 +2,8 @@
 
 const fs = require('fs'),
   mkdirp = require('mkdirp'),
-  CssReporter = require('./reporters/cssReporter');
+  CssReporter = require('./reporters/cssReporter'),
+  ESLintReporter = require('./reporters/eslintReporter');
 
 class SonarWebReporters {
 
@@ -13,6 +14,9 @@ class SonarWebReporters {
   launchReporters() {
     if (this.options.css) {
       this.launchCss(this.options);
+    }
+    if (this.options.eslint) {
+      this.launchESLint(this.options);
     }
   }
 
@@ -25,6 +29,18 @@ class SonarWebReporters {
     this.makeReportDirectory(cssOptions.report);
     let cssReporter = new CssReporter(options.projectName, options.projectLanguage);
     cssReporter.launch(cssOptions);
+
+  }
+
+  launchESLint (options) {
+    let eslintOptions = this.mergeOptions(options.eslint, {
+      src      : 'src/**/*.js',
+      report   : 'reports/sonar/eslint.json',
+      rulesFile: '.eslintrc'
+    });
+    this.makeReportDirectory(eslintOptions.report);
+    let eslintReporter = new ESLintReporter(options.projectName, options.projectLanguage);
+    eslintReporter.launch(eslintOptions);
 
   }
 
