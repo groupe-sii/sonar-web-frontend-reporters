@@ -11,10 +11,20 @@ class SonarWebReporters {
     this.options = JSON.parse(fs.readFileSync('./.sreporterrc', 'utf8'));
   }
 
+  /**
+   * Launch the Sonar Web Front-End Reporters.
+   * It automatically launch reporters registered under `ReporterFactory.TYPE`.
+   */
   launchReporters () {
     Object.keys(ReporterFactory.TYPE).forEach((key) => this.launch(ReporterFactory.TYPE[key], this.options));
   }
 
+  /**
+   * Launch a reporter.
+   *
+   * @param {ReporterFactory.TYPE}  type      Type of the reporter to be launched
+   * @param {Object}                options   `.sreporterrc` file content
+   */
   launch (type, options) {
     let opts = options[type],
       reporter = ReporterFactory.create(type, opts, options.projectName, options.projectLanguage);
@@ -27,6 +37,9 @@ class SonarWebReporters {
     }
   }
 
+  /**
+   * Recursively create the reporter path
+   */
   makeReportDirectory (reportPath) {
     let path = reportPath.substring(0, reportPath.lastIndexOf('/'));
 
@@ -37,6 +50,7 @@ class SonarWebReporters {
 
 }
 
+// FIXME To be removed
 let sonarWebReporter = new SonarWebReporters();
 sonarWebReporter.launchReporters();
 
