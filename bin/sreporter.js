@@ -3,7 +3,6 @@
 /* eslint no-console:off */
 
 const fs = require('fs'),
-  mkdirp = require('mkdirp'),
   chalk = require('chalk'),
   ReporterFactory = require('../reporters/reporter.factory');
 
