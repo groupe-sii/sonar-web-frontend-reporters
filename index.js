@@ -6,11 +6,11 @@ const fs = require('fs'),
 
 class SonarWebReporters {
 
-  constructor () {
+  constructor() {
     this.options = JSON.parse(fs.readFileSync('./.sreporterrc', 'utf8'));
   }
 
-  launchReporters () {
+  launchReporters() {
     if (this.options.css) {
       this.launchCss(this.options);
     }
@@ -18,9 +18,9 @@ class SonarWebReporters {
 
   launchCss(options) {
     let cssOptions = this.mergeOptions(options.css, {
-      src: "src/**/*.css",
-      report: "reports/sonar/csslint.json",
-      rulesFile: ".csslintrc"
+      src      : 'src/**/*.css',
+      report   : 'reports/sonar/csslint.json',
+      rulesFile: '.csslintrc'
     });
     this.makeReportDirectory(cssOptions.report);
     let cssReporter = new CssReporter(options.projectName, options.projectLanguage);
@@ -29,7 +29,7 @@ class SonarWebReporters {
   }
 
 
-  mergeOptions (options, defaultOptions) {
+  mergeOptions(options, defaultOptions) {
     if (options === true) {
       return defaultOptions;
     } else if (options) {
@@ -39,7 +39,7 @@ class SonarWebReporters {
     return false;
   }
 
-  makeReportDirectory (reportPath) {
+  makeReportDirectory(reportPath) {
     let path = reportPath.substring(0, reportPath.lastIndexOf('/'));
 
     if (!fs.existsSync(path)) {

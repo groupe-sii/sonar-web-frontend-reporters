@@ -1,12 +1,13 @@
+/* global __dirname */
 const fs = require('fs'),
-      path = require("path"),
-      os = require('os'),
-      VERSION = '1.1.0',
-      BASE_PROJECT = path.normalize(__dirname.substring(0, __dirname.indexOf('/node_')+1));
+  path = require('path'),
+  os = require('os'),
+  VERSION = '1.1.0',
+  BASE_PROJECT = path.normalize(__dirname.substring(0, __dirname.indexOf('/node_') + 1));
 
 class Reporter {
 
-  constructor(projectName, projectLanguage) {
+  constructor (projectName, projectLanguage) {
     this.projectName = projectName;
     this.projectLanguage = projectLanguage;
     this.nbFiles = 0;
@@ -22,37 +23,37 @@ class Reporter {
     this.linterName = 'unamed linter';
   }
 
-  launch() {
-    throw 'Launch function must be implemented';
+  launch () {
+    throw new Error('Launch function must be implemented');
   }
 
-  readFile(filename) {
+  readFile (filename) {
     try {
-      return fs.readFileSync(filename, "utf-8");
+      return fs.readFileSync(filename, 'utf-8');
     } catch (ex) {
-      return "";
+      return '';
     }
   }
 
-  getRCFile(file) {
+  getRCFile (file) {
     return JSON.parse(fs.readFileSync(file, 'utf8'));
   }
 
-  openReporter(reportFile) {
+  openReporter (reportFile) {
     fs.writeFileSync(reportFile,
-`{
+      `{
   "language": "${this.projectLanguage}",
   "project": "${this.projectName}",
   "projectPath": "${BASE_PROJECT}",
   "version": "${VERSION}",
   "files": [
 `);
-  };
+  }
 
-  closeReporter(reportFile) {
+  closeReporter (reportFile) {
     let buf = fs.readFileSync(reportFile);
-    if (buf.toString('utf-8', buf.length - 2, buf.length - 1) == ',') {
-      buf = buf.slice(0, buf.length - 2); //remove last ,\n from files array : 2 char from buff
+    if (buf.toString('utf-8', buf.length - 2, buf.length - 1) === ',') {
+      buf = buf.slice(0, buf.length - 2);
     }
     fs.writeFileSync(reportFile, buf);
     fs.appendFileSync(reportFile,
@@ -72,9 +73,9 @@ class Reporter {
 }
 `);
     console.log(`${reportFile} has been generated with ${this.linterName}`);
-  };
+  }
 
-  openFileIssues(file, reportFile, commentsRegexp, spaceRegexp) {
+  openFileIssues (file, reportFile, commentsRegexp, spaceRegexp) {
     let linesCount = this.fileLinesCount(file);
     let lastSlash = file.lastIndexOf('/');
     let filePath = file.substring(0, lastSlash);
@@ -82,9 +83,9 @@ class Reporter {
     this.nbFiles++;
 
     let b = null,
-        c = [],
-        d = [],
-        str = fs.readFileSync(file).toString();
+      c = [],
+      d = [],
+      str = fs.readFileSync(file).toString();
     if (commentsRegexp) {
       while ((b = commentsRegexp.exec(str)) !== null) {
         c.push(b[0]);
@@ -97,13 +98,13 @@ class Reporter {
     }
 
     let fileNbComments = c.length,
-        fileNbCloc = linesCount - fileNbComments - d.length;
+      fileNbCloc = linesCount - fileNbComments - d.length;
     this.totalLines += linesCount;
     this.totalComments += fileNbComments;
     this.totalClocs += fileNbCloc;
 
     fs.appendFileSync(reportFile,
-`     {
+      `     {
         "name": "${file.substring(lastSlash + 1)}",
         "path": "${normalizedFilePath}",
         "nbLines": ${linesCount},
@@ -115,10 +116,10 @@ class Reporter {
     return [0, 0, 0, 0, 0];
   }
 
-  closeFileIssues(fileNbViolations, reportFile) {
+  closeFileIssues (fileNbViolations, reportFile) {
     this.nbViolations = this.nbViolations.map((val, i) => val + fileNbViolations[i]);
     fs.appendFileSync(reportFile,
-`
+      `
       ],
       "violations": {
         "blocker": ${fileNbViolations[this.BLOCKER]},
@@ -129,13 +130,12 @@ class Reporter {
        }  
   },
 `);
-  };
+  }
 
-    fileLinesCount(file) {
-      return fs.readFileSync(file).toString().split('\n').length - 1;
+  fileLinesCount (file) {
+    return fs.readFileSync(file).toString().split('\n').length - 1;
   }
 }
-
 
 
 module.exports = Reporter;
