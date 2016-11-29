@@ -36,24 +36,11 @@ class CLIEngine {
       reporter = ReporterFactory.create(type, opts, options.projectName, options.projectLanguage);
 
     if (opts) {
-      this.makeReportDirectory(opts.report);
-
       reporter.launch(() => {
         console.info(chalk.green(`\u2714 ${chalk.green.bold(reporter.linterName)} has been generated under ${opts.report}`));
       });
     } else {
       console.info(chalk.gray(`\u002D ${chalk.gray.bold(reporter.linterName)} has been ignored`));
-    }
-  }
-
-  /**
-   * Recursively create the reporter path
-   */
-  makeReportDirectory (reportPath) {
-    let path = reportPath.substring(0, reportPath.lastIndexOf('/'));
-
-    if (!fs.existsSync(path)) {
-      mkdirp.sync(path);
     }
   }
 

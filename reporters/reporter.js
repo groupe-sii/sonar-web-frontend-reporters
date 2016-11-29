@@ -1,5 +1,6 @@
 /* global __dirname */
 const fs = require('fs'),
+  mkdirp = require('mkdirp'),
   path = require('path'),
   os = require('os'),
   VERSION = '1.1.0',
@@ -29,6 +30,10 @@ class Reporter {
     this.MINOR = 3;
     this.INFO = 4;
     this.linterName = 'unamed linter';
+
+    if (options) {
+      this.makeReportDirectory(options.report);
+    }
   }
 
   /**
@@ -48,6 +53,17 @@ class Reporter {
    */
   launch () {
     throw new Error('Launch method must be implemented');
+  }
+
+  /**
+   * Recursively create the reporter path
+   */
+  makeReportDirectory (reportPath) {
+    let path = reportPath.substring(0, reportPath.lastIndexOf('/'));
+
+    if (!fs.existsSync(path)) {
+      mkdirp.sync(path);
+    }
   }
 
   readFile (filename) {
