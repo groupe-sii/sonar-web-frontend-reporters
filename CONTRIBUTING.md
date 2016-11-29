@@ -27,7 +27,7 @@ npm run lint
 
 1. First of all, create a file under `reporters/` for your new reporter. It should match the following syntax: **new-reporter.reporter.js**.
 2. The new reporter must extends the `Reporter` class and implement `defaultOptions` and `launch` methods
-3. Register the reporter under the `ReporterFactory`
+3. Register the reporter in the `ReporterFactory`
 
 ```js
 switch (type) {
@@ -43,6 +43,13 @@ ReporterFactory.TYPE = {
 }
 ```
 
+4. Export the reporter so that anyone can use it (`index.js`)
+
+```js
+module.exports = {
+  NewReporter: require('./reporters/new-reporter.reporter')
+};
+```
 
 ## Commit Message Format
 
