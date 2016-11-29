@@ -1,8 +1,8 @@
-const CssReporter = require('./cssReporter'),
-  ESLintReporter = require('./eslintReporter'),
-  ESLintAngularReporter = require('./eslintAngularReporter'),
-  JSHintReporter = require('./jshintReporter'),
-  HTMLHintReporter = require('./HTMLReporter');
+const CssReporter = require('./csslint.reporter'),
+  ESLintReporter = require('./eslint.reporter'),
+  ESLintAngularReporter = require('./eslint-angular.reporter'),
+  JSHintReporter = require('./jshint.reporter'),
+  HTMLHintReporter = require('./htmlhint.reporter');
 
 class ReporterFactory {
 
