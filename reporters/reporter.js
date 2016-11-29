@@ -7,7 +7,8 @@ const fs = require('fs'),
 
 class Reporter {
 
-  constructor (projectName, projectLanguage) {
+  constructor (options, projectName, projectLanguage) {
+    this.options = options;
     this.projectName = projectName;
     this.projectLanguage = projectLanguage;
     this.nbFiles = 0;
@@ -23,8 +24,12 @@ class Reporter {
     this.linterName = 'unamed linter';
   }
 
+  static defaultOptions () {
+    throw new Error('defaultOptions method must be implemented');
+  }
+
   launch () {
-    throw new Error('Launch function must be implemented');
+    throw new Error('Launch method must be implemented');
   }
 
   readFile (filename) {
@@ -73,6 +78,10 @@ class Reporter {
 }
 `);
     console.log(`${reportFile} has been generated with ${this.linterName}`);
+  }
+
+  ignored () {
+    console.log(`${this.linterName} is ignored`);
   }
 
   openFileIssues (file, reportFile, commentsRegexp, spaceRegexp) {
@@ -136,6 +145,5 @@ class Reporter {
     return fs.readFileSync(file).toString().split('\n').length - 1;
   }
 }
-
 
 module.exports = Reporter;

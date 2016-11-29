@@ -4,34 +4,47 @@ const Reporter = require('./reporter'),
   fs = require('fs');
 
 module.exports = class CssReporter extends Reporter {
-  constructor (projectName, projectLanguage) {
-    super(projectName, projectLanguage);
+
+  constructor (options, projectName, projectLanguage) {
+    super(options, projectName, projectLanguage);
+
     this.linterName = 'CSS Lint';
   }
 
-  launch (options) {
-    let ruleset = {};
+  static defaultOptions () {
+    return {
+      src      : 'src/**/*.css',
+      report   : 'reports/sonar/csslint.json',
+      rulesFile: '.csslintrc'
+    };
+  }
 
-    csslint.getRules().forEach(function (rule) {
-      ruleset[rule.id] = 1;
-    });
+  launch () {
+    if (this.options) {
+      let ruleset = {};
 
-    let rcContent = this.getRCFile(options.rulesFile);
-    if (rcContent) {
-      for (let rule of Object.keys(rcContent)) {
-        if (rcContent[rule]) {
-          ruleset[rule] = rcContent[rule];
-        } else {
-          delete ruleset[rule];
+      csslint.getRules().forEach(function (rule) {
+        ruleset[ rule.id ] = 1;
+      });
+
+      let rcContent = this.getRCFile(this.options.rulesFile);
+      if (rcContent) {
+        for (let rule of Object.keys(rcContent)) {
+          if (rcContent[ rule ]) {
+            ruleset[ rule ] = rcContent[ rule ];
+          } else {
+            delete ruleset[ rule ];
+          }
         }
       }
+      this.options.rules = ruleset;
+
+      glob(this.options.src, (er, files) => {
+        this.processFiles(files, this.options);
+      });
+    } else {
+      this.ignored();
     }
-    options.rules = ruleset;
-
-    glob(options.src, (er, files) => {
-      this.processFiles(files, options);
-    });
-
   }
 
   processFiles (fileArray, options) {
@@ -52,20 +65,19 @@ module.exports = class CssReporter extends Reporter {
     let fileNbViolations = this.openFileIssues(file, options.report, /^(\s+)?\/\*.*\*\//gm, /^(\s+)?\n$/gm);
     for (let message of result.messages) {
       switch (message.type) {
-          case 'error':
-            severity = 'MAJOR';
-            fileNbViolations[this.MAJOR]++;
-            break;
-          case 'warning':
-            severity = 'MINOR';
-            fileNbViolations[this.MINOR]++;
-            break;
-          default:
-            severity = 'INFO';
-            fileNbViolations[this.INFO]++;
-            break;
+        case 'error':
+          severity = 'MAJOR';
+          fileNbViolations[this.MAJOR]++;
+          break;
+        case 'warning':
+          severity = 'MINOR';
+          fileNbViolations[this.MINOR]++;
+          break;
+        default:
+          severity = 'INFO';
+          fileNbViolations[this.INFO]++;
+          break;
       }
-
 
       fs.appendFileSync(options.report,
         `{

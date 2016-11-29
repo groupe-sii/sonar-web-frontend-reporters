@@ -2,60 +2,31 @@
 
 const fs = require('fs'),
   mkdirp = require('mkdirp'),
-  CssReporter = require('./reporters/cssReporter'),
-  ESLintReporter = require('./reporters/eslintReporter');
+  ReporterFactory = require('./reporters/reporter.factory');
 
 class SonarWebReporters {
 
-  constructor() {
+  constructor () {
     this.options = JSON.parse(fs.readFileSync('./.sreporterrc', 'utf8'));
   }
 
-  launchReporters() {
-    if (this.options.css) {
-      this.launchCss(this.options);
+  launchReporters () {
+    Object.keys(ReporterFactory.TYPE).forEach((key) => this.launch(ReporterFactory.TYPE[key], this.options));
+  }
+
+  launch (type, options) {
+    let opts = options[type],
+      reporter = ReporterFactory.create(type, opts, options.projectName, options.projectLanguage);
+
+    if (opts) {
+      this.makeReportDirectory(opts.report);
+      reporter.launch();
+    } else {
+      console.log('IGNORED', reporter.linterName);
     }
-    if (this.options.eslint) {
-      this.launchESLint(this.options);
-    }
   }
 
-  launchCss(options) {
-    let cssOptions = this.mergeOptions(options.css, {
-      src      : 'src/**/*.css',
-      report   : 'reports/sonar/csslint.json',
-      rulesFile: '.csslintrc'
-    });
-    this.makeReportDirectory(cssOptions.report);
-    let cssReporter = new CssReporter(options.projectName, options.projectLanguage);
-    cssReporter.launch(cssOptions);
-
-  }
-
-  launchESLint (options) {
-    let eslintOptions = this.mergeOptions(options.eslint, {
-      src      : 'src/**/*.js',
-      report   : 'reports/sonar/eslint.json',
-      rulesFile: '.eslintrc'
-    });
-    this.makeReportDirectory(eslintOptions.report);
-    let eslintReporter = new ESLintReporter(options.projectName, options.projectLanguage);
-    eslintReporter.launch(eslintOptions);
-
-  }
-
-
-  mergeOptions(options, defaultOptions) {
-    if (options === true) {
-      return defaultOptions;
-    } else if (options) {
-      return Object.assign(defaultOptions, options);
-    }
-
-    return false;
-  }
-
-  makeReportDirectory(reportPath) {
+  makeReportDirectory (reportPath) {
     let path = reportPath.substring(0, reportPath.lastIndexOf('/'));
 
     if (!fs.existsSync(path)) {

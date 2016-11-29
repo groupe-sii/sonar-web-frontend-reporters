@@ -63,7 +63,7 @@
     "comma-style": "error",
     "func-names": ["error", "never"],
     "indent": ["error", 2, {
-      "SwitchCase": 2
+      "SwitchCase": 1
     }],
     "key-spacing": ["error", {
       "align": "colon"
