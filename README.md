@@ -22,7 +22,13 @@ $ npm install sonar-web-frontend-reporters --save-dev   // For NodeJS use
 
 ### Command-Line Interface
 
-The Command-Line Interface uses the `.sreporterrc` file to define the reporters configuration. `.sreporterrc` file if mandatory in order to user the CLI.
+Launch the CLI by calling:
+
+```sh
+$ sreporter
+```
+
+The Command-Line Interface uses a `.sreporterrc` file to define the reporters configuration. The `.sreporterrc` file is mandatory in order to use the CLI.
 
 Default options are as follows:
 
@@ -93,11 +99,11 @@ The main reasons for this **3.0** version were that:
 
 > Warning:
 >
-> 3.x version is compatible with NodeJS version >= 6.9.1 because it's coded in full ES6
+> 3.x version is compatible with NodeJS version **>= 6.9.1**
 
-You can still use the Gulp version by installating `sonar-web-frontend-reporters@2.1.1`.
+You can still use the Gulp version by installing `sonar-web-frontend-reporters@2.1.1`.
 
-However, you can still use it with Gulp this way:
+However, you can also use it with Gulp this way:
 
 ```js
 var CSSLintReporter = require('sonar-web-frontend-reporters').CSSLintReporter;
