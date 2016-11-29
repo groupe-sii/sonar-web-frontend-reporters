@@ -19,6 +19,7 @@ class Reporter {
     this.MAJOR = 2;
     this.MINOR = 3;
     this.INFO = 4;
+    this.linterName = 'unamed linter';
   }
 
   launch() {
@@ -70,6 +71,7 @@ class Reporter {
   }
 }
 `);
+    console.log(`${reportFile} has been generated with ${this.linterName}`);
   };
 
   openFileIssues(file, reportFile, commentsRegexp, spaceRegexp) {
