@@ -1,7 +1,9 @@
 {
-    "css": {
-      "src": "src/**/*.css",
-      "report": "reports/sonar/csslint.json",
-      "rulesFile": ".csslintrc"
-    }
+  "projectName": "SonarWebReporter",
+  "projectLanguage": "JS",
+  "css": {
+    "src": "src/**/*.css",
+    "report": "reports/sonar/csslint.json",
+    "rulesFile": ".csslintrc"
+  }
 }
