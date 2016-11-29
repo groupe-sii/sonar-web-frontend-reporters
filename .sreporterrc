@@ -12,6 +12,11 @@
     "report": "reports/sonar/eslintangular.json",
     "rulesFile": "./samples/.eslintangularrc"
   },
+  "jshint": {
+      "src": "./samples/src/**/*.js",
+      "report": "reports/sonar/jshint.json",
+      "rulesFile": "./samples/.jshintrc"
+    },
    "html": {
      "src": "./samples/src/**/*.html",
      "report": "reports/sonar/htmlhint.json",

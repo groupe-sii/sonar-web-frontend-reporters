@@ -1,6 +1,7 @@
 const CssReporter = require('./cssReporter'),
   ESLintReporter = require('./eslintReporter'),
   ESLintAngularReporter = require('./eslintAngularReporter'),
+  JSHintReporter = require('./jshintReporter'),
   HTMLHintReporter = require('./HTMLReporter');
 
 class ReporterFactory {
@@ -29,6 +30,11 @@ class ReporterFactory {
         reporter = new HTMLHintReporter(opts, projectName, projectLanguage);
         break;
 
+      case ReporterFactory.TYPE.JSHINT:
+        opts = ReporterFactory.mergeOptions(options, JSHintReporter.defaultOptions());
+        reporter = new JSHintReporter(opts, projectName, projectLanguage);
+        break;
+
       default:
         throw new Error(`Unknown reporter '${type}'`);
     }
@@ -52,7 +58,8 @@ ReporterFactory.TYPE = {
   CSS          : 'css',
   ESLINT       : 'eslint',
   ESLINTANGULAR: 'eslintangular',
-  HTML         : 'html'
+  HTML         : 'html',
+  JSHINT       : 'jshint'
 };
 
 module.exports = ReporterFactory;
