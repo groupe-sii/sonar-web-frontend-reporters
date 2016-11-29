@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+/* eslint no-console:off */
+
 const fs = require('fs'),
   mkdirp = require('mkdirp'),
   chalk = require('chalk'),
@@ -31,7 +33,10 @@ class CLIEngine {
 
     if (opts) {
       this.makeReportDirectory(opts.report);
-      reporter.launch();
+
+      reporter.launch(() => {
+        console.info(chalk.green(`\u2714 ${chalk.green.bold(reporter.linterName)} has been generated under ${opts.report}`));
+      });
     } else {
       console.info(chalk.gray(`\u002D ${chalk.gray.bold(reporter.linterName)} has been ignored`));
     }

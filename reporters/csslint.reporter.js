@@ -19,7 +19,7 @@ module.exports = class CSSLintReporter extends Reporter {
     };
   }
 
-  launch () {
+  launch (done) {
     let ruleset = {};
 
     csslint.getRules().forEach(function (rule) {
@@ -40,6 +40,11 @@ module.exports = class CSSLintReporter extends Reporter {
 
     glob(this.options.src, (er, files) => {
       this.processFiles(files, this.options);
+      this.closeReporter(this.options.report);
+
+      if (typeof done === 'function') {
+        done();
+      }
     });
   }
 
@@ -48,7 +53,6 @@ module.exports = class CSSLintReporter extends Reporter {
     fileArray.forEach((file) => {
       this.processFile(file, options);
     });
-    this.closeReporter(options.report);
   }
 
   processFile (file, options) {

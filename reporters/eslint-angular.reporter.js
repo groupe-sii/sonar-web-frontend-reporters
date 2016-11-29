@@ -18,14 +18,18 @@ module.exports = class ESLintAngularReporter extends Reporter {
     };
   }
 
-  launch () {
+  launch (done) {
     this.options.eslint = this.getRCFile(this.options.rulesFile);
     this.linter = new CLIEngine(this.options.eslint);
 
     glob(this.options.src, (er, files) => {
       this.processFiles(files, this.options);
-    });
+      this.closeReporter(this.options.report);
 
+      if (typeof done === 'function') {
+        done();
+      }
+    });
   }
 
   processFiles (fileArray, options) {
@@ -33,7 +37,6 @@ module.exports = class ESLintAngularReporter extends Reporter {
     fileArray.forEach((file) => {
       this.processFile(file, options);
     });
-    this.closeReporter(options.report);
   }
 
   processFile (file, options) {

@@ -19,7 +19,7 @@ module.exports = class JSHintReporter extends Reporter {
     };
   }
 
-  launch () {
+  launch (done) {
     this.options.jshint = jshintcli.loadConfig(this.options.rulesFile);
     delete this.options.jshint.dirname;
     this.options.globals = this.options.jshint.globals;
@@ -27,8 +27,12 @@ module.exports = class JSHintReporter extends Reporter {
 
     glob(this.options.src, (er, files) => {
       this.processFiles(files, this.options);
-    });
+      this.closeReporter(this.options.report);
 
+      if (typeof done === 'function') {
+        done();
+      }
+    });
   }
 
   processFiles (fileArray, options) {
@@ -36,7 +40,6 @@ module.exports = class JSHintReporter extends Reporter {
     fileArray.forEach((file) => {
       this.processFile(file, options);
     });
-    this.closeReporter(options.report);
   }
 
   processFile (file, options) {

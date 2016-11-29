@@ -17,7 +17,7 @@ module.exports = class HTMLHintReporter extends Reporter {
     };
   }
 
-  launch () {
+  launch (done) {
     let optionsRC = this.getRCFile(this.options.rulesFile);
     this.options.htmlhint = [];
     for (var key in HTMLHint.defaultRuleset) {
@@ -36,8 +36,12 @@ module.exports = class HTMLHintReporter extends Reporter {
 
     glob(this.options.src, (er, files) => {
       this.processFiles(files, this.options);
-    });
+      this.closeReporter(this.options.report);
 
+      if (typeof done === 'function') {
+        done();
+      }
+    });
   }
 
   processFiles (fileArray, options) {
@@ -45,7 +49,6 @@ module.exports = class HTMLHintReporter extends Reporter {
     fileArray.forEach((file) => {
       this.processFile(file, options);
     });
-    this.closeReporter(options.report);
   }
 
   processFile (file, options) {
