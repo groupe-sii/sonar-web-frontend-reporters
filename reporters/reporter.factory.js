@@ -4,8 +4,20 @@ const CssReporter = require('./csslint.reporter'),
   JSHintReporter = require('./jshint.reporter'),
   HTMLHintReporter = require('./htmlhint.reporter');
 
+/**
+ * Handle the reporters creation.
+ */
 class ReporterFactory {
 
+  /**
+   * Instantiante a reporter
+   *
+   * @param   {ReporterFactory.TYPE}  type              Reporter type
+   * @param   {Object}                options           User specific options
+   * @param   {string}                projectName       The project name, coming from `.sreporterrc` file and use lately by SonarQube
+   * @param   {string}                projectLanguage   The project language, coming from `.sreporterrc` file and use lately by SonarQube
+   * @returns {Reporter}                                Instance of `Reporter`
+   */
   static create(type, options, projectName, projectLanguage) {
     let reporter, opts;
 
@@ -42,6 +54,14 @@ class ReporterFactory {
     return reporter;
   }
 
+/**
+ * Merge the user specific options with the default ones of the repoter.
+ * Prioritize the user options.
+ *
+ * @param   {Object}        options         User specific options
+ * @param   {Object}        defaultOptions  Default repoter options
+ * @returns {Object|false}                  Merged options; Or FALSE if this reporter should be ignored
+ */
   static mergeOptions(options, defaultOptions) {
     if (options === true) {
       return defaultOptions;
@@ -54,6 +74,9 @@ class ReporterFactory {
 
 }
 
+/**
+ * @typedef {Object} ReporterFactory.TYPE
+ */
 ReporterFactory.TYPE = {
   CSS          : 'css',
   ESLINT       : 'eslint',
