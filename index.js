@@ -2,6 +2,7 @@
 
 const fs = require('fs'),
   mkdirp = require('mkdirp'),
+  chalk = require('chalk'),
   ReporterFactory = require('./reporters/reporter.factory');
 
 class SonarWebReporters {
@@ -22,8 +23,7 @@ class SonarWebReporters {
       this.makeReportDirectory(opts.report);
       reporter.launch();
     } else {
-      // TODO Ignored info
-      // console.log('IGNORED', reporter.linterName);
+      console.info(chalk.gray(`\u002D ${chalk.gray.bold(reporter.linterName)} has been ignored`));
     }
   }
 

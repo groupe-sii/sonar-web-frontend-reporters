@@ -7,7 +7,7 @@ module.exports = class ESLintReporter extends Reporter {
 
   constructor (options, projectName, projectLanguage) {
     super(options, projectName, projectLanguage);
-    this.linterName = 'ES Lint';
+    this.linterName = 'ESLint';
   }
 
   static defaultOptions () {

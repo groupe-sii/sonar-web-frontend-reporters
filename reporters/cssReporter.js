@@ -8,7 +8,7 @@ module.exports = class CssReporter extends Reporter {
   constructor (options, projectName, projectLanguage) {
     super(options, projectName, projectLanguage);
 
-    this.linterName = 'CSS Lint';
+    this.linterName = 'CSSLint';
   }
 
   static defaultOptions () {
