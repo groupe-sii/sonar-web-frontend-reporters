@@ -4,7 +4,7 @@
   "version": "3.0.0",
   "main": "index.js",
   "bin": {
-    "sreporter": "./index.js"
+    "sreporter": "./bin/sreporter.js"
   },
   "scripts": {
     "lint": "eslint .",

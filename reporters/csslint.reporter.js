@@ -3,7 +3,7 @@ const Reporter = require('./reporter'),
   glob = require('glob'),
   fs = require('fs');
 
-module.exports = class CSSReporter extends Reporter {
+module.exports = class CSSLintReporter extends Reporter {
 
   constructor (options, projectName, projectLanguage) {
     super(options, projectName, projectLanguage);
