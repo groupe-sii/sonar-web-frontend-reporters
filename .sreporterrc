@@ -1,0 +1,7 @@
+{
+    "css": {
+      "src": "src/**/*.css",
+      "report": "reports/sonar/csslint.json",
+      "rulesFile": ".csslintrc"
+    }
+}
