@@ -1,4 +1,4 @@
-const CssReporter = require('./csslint.reporter'),
+const CSSReporter = require('./csslint.reporter'),
   ESLintReporter = require('./eslint.reporter'),
   ESLintAngularReporter = require('./eslint-angular.reporter'),
   JSHintReporter = require('./jshint.reporter'),
@@ -23,8 +23,8 @@ class ReporterFactory {
 
     switch (type) {
       case ReporterFactory.TYPE.CSS:
-        opts = ReporterFactory.mergeOptions(options, CssReporter.defaultOptions());
-        reporter = new CssReporter(opts, projectName, projectLanguage);
+        opts = ReporterFactory.mergeOptions(options, CSSReporter.defaultOptions());
+        reporter = new CSSReporter(opts, projectName, projectLanguage);
         break;
 
       case ReporterFactory.TYPE.ESLINT:
