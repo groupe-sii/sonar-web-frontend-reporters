@@ -7,7 +7,8 @@
     "sreporter": "./index.js"
   },
   "scripts": {
-    "test": "mocha"
+    "lint": "eslint .",
+    "test": "npm run-script lint && mocha"
   },
   "repository": {
     "type": "git",

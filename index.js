@@ -1,7 +1,8 @@
 #!/usr/bin/env node
+
 const fs = require('fs'),
-      mkdirp = require('mkdirp'),
-      CssReporter = require('./reporters/cssReporter');
+  mkdirp = require('mkdirp'),
+  CssReporter = require('./reporters/cssReporter');
 
 class SonarWebReporters {
 
@@ -17,9 +18,9 @@ class SonarWebReporters {
 
   launchCss (options) {
     let cssOptions = this.mergeOptions(options, {
-      src: "src/**/*.css",
-      report: "reports/sonar/csslint.json",
-      rulesFile: ".csslintrc"
+      src      : 'src/**/*.css',
+      report   : 'reports/sonar/csslint.json',
+      rulesFile: '.csslintrc'
     });
 
     this.makeReportDirectory(cssOptions.report);
@@ -34,14 +35,15 @@ class SonarWebReporters {
       return defaultOptions;
     } else if (options) {
       return Object.assign(defaultOptions, options);
-    } else {
-      return false;
     }
+
+    return false;
   }
 
   makeReportDirectory (reportPath) {
-    let path = reportPath.substring(0,reportPath.lastIndexOf("/"));
-    if (!fs.existsSync(path)){
+    let path = reportPath.substring(0, reportPath.lastIndexOf('/'));
+
+    if (!fs.existsSync(path)) {
       mkdirp.sync(path);
     }
   }
