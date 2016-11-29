@@ -55,24 +55,22 @@ module.exports = class HTMLHintReporter extends Reporter {
       d = (new Date()).getTime(),
       index = 0;
 
-
-
     let fileNbViolations = this.openFileIssues(file, options.report, null, /^(\s+)?\n$/gm);
     for (let message of result) {
 
       switch (message.type) {
-          case 'error':
-            severity = 'MAJOR';
-            fileNbViolations[this.MAJOR]++;
-            break;
-          case 'warning':
-            severity = 'MINOR';
-            fileNbViolations[this.MINOR]++;
-            break;
-          default:
-            severity = 'INFO';
-            fileNbViolations[this.INFO]++;
-            break;
+        case 'error':
+          severity = 'MAJOR';
+          fileNbViolations[this.MAJOR]++;
+          break;
+        case 'warning':
+          severity = 'MINOR';
+          fileNbViolations[this.MINOR]++;
+          break;
+        default:
+          severity = 'INFO';
+          fileNbViolations[this.INFO]++;
+          break;
       }
 
       fs.appendFileSync(options.report,

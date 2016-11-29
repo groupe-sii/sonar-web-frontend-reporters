@@ -18,7 +18,7 @@ class ReporterFactory {
    * @param   {string}                projectLanguage   The project language, coming from `.sreporterrc` file and used later by SonarQube.
    * @returns {Reporter}                                Instance of `Reporter`.
    */
-  static create(type, options, projectName, projectLanguage) {
+  static create (type, options, projectName, projectLanguage) {
     let reporter, opts;
 
     switch (type) {
@@ -62,7 +62,7 @@ class ReporterFactory {
  * @param   {Object}        defaultOptions  Default repoter options
  * @returns {Object|false}                  Merged options; Or FALSE if this reporter should be ignored
  */
-  static mergeOptions(options, defaultOptions) {
+  static mergeOptions (options, defaultOptions) {
     if (options === true) {
       return defaultOptions;
     } else if (options) {
