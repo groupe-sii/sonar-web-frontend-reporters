@@ -12,21 +12,20 @@ class SonarWebReporters {
 
   launchReporters () {
     if (this.options.css) {
-      this.launchCss(this.options.css);
+      this.launchCss(this.options);
     }
   }
 
-  launchCss (options) {
-    let cssOptions = this.mergeOptions(options, {
-      src      : 'src/**/*.css',
-      report   : 'reports/sonar/csslint.json',
-      rulesFile: '.csslintrc'
+  launchCss(options) {
+    let cssOptions = this.mergeOptions(options.css, {
+      src: "src/**/*.css",
+      report: "reports/sonar/csslint.json",
+      rulesFile: ".csslintrc"
     });
-
     this.makeReportDirectory(cssOptions.report);
-
-    let cssReporter = new CssReporter();
+    let cssReporter = new CssReporter(options.projectName, options.projectLanguage);
     cssReporter.launch(cssOptions);
+
   }
 
 
