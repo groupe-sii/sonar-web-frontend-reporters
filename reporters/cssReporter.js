@@ -20,31 +20,27 @@ module.exports = class CssReporter extends Reporter {
   }
 
   launch () {
-    if (this.options) {
-      let ruleset = {};
+    let ruleset = {};
 
-      csslint.getRules().forEach(function (rule) {
-        ruleset[ rule.id ] = 1;
-      });
+    csslint.getRules().forEach(function (rule) {
+      ruleset[ rule.id ] = 1;
+    });
 
-      let rcContent = this.getRCFile(this.options.rulesFile);
-      if (rcContent) {
-        for (let rule of Object.keys(rcContent)) {
-          if (rcContent[ rule ]) {
-            ruleset[ rule ] = rcContent[ rule ];
-          } else {
-            delete ruleset[ rule ];
-          }
+    let rcContent = this.getRCFile(this.options.rulesFile);
+    if (rcContent) {
+      for (let rule of Object.keys(rcContent)) {
+        if (rcContent[ rule ]) {
+          ruleset[ rule ] = rcContent[ rule ];
+        } else {
+          delete ruleset[ rule ];
         }
       }
-      this.options.rules = ruleset;
-
-      glob(this.options.src, (er, files) => {
-        this.processFiles(files, this.options);
-      });
-    } else {
-      this.ignored();
     }
+    this.options.rules = ruleset;
+
+    glob(this.options.src, (er, files) => {
+      this.processFiles(files, this.options);
+    });
   }
 
   processFiles (fileArray, options) {

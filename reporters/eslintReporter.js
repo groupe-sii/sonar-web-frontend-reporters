@@ -4,6 +4,7 @@ const Reporter = require('./reporter'),
   fs = require('fs');
 
 module.exports = class ESLintReporter extends Reporter {
+
   constructor (options, projectName, projectLanguage) {
     super(options, projectName, projectLanguage);
     this.linterName = 'ES Lint';
@@ -45,18 +46,18 @@ module.exports = class ESLintReporter extends Reporter {
     let fileNbViolations = this.openFileIssues(file, options.report, null, /^(\s+)?\n$/gm);
     for (let message of result.results[0].messages) {
       switch (message.type) {
-          case 2:
-            severity = 'MAJOR';
-            fileNbViolations[this.MAJOR]++;
-            break;
-          case 1:
-            severity = 'MINOR';
-            fileNbViolations[this.MINOR]++;
-            break;
-          default:
-            severity = 'INFO';
-            fileNbViolations[this.INFO]++;
-            break;
+        case 2:
+          severity = 'MAJOR';
+          fileNbViolations[this.MAJOR]++;
+          break;
+        case 1:
+          severity = 'MINOR';
+          fileNbViolations[this.MINOR]++;
+          break;
+        default:
+          severity = 'INFO';
+          fileNbViolations[this.INFO]++;
+          break;
       }
 
 

@@ -1,5 +1,6 @@
-const should = require('chai').should(),
-  ReporterFactory = require('../../reporters/reporter.factory');
+require('chai').should();
+
+const ReporterFactory = require('../../reporters/reporter.factory');
 
 module.exports = () => {
 

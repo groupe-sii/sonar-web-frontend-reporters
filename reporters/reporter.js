@@ -80,10 +80,6 @@ class Reporter {
     console.log(`${reportFile} has been generated with ${this.linterName}`);
   }
 
-  ignored () {
-    console.log(`${this.linterName} is ignored`);
-  }
-
   openFileIssues (file, reportFile, commentsRegexp, spaceRegexp) {
     let linesCount = this.fileLinesCount(file);
     let lastSlash = file.lastIndexOf('/');

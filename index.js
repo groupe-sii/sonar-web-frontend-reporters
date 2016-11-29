@@ -22,7 +22,8 @@ class SonarWebReporters {
       this.makeReportDirectory(opts.report);
       reporter.launch();
     } else {
-      console.log('IGNORED', reporter.linterName);
+      // TODO Ignored info
+      // console.log('IGNORED', reporter.linterName);
     }
   }
 
