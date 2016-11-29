@@ -2,6 +2,7 @@
 const fs = require('fs'),
   path = require('path'),
   os = require('os'),
+  chalk = require('chalk'),
   VERSION = '1.1.0',
   BASE_PROJECT = path.normalize(__dirname.substring(0, __dirname.indexOf('/node_') + 1));
 
@@ -77,11 +78,8 @@ class Reporter {
   }
 }
 `);
-    console.log(`${reportFile} has been generated with ${this.linterName}`);
-  }
 
-  ignored () {
-    console.log(`${this.linterName} is ignored`);
+    console.info(chalk.green(`\u2714 ${chalk.green.bold(this.linterName)} has been generated under ${reportFile}`));
   }
 
   openFileIssues (file, reportFile, commentsRegexp, spaceRegexp) {

@@ -6,6 +6,7 @@
   },
   "rules": {
     "angular/no-service-method": 0,
+    "no-console": ["error", { "allow": [ "info", "warn", "error" ] }],
     "no-template-curly-in-string": "error",
     "no-unsafe-negation": "error",
     "block-scoped-var": "error",
