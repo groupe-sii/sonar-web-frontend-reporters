@@ -7,8 +7,13 @@
     "rulesFile": "./samples/.csslintrc"
   },
   "eslint": {
+    "src": "./samples/src/**/*.js",
+    "report": "reports/sonar/eslint.json",
+    "rulesFile": "./samples/.eslintrc"
+  },
+  "eslintangular": {
       "src": "./samples/src/**/*.js",
-      "report": "reports/sonar/eslint.json",
-      "rulesFile": "./samples/.eslintrc"
+      "report": "reports/sonar/eslintangular.json",
+      "rulesFile": "./samples/.eslintangularrc"
     }
 }

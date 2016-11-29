@@ -3,10 +3,10 @@ const Reporter = require('./reporter'),
   glob = require('glob'),
   fs = require('fs');
 
-module.exports = class ESLintReporter extends Reporter {
+module.exports = class ESLintAngularReporter extends Reporter {
   constructor (options, projectName, projectLanguage) {
     super(options, projectName, projectLanguage);
-    this.linterName = 'ES Lint';
+    this.linterName = 'ESLint Angular';
   }
 
   static defaultOptions () {
@@ -58,13 +58,15 @@ module.exports = class ESLintReporter extends Reporter {
             break;
       }
 
+      let ruleId = message.ruleId.replace('angular/', '');
+
 
       fs.appendFileSync(options.report,
         `{
             "line": ${(message.line ? message.line : null)},
             "message": "${message.message}",
             "description": "",
-            "rulekey": "${message.ruleId}",
+            "rulekey": "ng_${ruleId.replace(/-/g, '_')}",
             "severity": "${severity}",
             "reporter": "eslint",
             "creationDate": "${d}"

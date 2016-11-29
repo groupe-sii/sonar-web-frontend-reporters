@@ -1,8 +1,10 @@
-const CssReporter = require('./cssReporter');
+const CssReporter = require('./cssReporter'),
+  ESLintReporter = require('./eslintReporter'),
+  ESLintAngularReporter = require('./eslintAngularReporter');
 
 class ReporterFactory {
 
-  static create (type, options, projectName, projectLanguage) {
+  static create(type, options, projectName, projectLanguage) {
     let reporter, opts;
 
     switch (type) {
@@ -11,8 +13,12 @@ class ReporterFactory {
         reporter = new CssReporter(opts, projectName, projectLanguage);
         break;
       case ReporterFactory.TYPE.ESLINT:
-        opts = ReporterFactory.mergeOptions(options, CssReporter.defaultOptions());
-        reporter = new CssReporter(opts, projectName, projectLanguage);
+        opts = ReporterFactory.mergeOptions(options, ESLintReporter.defaultOptions());
+        reporter = new ESLintReporter(opts, projectName, projectLanguage);
+        break;
+      case ReporterFactory.TYPE.ESLINTANGULAR:
+        opts = ReporterFactory.mergeOptions(options, ESLintAngularReporter.defaultOptions());
+        reporter = new ESLintAngularReporter(opts, projectName, projectLanguage);
         break;
 
       default:
@@ -22,7 +28,7 @@ class ReporterFactory {
     return reporter;
   }
 
-  static mergeOptions (options, defaultOptions) {
+  static mergeOptions(options, defaultOptions) {
     if (options === true) {
       return defaultOptions;
     } else if (options) {
@@ -35,8 +41,9 @@ class ReporterFactory {
 }
 
 ReporterFactory.TYPE = {
-  CSS   : 'css',
-  ESLINT: 'eslint'
+  CSS          : 'css',
+  ESLINT       : 'eslint',
+  ESLINTANGULAR: 'eslintangular'
 };
 
 module.exports = ReporterFactory;
