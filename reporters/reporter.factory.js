@@ -10,6 +10,10 @@ class ReporterFactory {
         opts = ReporterFactory.mergeOptions(options, CssReporter.defaultOptions());
         reporter = new CssReporter(opts, projectName, projectLanguage);
         break;
+      case ReporterFactory.TYPE.ESLINT:
+        opts = ReporterFactory.mergeOptions(options, CssReporter.defaultOptions());
+        reporter = new CssReporter(opts, projectName, projectLanguage);
+        break;
 
       default:
         throw new Error(`Unknown reporter '${type}'`);
