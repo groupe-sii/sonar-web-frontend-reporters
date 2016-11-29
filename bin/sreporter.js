@@ -10,6 +10,10 @@ const fs = require('fs'),
 class CLIEngine {
 
   constructor () {
+    if (!fs.existsSync('./.sreporterrc')) {
+      throw new Error('.sreporterrc file is missing');
+    }
+
     this.options = JSON.parse(fs.readFileSync('./.sreporterrc', 'utf8'));
   }
 
