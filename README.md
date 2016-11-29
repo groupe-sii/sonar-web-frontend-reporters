@@ -88,6 +88,25 @@ You can also set it's property to `false`:
 
 ### NodeJS
 
+You can launch all reporters 
+
+For CSSLint:
+
+```js
+const CSSLintReporter = require('sonar-web-frontend-reporters').CSSLintReporter;
+
+let cssLintReporter = new CSSLintReporter({
+  src      : 'src/**/*.css',
+  report   : 'reports/sonar/csslint.json',
+  rulesFile: '.csslintrc'
+}, 'Sonar Web Front-End Reporters');
+
+cssLintReporter.launch(() => {
+  console.log('CSSLint reporter has been generated under reports/sonar/csslint.json');
+});
+
+```
+
 ## Migrating from 2.x to 3.x
 
 2.x and 3.x versions aren't compatible one to another.
@@ -113,7 +132,7 @@ gulp.task('csslint:reporter', (done) => {
     src      : 'src/**/*.css',
     report   : 'reports/sonar/csslint.json',
     rulesFile: '.csslintrc'
-  }, 'ProjectName');
+  }, 'Sonar Web Front-End Reporters');
 
   cssLintReporter.launch(() => done());
 });

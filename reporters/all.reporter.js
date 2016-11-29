@@ -6,6 +6,7 @@ class SonarWebReporters {
    * Launch the Sonar Web Front-End Reporters.
    * It automatically launch reporters registered under `ReporterFactory.TYPE`.
    *
+   * // TODO Pass an options object (like with .sreporterrc)
    * @param {string}  projectName   The project name
    */
   launchReporters (projectName) {
