@@ -8,6 +8,13 @@ const fs = require('fs'),
 
 class Reporter {
 
+  /**
+   * Instantiante a reporter
+   *
+   * @param   {Object}                options           User specific options.
+   * @param   {string}                projectName       The project name, coming from `.sreporterrc` file and used later by SonarQube.
+   * @param   {string}                projectLanguage   The project language, coming from `.sreporterrc` file and used later by SonarQube.
+   */
   constructor (options, projectName, projectLanguage) {
     this.options = options;
     this.projectName = projectName;
@@ -25,10 +32,19 @@ class Reporter {
     this.linterName = 'unamed linter';
   }
 
+  /**
+   * Specifiy the default options for the Reporter.
+   * They will be overrided by the user specific options.
+   *
+   * @returns {{src: string, report: string, rulesFile: string}}
+   */
   static defaultOptions () {
     throw new Error('defaultOptions method must be implemented');
   }
 
+  /**
+   * Launch the reporter creation.
+   */
   launch () {
     throw new Error('Launch method must be implemented');
   }
@@ -134,7 +150,7 @@ class Reporter {
         "major": ${fileNbViolations[this.MAJOR]},
         "minor": ${fileNbViolations[this.MINOR]},
         "info": ${fileNbViolations[this.INFO]}
-       }  
+       }
   },
 `);
   }
