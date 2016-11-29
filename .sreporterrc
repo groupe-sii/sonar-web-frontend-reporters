@@ -12,8 +12,13 @@
     "rulesFile": "./samples/.eslintrc"
   },
   "eslintangular": {
-      "src": "./samples/src/**/*.js",
-      "report": "reports/sonar/eslintangular.json",
-      "rulesFile": "./samples/.eslintangularrc"
-    }
+    "src": "./samples/src/**/*.js",
+    "report": "reports/sonar/eslintangular.json",
+    "rulesFile": "./samples/.eslintangularrc"
+  },
+   "html": {
+     "src": "./samples/src/**/*.html",
+     "report": "reports/sonar/htmlhint.json",
+     "rulesFile": "./samples/.htmlhintrc"
+   }
 }
