@@ -4,8 +4,12 @@
     "ecmaVersion": 6,
     "sourceType": "module"
   },
+  "plugins": [
+    "angular"
+  ],
   "rules": {
     "angular/no-service-method": 0,
+    "angular/controller-name": [2,"/[A-Z].*Ctrl/"],
     "no-template-curly-in-string": "error",
     "no-unsafe-negation": "error",
     "block-scoped-var": "error",
@@ -134,9 +138,9 @@
   "env": {
     "browser": true
   },
-  "globals": {
-    "module": true,
-    "inject": true,
-    "require": true
-  }
+  "globals": [
+    "module",
+    "inject",
+    "require"
+  ]
 }

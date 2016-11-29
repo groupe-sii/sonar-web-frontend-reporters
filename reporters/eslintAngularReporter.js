@@ -1,5 +1,5 @@
 const Reporter = require('./reporter'),
-  eslint = require('eslint'),
+  CLIEngine = require('eslint').CLIEngine,
   glob = require('glob'),
   fs = require('fs');
 
@@ -19,6 +19,7 @@ module.exports = class ESLintAngularReporter extends Reporter {
 
   launch () {
     this.options.eslint = this.getRCFile(this.options.rulesFile);
+    this.linter = new CLIEngine(this.options.eslint);
 
     glob(this.options.src, (er, files) => {
       this.processFiles(files, this.options);
@@ -36,13 +37,13 @@ module.exports = class ESLintAngularReporter extends Reporter {
 
   processFile (file, options) {
     let input = this.readFile(file),
-      result = eslint.linter.verify(input, options.eslint),
+      result = this.linter.executeOnText(input, undefined, true),
       severity,
       d = (new Date()).getTime(),
       index = 0;
 
     let fileNbViolations = this.openFileIssues(file, options.report, null, /^(\s+)?\n$/gm);
-    for (let message of result) {
+    for (let message of result.results[0].messages) {
       switch (message.type) {
           case 2:
             severity = 'MAJOR';
