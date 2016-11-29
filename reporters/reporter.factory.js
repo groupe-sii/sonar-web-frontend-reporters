@@ -22,7 +22,7 @@ class ReporterFactory {
     let reporter, opts;
 
     switch (type) {
-      case ReporterFactory.TYPE.CSS:
+      case ReporterFactory.TYPE.CSSLINT:
         opts = ReporterFactory.mergeOptions(options, CSSLintReporter.defaultOptions());
         reporter = new CSSLintReporter(opts, projectName, projectLanguage);
         break;
@@ -37,7 +37,7 @@ class ReporterFactory {
         reporter = new ESLintAngularReporter(opts, projectName, projectLanguage);
         break;
 
-      case ReporterFactory.TYPE.HTML:
+      case ReporterFactory.TYPE.HTMLHINT:
         opts = ReporterFactory.mergeOptions(options, HTMLHintReporter.defaultOptions());
         reporter = new HTMLHintReporter(opts, projectName, projectLanguage);
         break;
@@ -78,10 +78,10 @@ class ReporterFactory {
  * @typedef {Object} ReporterFactory.TYPE
  */
 ReporterFactory.TYPE = {
-  CSS          : 'css',
+  CSSLINT      : 'csslint',
   ESLINT       : 'eslint',
   ESLINTANGULAR: 'eslintangular',
-  HTML         : 'html',
+  HTMLHINT     : 'htmlhint',
   JSHINT       : 'jshint'
 };
 

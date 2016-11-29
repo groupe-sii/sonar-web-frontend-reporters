@@ -1,7 +1,7 @@
 {
   "projectName": "SonarWebReporter",
   "projectLanguage": "JS",
-  "css": false,
+  "csslint": false,
   "eslint": {
     "src": "./samples/src/**/*.js",
     "report": "reports/sonar/eslint.json",
@@ -13,13 +13,13 @@
     "rulesFile": "./samples/.eslintangularrc"
   },
   "jshint": {
-      "src": "./samples/src/**/*.js",
-      "report": "reports/sonar/jshint.json",
-      "rulesFile": "./samples/.jshintrc"
-    },
-   "html": {
-     "src": "./samples/src/**/*.html",
-     "report": "reports/sonar/htmlhint.json",
-     "rulesFile": "./samples/.htmlhintrc"
-   }
+    "src": "./samples/src/**/*.js",
+    "report": "reports/sonar/jshint.json",
+    "rulesFile": "./samples/.jshintrc"
+  },
+  "htmlhint": {
+    "src": "./samples/src/**/*.html",
+    "report": "reports/sonar/htmlhint.json",
+    "rulesFile": "./samples/.htmlhintrc"
+  }
 }
