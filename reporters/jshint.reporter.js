@@ -44,7 +44,7 @@ module.exports = class JSHintReporter extends Reporter {
 
   processFile (file, options) {
     let input = this.readFile(file),
-      result = jshint(input, options.jshint, options.globals),
+      jshint(input, options.jshint, options.globals),
       severity,
       d = (new Date()).getTime(),
       index = 0;
