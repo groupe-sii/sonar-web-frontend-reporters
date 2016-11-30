@@ -3,5 +3,15 @@ module.exports = {
     src      : './test/mocks/test.css',
     report   : './test/output/test.json',
     rulesFile: './test/mocks/.csslintrc'
+  },
+  badFileSrcOptions: {
+    src      : './test/mocks/test.ss',
+    report   : './test/output/test.json',
+    rulesFile: './test/mocks/.csslintrc'
+  },
+  badRulesFileOptions: {
+    src      : './test/mocks/test.css',
+    report   : './test/output/test.json',
+    rulesFile: './test/mocks/.bad'
   }
 };
