@@ -4,8 +4,8 @@ const Reporter = require('./reporter'),
   fs = require('fs');
 
 module.exports = class HTMLHintReporter extends Reporter {
-  constructor (options, projectName, projectLanguage) {
-    super(options, projectName, projectLanguage);
+  constructor (options, projectName) {
+    super(options, projectName);
     this.linterName = 'HTMLHint';
   }
 

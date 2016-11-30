@@ -5,8 +5,8 @@ const Reporter = require('./reporter'),
 
 module.exports = class ESLintAngularReporter extends Reporter {
 
-  constructor (options, projectName, projectLanguage) {
-    super(options, projectName, projectLanguage);
+  constructor (options, projectName) {
+    super(options, projectName);
     this.linterName = 'ESLint Angular';
   }
 

@@ -15,10 +15,9 @@ class Reporter {
    * @param   {string}                projectName       The project name, coming from `.sreporterrc` file and used later by SonarQube.
    * @param   {string}                projectLanguage   The project language, coming from `.sreporterrc` file and used later by SonarQube.
    */
-  constructor (options, projectName, projectLanguage) {
+  constructor (options, projectName) {
     this.options = options;
     this.projectName = projectName;
-    this.projectLanguage = projectLanguage;
     this.nbFiles = 0;
     this.totalLines = 0;
     this.totalComments = 0;
@@ -81,7 +80,6 @@ class Reporter {
   openReporter (reportFile) {
     fs.writeFileSync(reportFile,
       `{
-  "language": "${this.projectLanguage}",
   "project": "${this.projectName}",
   "projectPath": "${BASE_PROJECT}",
   "version": "${VERSION}",

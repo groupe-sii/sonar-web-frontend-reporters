@@ -1,6 +1,5 @@
 {
   "projectName": "SonarWebReporter",
-  "projectLanguage": "JS",
   "csslint": false,
   "eslint": {
     "src": "./samples/src/**/*.js",

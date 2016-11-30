@@ -18,33 +18,33 @@ class ReporterFactory {
    * @param   {string}                projectLanguage   The project language, coming from `.sreporterrc` file and used later by SonarQube.
    * @returns {Reporter}                                Instance of `Reporter`.
    */
-  static create (type, options, projectName, projectLanguage) {
+  static create (type, options, projectName) {
     let reporter, opts;
 
     switch (type) {
       case ReporterFactory.TYPE.CSSLINT:
         opts = ReporterFactory.mergeOptions(options, CSSLintReporter.defaultOptions());
-        reporter = new CSSLintReporter(opts, projectName, projectLanguage);
+        reporter = new CSSLintReporter(opts, projectName);
         break;
 
       case ReporterFactory.TYPE.ESLINT:
         opts = ReporterFactory.mergeOptions(options, ESLintReporter.defaultOptions());
-        reporter = new ESLintReporter(opts, projectName, projectLanguage);
+        reporter = new ESLintReporter(opts, projectName);
         break;
 
       case ReporterFactory.TYPE.ESLINTANGULAR:
         opts = ReporterFactory.mergeOptions(options, ESLintAngularReporter.defaultOptions());
-        reporter = new ESLintAngularReporter(opts, projectName, projectLanguage);
+        reporter = new ESLintAngularReporter(opts, projectName);
         break;
 
       case ReporterFactory.TYPE.HTMLHINT:
         opts = ReporterFactory.mergeOptions(options, HTMLHintReporter.defaultOptions());
-        reporter = new HTMLHintReporter(opts, projectName, projectLanguage);
+        reporter = new HTMLHintReporter(opts, projectName);
         break;
 
       case ReporterFactory.TYPE.JSHINT:
         opts = ReporterFactory.mergeOptions(options, JSHintReporter.defaultOptions());
-        reporter = new JSHintReporter(opts, projectName, projectLanguage);
+        reporter = new JSHintReporter(opts, projectName);
         break;
 
       default:

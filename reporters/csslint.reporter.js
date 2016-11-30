@@ -5,8 +5,8 @@ const Reporter = require('./reporter'),
 
 module.exports = class CSSLintReporter extends Reporter {
 
-  constructor (options, projectName, projectLanguage) {
-    super(options, projectName, projectLanguage);
+  constructor (options, projectName) {
+    super(options, projectName);
 
     this.linterName = 'CSSLint';
   }

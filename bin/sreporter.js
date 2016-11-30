@@ -32,7 +32,7 @@ class CLIEngine {
    */
   launch (type, options) {
     let opts = options[type],
-      reporter = ReporterFactory.create(type, opts, options.projectName, options.projectLanguage);
+      reporter = ReporterFactory.create(type, opts, options.projectName);
 
     if (opts) {
       reporter.launch(() => {

@@ -6,8 +6,8 @@ const Reporter = require('./reporter'),
 
 module.exports = class JSHintReporter extends Reporter {
 
-  constructor (options, projectName, projectLanguage) {
-    super(options, projectName, projectLanguage);
+  constructor (options, projectName) {
+    super(options, projectName);
     this.linterName = 'JSHint';
   }
 
