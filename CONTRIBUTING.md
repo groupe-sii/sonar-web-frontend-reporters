@@ -51,9 +51,8 @@ module.exports = {
 ```
 
 1. Update README
-
-    1.1. **Default options** section
-    1.1. **Available reporters** section
+    * **Default options** section
+    * **Available reporters** section
 
 ## Commit Message Format
 
