@@ -44,11 +44,11 @@ module.exports = class JSHintReporter extends Reporter {
 
   processFile (file, options) {
     let input = this.readFile(file),
-      jshint(input, options.jshint, options.globals),
       severity,
       d = (new Date()).getTime(),
       index = 0;
 
+    jshint(input, options.jshint, options.globals);
     let fileNbViolations = this.openFileIssues(file, options.report, null, /^(\s+)?\n$/gm);
     for (let message of jshint.errors) {
       switch (message.id) {
