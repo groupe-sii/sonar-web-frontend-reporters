@@ -16,7 +16,6 @@ class ReporterFactory {
    * @param   {ReporterFactory.TYPE}  type              Reporter type.
    * @param   {Object}                options           User specific options.
    * @param   {string}                projectName       The project name, coming from `.sreporterrc` file and used later by SonarQube.
-   * @param   {string}                projectLanguage   The project language, coming from `.sreporterrc` file and used later by SonarQube.
    * @returns {Reporter}                                Instance of `Reporter`.
    */
   static create (type, options, projectName) {

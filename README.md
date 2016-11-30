@@ -6,6 +6,8 @@
 [npm-image]: https://badge.fury.io/js/sonar-web-frontend-reporters.svg
 [npm-url]: https://npmjs.org/package/sonar-web-frontend-reporters
 
+> `sreporter` is a Command-Line Interface to generate linters reporters for the [SonarQube](https://github.com/groupe-sii/sonar-web-frontend-plugin) plugin.
+
 ## Usage
 
 There is two way of using `sonar-web-frontend-reporters`:
@@ -90,7 +92,7 @@ You can also set it's property to `false`:
 
 You can launch all reporters 
 
-For CSSLint:
+e.g for CSSLint:
 
 ```js
 const CSSLintReporter = require('sonar-web-frontend-reporters').CSSLintReporter;
@@ -104,8 +106,17 @@ let cssLintReporter = new CSSLintReporter({
 cssLintReporter.launch(() => {
   console.log('CSSLint reporter has been generated under reports/sonar/csslint.json');
 });
-
 ```
+
+## Available reporters
+
+* CSSLint
+* SCSSLint
+* HTMLHint
+* ESLint
+* ESLint for AngularJS
+* JSHint
+* TSLint
 
 ## Migrating from 2.x to 3.x
 
@@ -137,3 +148,11 @@ gulp.task('csslint:reporter', (done) => {
   cssLintReporter.launch(() => done());
 });
 ```
+
+## [Contributing](CONTRIBUTING.md)
+
+## License
+
+ISC License
+
+Copyright (c) 2016 Groupe SII

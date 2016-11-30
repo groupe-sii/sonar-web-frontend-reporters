@@ -3,7 +3,7 @@
 ## Installation
 
 1. Clone repository
-2. Install dependencies
+1. Install dependencies
 
 ```sh
 $ npm install
@@ -26,8 +26,8 @@ npm run lint
 ## Writing a repoter
 
 1. First of all, create a file under `reporters/` for your new reporter. It should match the following syntax: **new-reporter.reporter.js**.
-2. The new reporter must extends the `Reporter` class and implement `defaultOptions` and `launch` methods
-3. Register the reporter in the `ReporterFactory`
+1. The new reporter must extends the `Reporter` class and implement `defaultOptions` and `launch` methods
+1. Register the reporter in the `ReporterFactory`
 
 ```js
 switch (type) {
@@ -38,18 +38,19 @@ switch (type) {
 }
 
 ReporterFactory.TYPE = {
-  ...
   NEWREPORTER: 'newreporter'
 }
 ```
-
-4. Export the reporter so that anyone can use it (`index.js`)
+1. Export the reporter so that anyone can use it (`index.js`)
 
 ```js
 module.exports = {
   NewReporter: require('./reporters/new-reporter.reporter')
 };
 ```
+1. Update README
+    * **Default options** section
+    * **Available reporters** section
 
 ## Commit Message Format
 
