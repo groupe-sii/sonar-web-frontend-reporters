@@ -11,6 +11,10 @@ module.exports = () => {
 
     describe('#launch', () => {
 
+      it('should throw an error if the project name is undefined', () => {
+        (() => new CSSLintReporter(cssLintMock.defaultOptions)).should.throw(Error);
+      });
+
       it('should be the right project name', (done) => {
         let reporter = new CSSLintReporter(cssLintMock.defaultOptions, 'test');
         reporter.launch(() => {
@@ -19,7 +23,7 @@ module.exports = () => {
         });
       });
 
-      it('must have the output file', (done) => {
+      it('should create the output file', (done) => {
         let reporter = new CSSLintReporter(cssLintMock.defaultOptions, 'test');
         reporter.launch(() => {
           fs.existsSync(cssLintMock.defaultOptions.report).should.be.equal(true);
