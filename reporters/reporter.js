@@ -35,6 +35,10 @@ class Reporter {
         throw new Error(`Rules file '${options.rulesFile}' does not exist`);
       }
     }
+
+    if (!projectName) {
+      throw new Error(`Project name must not be null`);
+    }
   }
 
   /**
