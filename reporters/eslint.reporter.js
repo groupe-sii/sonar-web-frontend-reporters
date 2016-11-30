@@ -74,7 +74,7 @@ module.exports = class ESLintReporter extends Reporter {
             "reporter": "eslint",
             "creationDate": "${d}"
           }` +
-        ((index < (result.length) - 1) ? ',' : ''));
+        ((index < (result.results[0].messages.length) - 1) ? ',' : ''));
 
       index++;
     }

@@ -77,7 +77,7 @@ module.exports = class JSHintReporter extends Reporter {
             "reporter": "jshint",
             "creationDate": "${d}"
           }` +
-        ((index < (result.length) - 1) ? ',' : ''));
+        ((index < (jshint.errors.length) - 1) ? ',' : ''));
 
       index++;
     }
