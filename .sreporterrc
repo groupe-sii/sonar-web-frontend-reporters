@@ -26,9 +26,9 @@
     "report": "reports/sonar/tslint.json",
     "rulesFile": "./samples/tslint.json"
   },
-  "scsslint": {
-    "src": "./samples/src/**/*.scss",
-    "report": "reports/sonar/scsslint.json",
+  "sasslint": {
+    "src": "./samples/src/**/*.s+(a|c)ss",
+    "report": "reports/sonar/sasslint.json",
     "rulesFile": "./samples/.sass-lint.yml"
   }
 

@@ -3,12 +3,12 @@ const Reporter = require('./reporter'),
   glob = require('glob'),
   fs = require('fs');
 
-module.exports = class SCSSLintReporter extends Reporter {
+module.exports = class SASSLintReporter extends Reporter {
 
   constructor (options, projectName) {
     super(options, projectName);
 
-    this.linterName = 'SCSSLint';
+    this.linterName = 'SASSLint';
   }
 
   static defaultOptions () {

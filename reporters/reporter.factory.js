@@ -1,5 +1,5 @@
 const CSSLintReporter = require('./csslint.reporter'),
-  SCSSLintReporter = require('./scsslint.reporter'),
+  SASSLintReporter = require('./sasslint.reporter'),
   ESLintReporter = require('./eslint.reporter'),
   ESLintAngularReporter = require('./eslint-angular.reporter'),
   JSHintReporter = require('./jshint.reporter'),
@@ -53,9 +53,9 @@ class ReporterFactory {
         reporter = new TSLintReporter(opts, projectName);
         break;
 
-      case ReporterFactory.TYPE.SCSSLINT:
-        opts = ReporterFactory.mergeOptions(options, SCSSLintReporter.defaultOptions());
-        reporter = new SCSSLintReporter(opts, projectName);
+      case ReporterFactory.TYPE.SASSLINT:
+        opts = ReporterFactory.mergeOptions(options, SASSLintReporter.defaultOptions());
+        reporter = new SASSLintReporter(opts, projectName);
         break;
 
       default:
@@ -95,7 +95,7 @@ ReporterFactory.TYPE = {
   HTMLHINT     : 'htmlhint',
   JSHINT       : 'jshint',
   TSLINT       : 'tslint',
-  SCSSLINT     : 'scsslint'
+  SASSLINT     : 'sasslint'
 };
 
 module.exports = ReporterFactory;
