@@ -31,6 +31,9 @@ class Reporter {
 
     if (options) {
       this.makeReportDirectory(options.report);
+      if (!fs.existsSync(options.rulesFile)) {
+        throw new Error(`Rules file '${options.rulesFile}' does not exist`);
+      }
     }
   }
 
