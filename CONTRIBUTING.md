@@ -41,7 +41,6 @@ ReporterFactory.TYPE = {
   NEWREPORTER: 'newreporter'
 }
 ```
-
 1. Export the reporter so that anyone can use it (`index.js`)
 
 ```js
@@ -49,7 +48,6 @@ module.exports = {
   NewReporter: require('./reporters/new-reporter.reporter')
 };
 ```
-
 1. Update README
     * **Default options** section
     * **Available reporters** section
