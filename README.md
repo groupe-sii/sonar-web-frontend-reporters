@@ -92,7 +92,7 @@ You can also set it's property to `false`:
 
 You can launch all reporters 
 
-For CSSLint:
+e.g for CSSLint:
 
 ```js
 const CSSLintReporter = require('sonar-web-frontend-reporters').CSSLintReporter;
@@ -106,8 +106,17 @@ let cssLintReporter = new CSSLintReporter({
 cssLintReporter.launch(() => {
   console.log('CSSLint reporter has been generated under reports/sonar/csslint.json');
 });
-
 ```
+
+## Available reporters
+
+* CSSLint
+* SCSSLint
+* HTMLHint
+* ESLint
+* ESLint for AngularJS
+* JSHint
+* TSLint
 
 ## Migrating from 2.x to 3.x
 
