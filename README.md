@@ -6,6 +6,8 @@
 [npm-image]: https://badge.fury.io/js/sonar-web-frontend-reporters.svg
 [npm-url]: https://npmjs.org/package/sonar-web-frontend-reporters
 
+> `sreporter` is a Command-Line Interface to generate linters reporters for the [SonarQube](https://github.com/groupe-sii/sonar-web-frontend-plugin) plugin.
+
 ## Usage
 
 There is two way of using `sonar-web-frontend-reporters`:
