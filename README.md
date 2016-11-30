@@ -139,3 +139,11 @@ gulp.task('csslint:reporter', (done) => {
   cssLintReporter.launch(() => done());
 });
 ```
+
+## [Contributing](CONTRIBUTING.md)
+
+## License
+
+ISC License
+
+Copyright (c) 2016 Groupe SII
