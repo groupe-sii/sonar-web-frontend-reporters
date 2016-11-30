@@ -13,6 +13,8 @@
 # Linter SpaceBeforeBrace, option "allow_single_line_padding"
 # Linter VendorPrefix, option "identifier_list"
 
+files:
+  include: 'src/**/*.s+(a|c)ss'
 options:
   formatter: stylish
   merge-default-rules: false
