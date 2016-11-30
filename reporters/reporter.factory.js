@@ -1,4 +1,5 @@
 const CSSLintReporter = require('./csslint.reporter'),
+  SCSSLintReporter = require('./scsslint.reporter'),
   ESLintReporter = require('./eslint.reporter'),
   ESLintAngularReporter = require('./eslint-angular.reporter'),
   JSHintReporter = require('./jshint.reporter'),
@@ -52,6 +53,11 @@ class ReporterFactory {
         reporter = new TSLintReporter(opts, projectName);
         break;
 
+      case ReporterFactory.TYPE.SCSSLINT:
+        opts = ReporterFactory.mergeOptions(options, SCSSLintReporter.defaultOptions());
+        reporter = new SCSSLintReporter(opts, projectName);
+        break;
+
       default:
         throw new Error(`Unknown reporter '${type}'`);
     }
@@ -88,7 +94,8 @@ ReporterFactory.TYPE = {
   ESLINTANGULAR: 'eslintangular',
   HTMLHINT     : 'htmlhint',
   JSHINT       : 'jshint',
-  TSLINT       : 'tslint'
+  TSLINT       : 'tslint',
+  SCSSLINT     : 'scsslint'
 };
 
 module.exports = ReporterFactory;

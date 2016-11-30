@@ -43,6 +43,7 @@
     "htmlhint": "^0.9.13",
     "jshint": "^2.9.4",
     "mkdirp": "^0.5.1",
+    "sass-lint": "^1.10.2",
     "tslint": "^4.0.2",
     "typescript": "^2.0.10"
   },

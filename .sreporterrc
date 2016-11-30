@@ -25,5 +25,11 @@
     "src": "./samples/src/**/*.ts",
     "report": "reports/sonar/tslint.json",
     "rulesFile": "./samples/tslint.json"
+  },
+  "scsslint": {
+    "src": "./samples/src/**/*.scss",
+    "report": "reports/sonar/scsslint.json",
+    "rulesFile": "./samples/.sass-lint.yml"
   }
+
 }
