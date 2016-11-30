@@ -20,5 +20,10 @@
     "src": "./samples/src/**/*.html",
     "report": "reports/sonar/htmlhint.json",
     "rulesFile": "./samples/.htmlhintrc"
+  },
+  "tslint": {
+    "src": "./samples/src/**/*.ts",
+    "report": "reports/sonar/tslint.json",
+    "rulesFile": "./samples/tslint.json"
   }
 }
