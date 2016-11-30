@@ -90,9 +90,35 @@ You can also set it's property to `false`:
 
 ### NodeJS
 
-You can launch all reporters 
+You can launch all reporters:
 
-e.g for CSSLint:
+```js
+const SonarWebReporters = require('sonar-web-frontend-reporters').Reporters;
+
+let sonarWebReporters = new SonarWebReporters('Sonar Web Front-End Reporters', {
+  "csslint": {
+    "src": "src/**/*.css",
+    "report": "reports/sonar/csslint.json",
+    "rulesFile": ".csslintrc"
+  },
+  "htmlhint": {
+    "src": "src/**/*.html",
+    "report": "reports/sonar/htmlhint.json",
+    "rulesFile": ".htmlhintrc"
+  },
+  "eslint": {
+    "src": "src/**/*.js",
+    "report": "reports/sonar/eslint.json",
+    "rulesFile": ".eslintrc"
+  }
+});
+
+sonarWebReporters.launchReporters(() => {
+  console.log('All reporters have been processed');
+});
+```
+
+Or just one by one, e.g for CSSLint:
 
 ```js
 const CSSLintReporter = require('sonar-web-frontend-reporters').CSSLintReporter;
