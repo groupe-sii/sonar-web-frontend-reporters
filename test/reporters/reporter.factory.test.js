@@ -35,6 +35,10 @@ module.exports = () => {
         ReporterFactory.mergeOptions(null, {
           option1: 'string'
         }).should.be.deep.equal(false);
+
+        ReporterFactory.mergeOptions(false, {
+          option1: 'string'
+        }).should.be.deep.equal(false);
       });
 
     });
