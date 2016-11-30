@@ -42,10 +42,10 @@ Default options are as follows:
     "report": "reports/sonar/csslint.json",
     "rulesFile": ".csslintrc"
   },
-  "scsslint": {
+  "sasslint": {
     "src": "src/**/*.scss",
     "report": "reports/sonar/scsslint.json",
-    "rulesFile": ".scsslintrc"
+    "rulesFile": ".sass-lint.yml"
   },
   "htmlhint": {
     "src": "src/**/*.html",
@@ -111,7 +111,7 @@ cssLintReporter.launch(() => {
 ## Available reporters
 
 * CSSLint
-* SCSSLint
+* SASSLint
 * HTMLHint
 * ESLint
 * ESLint for AngularJS

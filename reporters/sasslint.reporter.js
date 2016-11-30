@@ -1,5 +1,5 @@
 const Reporter = require('./reporter'),
-  scsslint = require('sass-lint'),
+  sasslint = require('sass-lint'),
   glob = require('glob'),
   fs = require('fs');
 
@@ -38,7 +38,7 @@ module.exports = class SASSLintReporter extends Reporter {
   }
 
   processFile (file, options) {
-    let result = scsslint.lintFiles(file, {}, options.rulesFile)[0],
+    let result = sasslint.lintFiles(file, {}, options.rulesFile)[0],
       severity,
       d = (new Date()).getTime(),
       index = 0;
