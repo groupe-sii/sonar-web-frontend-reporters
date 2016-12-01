@@ -1,7 +1,6 @@
 const Reporter = require('./reporter'),
   CLIEngine = require('eslint').CLIEngine,
-  glob = require('glob'),
-  fs = require('fs');
+  glob = require('glob');
 
 module.exports = class ESLintReporter extends Reporter {
 
@@ -32,54 +31,35 @@ module.exports = class ESLintReporter extends Reporter {
     });
   }
 
-  processFiles (fileArray, options) {
-    this.openReporter(options.report);
+  processFiles (fileArray) {
+    this.openReporter();
     fileArray.forEach((file) => {
-      this.processFile(file, options);
+      this.processFile(file);
     });
   }
 
-  processFile (file, options) {
+  processFile (file) {
     let input = this.readFile(file),
       result = this.linter.executeOnText(input, undefined, true),
-      severity,
-      d = (new Date()).getTime(),
-      index = 0;
+      severity;
 
-    let fileNbViolations = this.openFileIssues(file, options.report, null, /^(\s+)?\n$/gm);
+    this.openFileIssues(file, null, /^(\s+)?\n$/gm);
     for (let message of result.results[0].messages) {
       switch (message.type) {
         case 2:
-          severity = 'MAJOR';
-          fileNbViolations[this.MAJOR]++;
+          severity = this.MAJOR;
           break;
         case 1:
-          severity = 'MINOR';
-          fileNbViolations[this.MINOR]++;
+          severity = this.MINOR;
           break;
         default:
-          severity = 'INFO';
-          fileNbViolations[this.INFO]++;
+          severity = this.INFO;
           break;
       }
+      this.addIssue((message.line ? message.line : null), message.message, '', message.ruleId, severity, 'eslint');
 
-
-      fs.appendFileSync(options.report,
-        `{
-            "line": ${(message.line ? message.line : null)},
-            "message": "${message.message}",
-            "description": "",
-            "rulekey": "${message.ruleId}",
-            "severity": "${severity}",
-            "reporter": "eslint",
-            "creationDate": "${d}"
-          }` +
-        ((index < (result.results[0].messages.length) - 1) ? ',' : ''));
-
-      index++;
     }
 
-    this.closeFileIssues(fileNbViolations, options.report);
   }
 
 
