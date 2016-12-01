@@ -27,18 +27,21 @@ npm run lint
 
 1. First of all, create a file under `reporters/` for your new reporter. It should match the following syntax: **new-reporter.reporter.js**.
 1. The new reporter must extends the `Reporter` class and implement `defaultOptions` and `launch` methods
+1. Add a new reporter type in the `reporter.enum.js` file
+
+```js
+const ReporterType = {
+  NEWREPORTER: 'newreporter'
+}
+```
 1. Register the reporter in the `ReporterFactory`
 
 ```js
 switch (type) {
-  case ReporterFactory.TYPE.NEWREPORTER:
+  case ReporterType.NEWREPORTER:
     opts = ReporterFactory.mergeOptions(options, NewReporter.defaultOptions());
     reporter = new NewReporter(opts, projectName);
     break;
-}
-
-ReporterFactory.TYPE = {
-  NEWREPORTER: 'newreporter'
 }
 ```
 1. Export the reporter so that anyone can use it (`index.js`)
