@@ -49,8 +49,8 @@ class Reporter {
   }
 
   /**
-   * Specifiy the default options for the Reporter.
-   * They will be overrided by the user specific options.
+   * Specify the default options for the Reporter.
+   * They will be overriden by the user specific options.
    *
    * @returns {{src: string, report: string, rulesFile: string}}
    */
@@ -109,7 +109,7 @@ class Reporter {
       minor   : this.nbViolations[this.MINOR],
       info    : this.nbViolations[this.INFO]
     };
-    fs.writeFileSync(reportFile, JSON.stringify(this.fileContent, null, 4));
+    fs.writeFileSync(reportFile, JSON.stringify(this.fileContent, null, 2));
   }
 
   openFileIssues (file, commentsRegexp, spaceRegexp) {
@@ -153,7 +153,7 @@ class Reporter {
         minor   : 0,
         info    : 0
       },
-      issues    : []
+      issues: []
     });
   }
 
