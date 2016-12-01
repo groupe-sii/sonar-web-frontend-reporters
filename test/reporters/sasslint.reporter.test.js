@@ -41,20 +41,20 @@ module.exports = () => {
         });
       });
 
-      it('should have foor issues', (done) => {
+      it('should have 8 issues', (done) => {
         let reporter = new SASSLintReporter(sassLintMock.defaultOptions, 'test');
         reporter.launch(() => {
           let result = readJSONFile(sassLintMock.defaultOptions.report);
-          result.files[0].issues.length.should.be.equal(4);
+          result.files[0].issues.length.should.be.equal(8);
           done();
         });
       });
 
-      it('should have 4 lines', (done) => {
+      it('should have 5 lines', (done) => {
         let reporter = new SASSLintReporter(sassLintMock.defaultOptions, 'test');
         reporter.launch(() => {
           let result = readJSONFile(sassLintMock.defaultOptions.report);
-          result.files[0].nbLines.should.be.equal(4);
+          result.files[0].nbLines.should.be.equal(5);
           done();
         });
       });
