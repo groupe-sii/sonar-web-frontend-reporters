@@ -1,12 +1,12 @@
-const Reporter = require('./reporter'),
+const glob = require('glob'),
   CLIEngine = require('eslint').CLIEngine,
-  glob = require('glob'),
-  fs = require('fs');
+  Reporter = require('./reporter');
 
 module.exports = class ESLintAngularReporter extends Reporter {
 
   constructor (options, projectName) {
     super(options, projectName);
+
     this.linterName = 'ESLint Angular';
   }
 
@@ -35,53 +35,38 @@ module.exports = class ESLintAngularReporter extends Reporter {
   processFiles (fileArray, options) {
     this.openReporter(options.report);
     fileArray.forEach((file) => {
-      this.processFile(file, options);
+      this.processFile(file);
     });
   }
 
-  processFile (file, options) {
+  processFile (file) {
     let input = this.readFile(file),
       result = this.linter.executeOnText(input, undefined, true),
-      severity,
-      d = (new Date()).getTime(),
-      index = 0;
+      severity;
 
-    let fileNbViolations = this.openFileIssues(file, options.report, null, /^(\s+)?\n$/gm);
+    this.openFileIssues(file, null, /^(\s+)?\n$/gm);
     for (let message of result.results[0].messages) {
       switch (message.type) {
         case 2:
-          severity = 'MAJOR';
-          fileNbViolations[this.MAJOR]++;
+          severity = this.MAJOR;
           break;
         case 1:
-          severity = 'MINOR';
-          fileNbViolations[this.MINOR]++;
+          severity = this.MINOR;
           break;
         default:
-          severity = 'INFO';
-          fileNbViolations[this.INFO]++;
+          severity = this.INFO;
           break;
       }
 
-      let ruleId = message.ruleId.replace('angular/', '');
-
-
-      fs.appendFileSync(options.report,
-        `{
-            "line": ${(message.line ? message.line : null)},
-            "message": "${message.message}",
-            "description": "",
-            "rulekey": "ng_${ruleId.replace(/-/g, '_')}",
-            "severity": "${severity}",
-            "reporter": "eslint",
-            "creationDate": "${d}"
-          }` +
-        ((index < (result.results[0].messages.length) - 1) ? ',' : ''));
-
-      index++;
+      this.addIssue(
+        (message.line ? message.line : null),
+        message.message,
+        '',
+        `ng_${message.ruleId.replace('angular/', '').replace(/-/g, '_')}`,
+        severity,
+        'eslintangular'
+      );
     }
-
-    this.closeFileIssues(fileNbViolations, options.report);
   }
 
 
