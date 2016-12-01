@@ -30,7 +30,7 @@ module.exports = class SASSLintReporter extends Reporter {
   }
 
   processFiles (fileArray, options) {
-    this.openReporter(options.report);
+    this.openReporter();
     fileArray.forEach((file) => {
       this.processFile(file, options);
     });
