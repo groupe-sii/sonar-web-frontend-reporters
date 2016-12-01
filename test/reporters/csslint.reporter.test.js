@@ -1,6 +1,6 @@
 require('chai').should();
 
-const CSSLintReporter = require('../../reporters/csslint.reporter'),
+const CSSLintReporter = require('../../index').CSSLintReporter,
   readJSONFile = require('../test.utils').readJSONFile,
   cssLintMock = require('./csslint.reporter.mock'),
   fs = require('fs');

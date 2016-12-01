@@ -1,6 +1,6 @@
 require('chai').should();
 
-const HTMLHintReporter = require('../../reporters/htmlhint.reporter'),
+const HTMLHintReporter = require('../../index').HTMLHintReporter,
   readJSONFile = require('../test.utils').readJSONFile,
   htmlHintMock = require('./htmlhint.reporter.mock'),
   fs = require('fs');
