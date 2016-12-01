@@ -13,7 +13,7 @@ module.exports = class ESLintAngularReporter extends Reporter {
   static defaultOptions () {
     return {
       src      : 'src/**/*.js',
-      report   : 'reports/sonar/eslint.json',
+      report   : 'reports/sonar/eslint-angular.json',
       rulesFile: '.eslintrc'
     };
   }
