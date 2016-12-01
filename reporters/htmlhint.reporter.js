@@ -1,7 +1,6 @@
 const Reporter = require('./reporter'),
   HTMLHint = require('htmlhint').HTMLHint,
-  glob = require('glob'),
-  fs = require('fs');
+  glob = require('glob');
 
 module.exports = class HTMLHintReporter extends Reporter {
   constructor (options, projectName) {
@@ -45,7 +44,7 @@ module.exports = class HTMLHintReporter extends Reporter {
   }
 
   processFiles (fileArray, options) {
-    this.openReporter(options.report);
+    this.openReporter();
     fileArray.forEach((file) => {
       this.processFile(file, options);
     });
@@ -54,44 +53,26 @@ module.exports = class HTMLHintReporter extends Reporter {
   processFile (file, options) {
     let input = this.readFile(file),
       result = HTMLHint.verify(input, options.htmlhint),
-      severity,
-      d = (new Date()).getTime(),
-      index = 0;
+      severity;
 
-    let fileNbViolations = this.openFileIssues(file, options.report, null, /^(\s+)?\n$/gm);
+    this.openFileIssues(file, null, /^(\s+)?\n$/gm);
     for (let message of result) {
 
       switch (message.type) {
         case 'error':
-          severity = 'MAJOR';
-          fileNbViolations[this.MAJOR]++;
+          severity = this.MAJOR;
           break;
         case 'warning':
-          severity = 'MINOR';
-          fileNbViolations[this.MINOR]++;
+          severity = this.MINOR;
           break;
         default:
-          severity = 'INFO';
-          fileNbViolations[this.INFO]++;
+          severity = this.INFO;
           break;
       }
 
-      fs.appendFileSync(options.report,
-        `{
-            "line": ${(message.line ? message.line : null)},
-            "message": ${JSON.stringify(message.message)},
-            "description": ${JSON.stringify(message.rule.description)},
-            "rulekey": "${message.rule.id}",
-            "severity": "${severity}",
-            "reporter": "htmlhint",
-            "creationDate": "${d}"
-          }` +
-        ((index < (result.length) - 1) ? ',' : ''));
+      this.addIssue((message.line ? message.line : null), message.message, message.rule.description, message.rule.id, severity, 'htmlhint');
 
-      index++;
     }
-
-    this.closeFileIssues(fileNbViolations, options.report);
   }
 
 

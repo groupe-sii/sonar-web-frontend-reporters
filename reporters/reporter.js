@@ -21,13 +21,20 @@ class Reporter {
     this.totalLines = 0;
     this.totalComments = 0;
     this.totalClocs = 0;
-    this.nbViolations = [0, 0, 0, 0, 0];
-    this.BLOCKER = 0;
-    this.CRITICAL = 1;
-    this.MAJOR = 2;
-    this.MINOR = 3;
-    this.INFO = 4;
+    this.nbViolations = {
+      blocker : 0,
+      critical: 0,
+      major   : 0,
+      minor   : 0,
+      info    : 0
+    };
+    this.BLOCKER = 'blocker';
+    this.CRITICAL = 'critical';
+    this.MAJOR = 'major';
+    this.MINOR = 'minor';
+    this.INFO = 'info';
     this.linterName = 'unamed linter';
+    this.fileContent = {};
 
     if (options) {
       this.makeReportDirectory(options.report);
@@ -42,8 +49,8 @@ class Reporter {
   }
 
   /**
-   * Specifiy the default options for the Reporter.
-   * They will be overrided by the user specific options.
+   * Specify the default options for the Reporter.
+   * They will be overriden by the user specific options.
    *
    * @returns {{src: string, report: string, rulesFile: string}}
    */
@@ -83,41 +90,29 @@ class Reporter {
     return JSON.parse(fs.readFileSync(file, 'utf8'));
   }
 
-  openReporter (reportFile) {
-    fs.writeFileSync(reportFile,
-      `{
-  "project": "${this.projectName}",
-  "projectPath": "${BASE_PROJECT}",
-  "version": "${VERSION}",
-  "files": [
-`);
+  openReporter () {
+    this.fileContent.project = this.projectName;
+    this.fileContent.projectPath = BASE_PROJECT;
+    this.fileContent.version = VERSION;
+    this.fileContent.files = [];
   }
 
   closeReporter (reportFile) {
-    let buf = fs.readFileSync(reportFile);
-    if (buf.toString('utf-8', buf.length - 2, buf.length - 1) === ',') {
-      buf = buf.slice(0, buf.length - 2);
-    }
-    fs.writeFileSync(reportFile, buf);
-    fs.appendFileSync(reportFile,
-      `
-  ],
-  "nbFiles": ${this.nbFiles},
-  "nbLines": ${this.totalLines},
-  "nbCloc": ${this.totalClocs},
-  "nbComments": ${this.totalComments},
-  "violations": {
-    "blocker": ${this.nbViolations[this.BLOCKER]},
-    "critical": ${this.nbViolations[this.CRITICAL]},
-    "major": ${this.nbViolations[this.MAJOR]},
-    "minor": ${this.nbViolations[this.MINOR]},
-    "info": ${this.nbViolations[this.INFO]}
-  }
-}
-`);
+    this.fileContent.nbFiles = this.nbFiles;
+    this.fileContent.nbLines = this.totalLines;
+    this.fileContent.nbCloc = this.totalClocs;
+    this.fileContent.nbComments = this.totalComments;
+    this.fileContent.violations = {
+      blocker : this.nbViolations[this.BLOCKER],
+      critical: this.nbViolations[this.CRITICAL],
+      major   : this.nbViolations[this.MAJOR],
+      minor   : this.nbViolations[this.MINOR],
+      info    : this.nbViolations[this.INFO]
+    };
+    fs.writeFileSync(reportFile, JSON.stringify(this.fileContent, null, 2));
   }
 
-  openFileIssues (file, reportFile, commentsRegexp, spaceRegexp) {
+  openFileIssues (file, commentsRegexp, spaceRegexp) {
     let linesCount = this.fileLinesCount(file);
     let lastSlash = file.lastIndexOf('/');
     let filePath = file.substring(0, lastSlash);
@@ -145,33 +140,36 @@ class Reporter {
     this.totalComments += fileNbComments;
     this.totalClocs += fileNbCloc;
 
-    fs.appendFileSync(reportFile,
-      `     {
-        "name": "${file.substring(lastSlash + 1)}",
-        "path": "${normalizedFilePath}",
-        "nbLines": ${linesCount},
-        "nbComments": ${fileNbComments},
-        "nbCloc": ${fileNbCloc},
-        "issues": [
-          `);
-
-    return [0, 0, 0, 0, 0];
+    this.fileContent.files.push({
+      name      : file.substring(lastSlash + 1),
+      path      : normalizedFilePath,
+      nbLines   : linesCount,
+      nbComments: fileNbComments,
+      nbCloc    : fileNbCloc,
+      violations: {
+        blocker : 0,
+        critical: 0,
+        major   : 0,
+        minor   : 0,
+        info    : 0
+      },
+      issues: []
+    });
   }
 
-  closeFileIssues (fileNbViolations, reportFile) {
-    this.nbViolations = this.nbViolations.map((val, i) => val + fileNbViolations[i]);
-    fs.appendFileSync(reportFile,
-      `
-      ],
-      "violations": {
-        "blocker": ${fileNbViolations[this.BLOCKER]},
-        "critical": ${fileNbViolations[this.CRITICAL]},
-        "major": ${fileNbViolations[this.MAJOR]},
-        "minor": ${fileNbViolations[this.MINOR]},
-        "info": ${fileNbViolations[this.INFO]}
-       }
-  },
-`);
+  addIssue (line, message, description, ruleKey, severity, reporter) {
+    let fileObject = this.fileContent.files[this.fileContent.files.length - 1];
+    fileObject.violations[severity]++;
+    this.nbViolations[severity]++;
+    fileObject.issues.push({
+      line        : line,
+      message     : message,
+      description : description,
+      rulekey     : ruleKey,
+      severity    : severity,
+      reporter    : reporter,
+      creationDate: (new Date()).getTime()
+    });
   }
 
   fileLinesCount (file) {

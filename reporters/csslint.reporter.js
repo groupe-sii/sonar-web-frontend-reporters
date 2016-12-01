@@ -1,7 +1,6 @@
 const Reporter = require('./reporter'),
   csslint = require('csslint').CSSLint,
-  glob = require('glob'),
-  fs = require('fs');
+  glob = require('glob');
 
 module.exports = class CSSLintReporter extends Reporter {
 
@@ -49,7 +48,7 @@ module.exports = class CSSLintReporter extends Reporter {
   }
 
   processFiles (fileArray, options) {
-    this.openReporter(options.report);
+    this.openReporter();
     fileArray.forEach((file) => {
       this.processFile(file, options);
     });
@@ -58,43 +57,26 @@ module.exports = class CSSLintReporter extends Reporter {
   processFile (file, options) {
     let input = this.readFile(file),
       result = csslint.verify(input, options.rules),
-      severity,
-      d = (new Date()).getTime(),
-      index = 0;
+      severity;
 
-    let fileNbViolations = this.openFileIssues(file, options.report, /^(\s+)?\/\*.*\*\//gm, /^(\s+)?\n$/gm);
+    this.openFileIssues(file, /^(\s+)?\/\*.*\*\//gm, /^(\s+)?\n$/gm);
     for (let message of result.messages) {
       switch (message.type) {
         case 'error':
-          severity = 'MAJOR';
-          fileNbViolations[this.MAJOR]++;
+          severity = this.MAJOR;
           break;
         case 'warning':
-          severity = 'MINOR';
-          fileNbViolations[this.MINOR]++;
+          severity = this.MINOR;
           break;
         default:
-          severity = 'INFO';
-          fileNbViolations[this.INFO]++;
+          severity = this.INFO;
           break;
       }
 
-      fs.appendFileSync(options.report,
-        `{
-            "line": ${(message.line ? message.line : null)},
-            "message": "${message.message}",
-            "description": "${message.rule.desc}",
-            "rulekey": "${message.rule.id}",
-            "severity": "${severity}",
-            "reporter": "csslint",
-            "creationDate": "${d}"
-          }` +
-        ((index < (result.messages.length) - 1) ? ',' : ''));
+      this.addIssue((message.line ? message.line : null), message.message, message.rule.desc, message.rule.id, severity, 'csslint');
 
-      index++;
     }
 
-    this.closeFileIssues(fileNbViolations, options.report);
   }
 
 
