@@ -1,7 +1,6 @@
 const Reporter = require('./reporter'),
   sasslint = require('sass-lint'),
-  glob = require('glob'),
-  fs = require('fs');
+  glob = require('glob');
 
 module.exports = class SASSLintReporter extends Reporter {
 
@@ -39,43 +38,25 @@ module.exports = class SASSLintReporter extends Reporter {
 
   processFile (file, options) {
     let result = sasslint.lintFiles(file, {}, options.rulesFile)[0],
-      severity,
-      d = (new Date()).getTime(),
-      index = 0;
+      severity;
 
-    let fileNbViolations = this.openFileIssues(file, options.report, /^(\s+)?\/\*.*\*\//gm, /^(\s+)?\n$/gm);
+    this.openFileIssues(file, /^(\s+)?\/\*.*\*\//gm, /^(\s+)?\n$/gm);
     for (let message of result.messages) {
       switch (message.severity) {
         case 2:
-          severity = 'MAJOR';
-          fileNbViolations[this.MAJOR]++;
+          severity = this.MAJOR;
           break;
         case 1:
-          severity = 'MINOR';
-          fileNbViolations[this.MINOR]++;
+          severity = this.MINOR;
           break;
         default:
-          severity = 'INFO';
-          fileNbViolations[this.INFO]++;
+          severity = this.INFO;
           break;
       }
 
-      fs.appendFileSync(options.report,
-        `{
-            "line": ${(message.line ? message.line : null)},
-            "message": "${message.message}",
-            "description": "${message.message}",
-            "rulekey": "${message.ruleId}",
-            "severity": "${severity}",
-            "reporter": "scsslint",
-            "creationDate": "${d}"
-          }` +
-        ((index < (result.messages.length) - 1) ? ',' : ''));
+      this.addIssue((message.line ? message.line : null), message.message, message.message, message.ruleId, severity, 'tslint');
 
-      index++;
     }
-
-    this.closeFileIssues(fileNbViolations, options.report);
   }
 
 
