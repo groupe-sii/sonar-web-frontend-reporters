@@ -1,8 +1,7 @@
 const Reporter = require('./reporter'),
   jshintcli = require('jshint/src/cli'),
   jshint = require('jshint').JSHINT,
-  glob = require('glob'),
-  fs = require('fs');
+  glob = require('glob');
 
 module.exports = class JSHintReporter extends Reporter {
 
@@ -44,45 +43,26 @@ module.exports = class JSHintReporter extends Reporter {
 
   processFile (file, options) {
     let input = this.readFile(file),
-      severity,
-      d = (new Date()).getTime(),
-      index = 0;
+      severity;
 
     jshint(input, options.jshint, options.globals);
-    let fileNbViolations = this.openFileIssues(file, options.report, null, /^(\s+)?\n$/gm);
+    this.openFileIssues(file, null, /^(\s+)?\n$/gm);
     for (let message of jshint.errors) {
       switch (message.id) {
         case '(error)':
-          severity = 'MAJOR';
-          fileNbViolations[this.MAJOR]++;
+          severity = this.MAJOR;
           break;
         case undefined:
-          severity = 'BLOCKER';
-          fileNbViolations[this.BLOCKER]++;
+          severity = this.BLOCKER;
           break;
         default:
-          severity = 'INFO';
-          fileNbViolations[this.INFO]++;
+          severity = this.INFO;
           break;
       }
 
-
-      fs.appendFileSync(options.report,
-        `{
-            "line": ${(message.line ? message.line : null)},
-            "message": ${JSON.stringify(message.reason)},
-            "description": ${JSON.stringify(message.raw)},
-            "rulekey": "${message.code}",
-            "severity": "${severity}",
-            "reporter": "jshint",
-            "creationDate": "${d}"
-          }` +
-        ((index < (jshint.errors.length) - 1) ? ',' : ''));
-
-      index++;
+      this.addIssue((message.line ? message.line : null), message.reason, message.raw, message.code, severity, 'jshint');
     }
 
-    this.closeFileIssues(fileNbViolations, options.report);
   }
 
 
