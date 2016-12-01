@@ -59,7 +59,7 @@ Default options are as follows:
   },
   "eslintangular": {
     "src": "src/**/*.js",
-    "report": "eslintangular.json",
+    "report": "eslint-angular.json",
     "rulesFile": ".eslintrc"
   },
   "jshint": {
