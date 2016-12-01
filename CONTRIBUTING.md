@@ -23,7 +23,7 @@ You can launch linting with the following command:
 npm run lint
 ```
 
-## Writing a repoter
+## Writing a reporter
 
 1. First of all, create a file under `reporters/` for your new reporter. It should match the following syntax: **new-reporter.reporter.js**.
 1. The new reporter must extends the `Reporter` class and implement `defaultOptions` and `launch` methods

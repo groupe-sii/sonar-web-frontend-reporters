@@ -66,11 +66,11 @@ class ReporterFactory {
   }
 
 /**
- * Merge the user specific options with the default ones of the repoter.
+ * Merge the user specific options with the default ones of the reporter.
  * Prioritize the user options.
  *
  * @param   {Object}        options         User specific options
- * @param   {Object}        defaultOptions  Default repoter options
+ * @param   {Object}        defaultOptions  Default reporter options
  * @returns {Object|false}                  Merged options; Or FALSE if this reporter should be ignored
  */
   static mergeOptions (options, defaultOptions) {
