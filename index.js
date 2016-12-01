@@ -4,5 +4,7 @@ module.exports = {
   ESLintReporter       : require('./reporters/eslint.reporter'),
   ESLintAngularReporter: require('./reporters/eslint-angular.reporter'),
   HTMLHintReporter     : require('./reporters/htmlhint.reporter'),
-  JSHintReporter       : require('./reporters/jshint.reporter')
+  JSHintReporter       : require('./reporters/jshint.reporter'),
+  TSLintReporter       : require('./reporters/tslint.reporter'),
+  SASSLintReporter     : require('./reporters/sasslint.reporter')
 };
