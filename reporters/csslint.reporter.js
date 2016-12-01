@@ -1,7 +1,6 @@
 const Reporter = require('./reporter'),
   csslint = require('csslint').CSSLint,
-  glob = require('glob'),
-  fs = require('fs');
+  glob = require('glob');
 
 module.exports = class CSSLintReporter extends Reporter {
 
