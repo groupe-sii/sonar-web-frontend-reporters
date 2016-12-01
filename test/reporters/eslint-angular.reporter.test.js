@@ -49,16 +49,16 @@ module.exports = () => {
       });
 
       it ('should have 4 issues', (done) => {
-        let reporter = new ESLintAngularReporter(esLintAngularMock.defaultOptions, 'SonarWebFrontEndReporters');
+        let reporter = new ESLintAngularReporter(esLintAngularMock.defaultOptions, 'SonarWebFrontEndReporters'),
+          expected = [ 'ng_space_before_function_paren', 'ng_strict', 'ng_controller_name', 'ng_no_undef' ];
 
         reporter.launch(() => {
           let result = readJSONFile(esLintAngularMock.defaultOptions.report);
 
           result.files[0].issues.length.should.be.equal(4);
-          result.files[0].issues[0].rulekey.should.be.equal('ng_space_before_function_paren');
-          result.files[0].issues[1].rulekey.should.be.equal('ng_strict');
-          result.files[0].issues[2].rulekey.should.be.equal('ng_controller_name');
-          result.files[0].issues[3].rulekey.should.be.equal('ng_no_undef');
+          result.files[0].issues.forEach((issue) => {
+            issue.rulekey.should.be.oneOf(expected);
+          });
 
           done();
         });

@@ -49,13 +49,16 @@ module.exports = () => {
       });
 
       it ('should have an issue', (done) => {
-        let reporter = new ESLintReporter(esLintMock.defaultOptions, 'SonarWebFrontEndReporters');
+        let reporter = new ESLintReporter(esLintMock.defaultOptions, 'SonarWebFrontEndReporters'),
+          expected = [ 'no-unused-vars' ];
 
         reporter.launch(() => {
           let result = readJSONFile(esLintMock.defaultOptions.report);
 
           result.files[0].issues.length.should.be.equal(1);
-          result.files[0].issues[0].rulekey.should.be.equal('no-unused-vars');
+          result.files[0].issues.forEach((issue) => {
+            issue.rulekey.should.be.oneOf(expected);
+          });
 
           done();
         });
