@@ -55,6 +55,10 @@ module.exports = () => {
           let result = readJSONFile(tsLintMock.defaultOptions.report);
 
           result.files[0].issues.length.should.be.equal(4);
+          let expected = ['no-var-keyword', 'one-line', 'comment-format'];
+          result.files[0].issues.forEach((val) => {
+            val.rulekey.should.be.oneOf(expected);
+          });
 
           done();
         });

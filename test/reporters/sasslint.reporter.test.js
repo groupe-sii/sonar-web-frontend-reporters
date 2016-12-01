@@ -46,6 +46,10 @@ module.exports = () => {
         reporter.launch(() => {
           let result = readJSONFile(sassLintMock.defaultOptions.report);
           result.files[0].issues.length.should.be.equal(8);
+          let expected = ['no-color-literals', 'hex-notation', 'property-sort-order', 'no-misspelled-properties', 'space-before-brace', 'no-ids', 'no-css-comments'];
+          result.files[0].issues.forEach((val) => {
+            val.rulekey.should.be.oneOf(expected);
+          });
           done();
         });
       });

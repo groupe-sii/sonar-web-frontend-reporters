@@ -46,6 +46,10 @@ module.exports = () => {
         reporter.launch(() => {
           let result = readJSONFile(htmlHintMock.defaultOptions.report);
           result.files[0].issues.length.should.be.equal(2);
+          let expected = ['title-require', 'tag-pair'];
+          result.files[0].issues.forEach((val) => {
+            val.rulekey.should.be.oneOf(expected);
+          });
           done();
         });
       });
