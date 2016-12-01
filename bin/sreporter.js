@@ -4,6 +4,7 @@
 
 const fs = require('fs'),
   chalk = require('chalk'),
+  ReporterType = require('../reporters/reporter.enum'),
   ReporterFactory = require('../reporters/reporter.factory');
 
 class CLIEngine {
@@ -18,17 +19,17 @@ class CLIEngine {
 
   /**
    * Launch the Sonar Web Front-End Reporters.
-   * It automatically launch reporters registered under `ReporterFactory.TYPE`.
+   * It automatically launch reporters registered under `ReporterType`.
    */
   launchReporters () {
-    Object.keys(ReporterFactory.TYPE).forEach((key) => this.launch(ReporterFactory.TYPE[key], this.options));
+    Object.keys(ReporterType).forEach((key) => this.launch(ReporterType[key], this.options));
   }
 
   /**
    * Launch a reporter.
    *
-   * @param {ReporterFactory.TYPE}  type      Type of the reporter to be launched
-   * @param {Object}                options   `.sreporterrc` file content
+   * @param {ReporterType}  type      Type of the reporter to be launched
+   * @param {Object}        options   `.sreporterrc` file content
    */
   launch (type, options) {
     let opts = options[type],

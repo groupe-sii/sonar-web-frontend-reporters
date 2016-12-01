@@ -22,7 +22,7 @@ class SonarWebReporters {
 
   /**
    * Launch the Sonar Web Front-End Reporters.
-   * It automatically launch reporters registered under `ReporterFactory.TYPE`.
+   * It automatically launch reporters registered under `ReporterType`.
    *
    * @param {function=}  done  Called after all reporters has been processed
    */
@@ -42,10 +42,10 @@ class SonarWebReporters {
   /**
    * Launch a reporter.
    *
-   * @param {ReporterFactory.TYPE}  type          Type of the reporter to be launched
-   * @param {string}                projectName   The project name
-   * @param {Object}                options       Reporter options
-   * @param {function}              done          Called after reporter is done
+   * @param {ReporterType}  type          Type of the reporter to be launched
+   * @param {string}        projectName   The project name
+   * @param {Object}        options       Reporter options
+   * @param {function}      done          Called after reporter is done
    */
   launch (type, projectName, options, done) {
     ReporterFactory.create(type, options, projectName).launch(() => done());

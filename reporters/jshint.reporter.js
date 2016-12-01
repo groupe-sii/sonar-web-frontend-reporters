@@ -1,12 +1,14 @@
-const Reporter = require('./reporter'),
+const glob = require('glob'),
   jshintcli = require('jshint/src/cli'),
   jshint = require('jshint').JSHINT,
-  glob = require('glob');
+  ReporterType = require('./reporter.enum'),
+  Reporter = require('./reporter');
 
 module.exports = class JSHintReporter extends Reporter {
 
   constructor (options, projectName) {
     super(options, projectName);
+
     this.linterName = 'JSHint';
   }
 
@@ -60,7 +62,7 @@ module.exports = class JSHintReporter extends Reporter {
           break;
       }
 
-      this.addIssue((message.line ? message.line : null), message.reason, message.raw, message.code, severity, 'jshint');
+      this.addIssue((message.line ? message.line : null), message.reason, message.raw, message.code, severity, ReporterType.JSHINT);
     }
 
   }

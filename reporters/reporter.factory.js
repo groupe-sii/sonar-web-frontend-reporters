@@ -1,4 +1,5 @@
-const CSSLintReporter = require('./csslint.reporter'),
+const ReporterType = require('./reporter.enum'),
+  CSSLintReporter = require('./csslint.reporter'),
   SASSLintReporter = require('./sasslint.reporter'),
   ESLintReporter = require('./eslint.reporter'),
   ESLintAngularReporter = require('./eslint-angular.reporter'),
@@ -14,46 +15,46 @@ class ReporterFactory {
   /**
    * Instantiante a reporter
    *
-   * @param   {ReporterFactory.TYPE}  type              Reporter type.
-   * @param   {Object}                options           User specific options.
-   * @param   {string}                projectName       The project name, coming from `.sreporterrc` file and used later by SonarQube.
-   * @returns {Reporter}                                Instance of `Reporter`.
+   * @param   {ReporterType}  type              Reporter type.
+   * @param   {Object}        options           User specific options.
+   * @param   {string}        projectName       The project name, coming from `.sreporterrc` file and used later by SonarQube.
+   * @returns {Reporter}                        Instance of `Reporter`.
    */
   static create (type, options, projectName) {
     let reporter, opts;
 
     switch (type) {
-      case ReporterFactory.TYPE.CSSLINT:
+      case ReporterType.CSSLINT:
         opts = ReporterFactory.mergeOptions(options, CSSLintReporter.defaultOptions());
         reporter = new CSSLintReporter(opts, projectName);
         break;
 
-      case ReporterFactory.TYPE.ESLINT:
+      case ReporterType.ESLINT:
         opts = ReporterFactory.mergeOptions(options, ESLintReporter.defaultOptions());
         reporter = new ESLintReporter(opts, projectName);
         break;
 
-      case ReporterFactory.TYPE.ESLINTANGULAR:
+      case ReporterType.ESLINTANGULAR:
         opts = ReporterFactory.mergeOptions(options, ESLintAngularReporter.defaultOptions());
         reporter = new ESLintAngularReporter(opts, projectName);
         break;
 
-      case ReporterFactory.TYPE.HTMLHINT:
+      case ReporterType.HTMLHINT:
         opts = ReporterFactory.mergeOptions(options, HTMLHintReporter.defaultOptions());
         reporter = new HTMLHintReporter(opts, projectName);
         break;
 
-      case ReporterFactory.TYPE.JSHINT:
+      case ReporterType.JSHINT:
         opts = ReporterFactory.mergeOptions(options, JSHintReporter.defaultOptions());
         reporter = new JSHintReporter(opts, projectName);
         break;
 
-      case ReporterFactory.TYPE.TSLINT:
+      case ReporterType.TSLINT:
         opts = ReporterFactory.mergeOptions(options, TSLintReporter.defaultOptions());
         reporter = new TSLintReporter(opts, projectName);
         break;
 
-      case ReporterFactory.TYPE.SASSLINT:
+      case ReporterType.SASSLINT:
         opts = ReporterFactory.mergeOptions(options, SASSLintReporter.defaultOptions());
         reporter = new SASSLintReporter(opts, projectName);
         break;
@@ -84,18 +85,5 @@ class ReporterFactory {
   }
 
 }
-
-/**
- * @typedef {Object} ReporterFactory.TYPE
- */
-ReporterFactory.TYPE = {
-  CSSLINT      : 'csslint',
-  ESLINT       : 'eslint',
-  ESLINTANGULAR: 'eslintangular',
-  HTMLHINT     : 'htmlhint',
-  JSHINT       : 'jshint',
-  TSLINT       : 'tslint',
-  SASSLINT     : 'sasslint'
-};
 
 module.exports = ReporterFactory;

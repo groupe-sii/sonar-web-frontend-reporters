@@ -1,10 +1,12 @@
-const Reporter = require('./reporter'),
+const glob = require('glob'),
   HTMLHint = require('htmlhint').HTMLHint,
-  glob = require('glob');
+  ReporterType = require('./reporter.enum'),
+  Reporter = require('./reporter');
 
 module.exports = class HTMLHintReporter extends Reporter {
   constructor (options, projectName) {
     super(options, projectName);
+
     this.linterName = 'HTMLHint';
   }
 
@@ -70,7 +72,7 @@ module.exports = class HTMLHintReporter extends Reporter {
           break;
       }
 
-      this.addIssue((message.line ? message.line : null), message.message, message.rule.description, message.rule.id, severity, 'htmlhint');
+      this.addIssue((message.line ? message.line : null), message.message, message.rule.description, message.rule.id, severity, ReporterType.HTMLHINT);
 
     }
   }

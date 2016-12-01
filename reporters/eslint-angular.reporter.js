@@ -1,5 +1,6 @@
 const glob = require('glob'),
   CLIEngine = require('eslint').CLIEngine,
+  ReporterType = require('./reporter.enum'),
   Reporter = require('./reporter');
 
 module.exports = class ESLintAngularReporter extends Reporter {
@@ -64,7 +65,7 @@ module.exports = class ESLintAngularReporter extends Reporter {
         '',
         `ng_${message.ruleId.replace('angular/', '').replace(/-/g, '_')}`,
         severity,
-        'eslintangular'
+        ReporterType.ESLINTANGULAR
       );
     }
   }

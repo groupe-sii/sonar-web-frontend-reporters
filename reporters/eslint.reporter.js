@@ -1,11 +1,13 @@
-const Reporter = require('./reporter'),
+const glob = require('glob'),
   CLIEngine = require('eslint').CLIEngine,
-  glob = require('glob');
+  ReporterType = require('./reporter.enum'),
+  Reporter = require('./reporter');
 
 module.exports = class ESLintReporter extends Reporter {
 
   constructor (options, projectName) {
     super(options, projectName);
+
     this.linterName = 'ESLint';
   }
 
@@ -56,7 +58,7 @@ module.exports = class ESLintReporter extends Reporter {
           severity = this.INFO;
           break;
       }
-      this.addIssue((message.line ? message.line : null), message.message, '', message.ruleId, severity, 'eslint');
+      this.addIssue((message.line ? message.line : null), message.message, '', message.ruleId, severity, ReporterType.ESLINT);
 
     }
 

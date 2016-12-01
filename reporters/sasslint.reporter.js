@@ -1,6 +1,7 @@
-const Reporter = require('./reporter'),
+const glob = require('glob'),
   sasslint = require('sass-lint'),
-  glob = require('glob');
+  ReporterType = require('./reporter.enum'),
+  Reporter = require('./reporter');
 
 module.exports = class SASSLintReporter extends Reporter {
 
@@ -54,7 +55,7 @@ module.exports = class SASSLintReporter extends Reporter {
           break;
       }
 
-      this.addIssue((message.line ? message.line : null), message.message, message.message, message.ruleId, severity, 'tslint');
+      this.addIssue((message.line ? message.line : null), message.message, message.message, message.ruleId, severity, ReporterType.SASSLINT);
 
     }
   }

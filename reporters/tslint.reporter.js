@@ -1,11 +1,13 @@
-const Reporter = require('./reporter'),
+const glob = require('glob'),
   TSLint = require('tslint'),
-  glob = require('glob');
+  ReporterType = require('./reporter.enum'),
+  Reporter = require('./reporter');
 
 module.exports = class TSLintReporter extends Reporter {
 
   constructor (options, projectName) {
     super(options, projectName);
+
     this.linterName = 'TSLint';
   }
 
@@ -45,7 +47,7 @@ module.exports = class TSLintReporter extends Reporter {
     this.openFileIssues(file, null, /^(\s+)?\n$/gm);
     let result = tslint.getResult();
     for (let message of result.failures) {
-      this.addIssue(message.startPosition.lineAndCharacter.line + 1, message.failure, message.failure, message.ruleName, this.INFO, 'tslint');
+      this.addIssue(message.startPosition.lineAndCharacter.line + 1, message.failure, message.failure, message.ruleName, this.INFO, ReporterType.TSLINT);
     }
   }
 
