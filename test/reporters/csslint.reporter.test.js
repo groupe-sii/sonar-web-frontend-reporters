@@ -16,15 +16,15 @@ module.exports = () => {
       });
 
       it('should be the right project name', (done) => {
-        let reporter = new CSSLintReporter(cssLintMock.defaultOptions, 'test');
+        let reporter = new CSSLintReporter(cssLintMock.defaultOptions, 'SonarWebFrontEndReporters');
         reporter.launch(() => {
-          readJSONFile(cssLintMock.defaultOptions.report).project.should.be.equal('test');
+          readJSONFile(cssLintMock.defaultOptions.report).project.should.be.equal('SonarWebFrontEndReporters');
           done();
         });
       });
 
       it('should create the output file', (done) => {
-        let reporter = new CSSLintReporter(cssLintMock.defaultOptions, 'test');
+        let reporter = new CSSLintReporter(cssLintMock.defaultOptions, 'SonarWebFrontEndReporters');
         reporter.launch(() => {
           fs.existsSync(cssLintMock.defaultOptions.report).should.be.equal(true);
           done();
@@ -32,7 +32,7 @@ module.exports = () => {
       });
 
       it('should be the right file number', (done) => {
-        let reporter = new CSSLintReporter(cssLintMock.defaultOptions, 'test');
+        let reporter = new CSSLintReporter(cssLintMock.defaultOptions, 'SonarWebFrontEndReporters');
         reporter.launch(() => {
           let result = readJSONFile(cssLintMock.defaultOptions.report);
           result.files.length.should.be.equal(1);
@@ -42,7 +42,7 @@ module.exports = () => {
       });
 
       it('should have two issues', (done) => {
-        let reporter = new CSSLintReporter(cssLintMock.defaultOptions, 'test');
+        let reporter = new CSSLintReporter(cssLintMock.defaultOptions, 'SonarWebFrontEndReporters');
         reporter.launch(() => {
           let result = readJSONFile(cssLintMock.defaultOptions.report);
           result.files[0].issues.length.should.be.equal(2);
@@ -51,7 +51,7 @@ module.exports = () => {
       });
 
       it('should have 4 lines', (done) => {
-        let reporter = new CSSLintReporter(cssLintMock.defaultOptions, 'test');
+        let reporter = new CSSLintReporter(cssLintMock.defaultOptions, 'SonarWebFrontEndReporters');
         reporter.launch(() => {
           let result = readJSONFile(cssLintMock.defaultOptions.report);
           result.files[0].nbLines.should.be.equal(4);
@@ -60,7 +60,7 @@ module.exports = () => {
       });
 
       it('should not have processed files', (done) => {
-        let reporter = new CSSLintReporter(cssLintMock.badFileSrcOptions, 'test');
+        let reporter = new CSSLintReporter(cssLintMock.badFileSrcOptions, 'SonarWebFrontEndReporters');
         reporter.launch(() => {
           let result = readJSONFile(cssLintMock.badFileSrcOptions.report);
           result.files.length.should.be.equal(0);
@@ -70,7 +70,7 @@ module.exports = () => {
       });
 
       it('should throw bad file exception', () => {
-        (() => new CSSLintReporter(cssLintMock.badRulesFileOptions, 'test')).should.throw(Error);
+        (() => new CSSLintReporter(cssLintMock.badRulesFileOptions, 'SonarWebFrontEndReporters')).should.throw(Error);
       });
 
 

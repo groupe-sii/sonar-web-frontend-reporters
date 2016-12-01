@@ -16,15 +16,15 @@ module.exports = () => {
       });
 
       it('should be the right project name', (done) => {
-        let reporter = new HTMLHintReporter(htmlHintMock.defaultOptions, 'test');
+        let reporter = new HTMLHintReporter(htmlHintMock.defaultOptions, 'SonarWebFrontEndReporters');
         reporter.launch(() => {
-          readJSONFile(htmlHintMock.defaultOptions.report).project.should.be.equal('test');
+          readJSONFile(htmlHintMock.defaultOptions.report).project.should.be.equal('SonarWebFrontEndReporters');
           done();
         });
       });
 
       it('should create the output file', (done) => {
-        let reporter = new HTMLHintReporter(htmlHintMock.defaultOptions, 'test');
+        let reporter = new HTMLHintReporter(htmlHintMock.defaultOptions, 'SonarWebFrontEndReporters');
         reporter.launch(() => {
           fs.existsSync(htmlHintMock.defaultOptions.report).should.be.equal(true);
           done();
@@ -32,7 +32,7 @@ module.exports = () => {
       });
 
       it('should be the right file number', (done) => {
-        let reporter = new HTMLHintReporter(htmlHintMock.defaultOptions, 'test');
+        let reporter = new HTMLHintReporter(htmlHintMock.defaultOptions, 'SonarWebFrontEndReporters');
         reporter.launch(() => {
           let result = readJSONFile(htmlHintMock.defaultOptions.report);
           result.files.length.should.be.equal(1);
@@ -42,7 +42,7 @@ module.exports = () => {
       });
 
       it('should have two issues', (done) => {
-        let reporter = new HTMLHintReporter(htmlHintMock.defaultOptions, 'test');
+        let reporter = new HTMLHintReporter(htmlHintMock.defaultOptions, 'SonarWebFrontEndReporters');
         reporter.launch(() => {
           let result = readJSONFile(htmlHintMock.defaultOptions.report);
           result.files[0].issues.length.should.be.equal(2);
@@ -51,7 +51,7 @@ module.exports = () => {
       });
 
       it('should have 7 lines', (done) => {
-        let reporter = new HTMLHintReporter(htmlHintMock.defaultOptions, 'test');
+        let reporter = new HTMLHintReporter(htmlHintMock.defaultOptions, 'SonarWebFrontEndReporters');
         reporter.launch(() => {
           let result = readJSONFile(htmlHintMock.defaultOptions.report);
           result.files[0].nbLines.should.be.equal(7);
@@ -60,7 +60,7 @@ module.exports = () => {
       });
 
       it('should not have processed files', (done) => {
-        let reporter = new HTMLHintReporter(htmlHintMock.badFileSrcOptions, 'test');
+        let reporter = new HTMLHintReporter(htmlHintMock.badFileSrcOptions, 'SonarWebFrontEndReporters');
         reporter.launch(() => {
           let result = readJSONFile(htmlHintMock.badFileSrcOptions.report);
           result.files.length.should.be.equal(0);
@@ -70,7 +70,7 @@ module.exports = () => {
       });
 
       it('should throw bad file exception', () => {
-        (() => new HTMLHintReporter(htmlHintMock.badRulesFileOptions, 'test')).should.throw(Error);
+        (() => new HTMLHintReporter(htmlHintMock.badRulesFileOptions, 'SonarWebFrontEndReporters')).should.throw(Error);
       });
 
 
