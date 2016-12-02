@@ -115,8 +115,7 @@ class Reporter {
   openFileIssues (file, commentsRegexp, spaceRegexp) {
     let linesCount = this.fileLinesCount(file);
     let lastSlash = file.lastIndexOf('/');
-    let filePath = file.substring(0, lastSlash);
-    let normalizedFilePath = (os.platform() === 'win32' || os.platform() === 'win64') ? filePath.replace(/\\/g, '\\\\') : filePath;
+    let normalizedFilePath = (os.platform() === 'win32' || os.platform() === 'win64') ? file.replace(/\\/g, '\\\\') : file;
     this.nbFiles++;
 
     let b = null,
