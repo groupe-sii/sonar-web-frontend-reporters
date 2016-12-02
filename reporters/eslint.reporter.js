@@ -21,6 +21,14 @@ module.exports = class ESLintReporter extends Reporter {
 
   launch (done) {
     this.options.eslint = this.getRCFile(this.options.rulesFile);
+
+    // HACK ESLint CLI is expecting an array for the `globals` property, let's transform the object
+    // Origin: globals: { "sample": true }
+    // Result: globals: [ "sample" ]
+    if (typeof this.options.eslint.globals === 'object') {
+      this.options.eslint.globals = Object.keys(this.options.eslint.globals);
+    }
+
     this.linter = new CLIEngine(this.options.eslint);
 
     glob(this.options.src, (er, files) => {

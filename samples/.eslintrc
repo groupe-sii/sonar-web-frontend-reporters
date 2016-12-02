@@ -134,9 +134,9 @@
   "env": {
     "browser": true
   },
-  "globals": [
-    "module",
-    "inject",
-    "require"
-  ]
+  "globals": {
+    "module": true,
+    "inject": true,
+    "require": true
+  }
 }
