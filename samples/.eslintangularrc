@@ -1,21 +1,15 @@
 {
-  "extends": "eslint:recommended",
+  "extends": ["eslint:recommended", "angular"],
   "parserOptions": {
     "ecmaVersion": 6,
     "sourceType": "module"
   },
-  "plugins": [
-    "angular"
-  ],
   "rules": {
-    "angular/no-service-method": 0,
-    "angular/controller-name": [2,"/[A-Z].*Ctrl/"],
     "no-template-curly-in-string": "error",
     "no-unsafe-negation": "error",
     "block-scoped-var": "error",
     "curly": "error",
     "default-case": "error",
-    "no-console": "error",
     "dot-notation": "error",
     "eqeqeq": "error",
     "no-alert": "error",
@@ -68,7 +62,7 @@
     "comma-style": "error",
     "func-names": ["error", "never"],
     "indent": ["error", 2, {
-      "SwitchCase": 2
+      "SwitchCase": 1
     }],
     "key-spacing": ["error", {
       "align": "colon"
@@ -138,9 +132,9 @@
   "env": {
     "browser": true
   },
-  "globals": [
-    "module",
-    "inject",
-    "require"
-  ]
+  "globals": {
+    "module": true,
+    "inject": true,
+    "require": true
+  }
 }

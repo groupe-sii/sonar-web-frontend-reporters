@@ -50,12 +50,12 @@ module.exports = () => {
 
       it ('should have 4 issues', (done) => {
         let reporter = new ESLintAngularReporter(esLintAngularMock.defaultOptions, 'SonarWebFrontEndReporters'),
-          expected = [ 'ng_space_before_function_paren', 'ng_strict', 'ng_controller_name', 'ng_no_undef' ];
+          expected = [ 'ng_controller_name', 'ng_no_service_method' ];
 
         reporter.launch(() => {
           let result = readJSONFile(esLintAngularMock.defaultOptions.report);
 
-          result.files[0].issues.length.should.be.equal(4);
+          result.files[0].issues.length.should.be.equal(2);
           result.files[0].issues.forEach((issue) => {
             issue.rulekey.should.be.oneOf(expected);
           });

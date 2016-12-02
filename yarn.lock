@@ -439,6 +439,10 @@ escope@^3.6.0:
     esrecurse "^4.1.0"
     estraverse "^4.1.1"
 
+eslint-config-angular@^0.5.0:
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/eslint-config-angular/-/eslint-config-angular-0.5.0.tgz#e0aae0132e39e7467df3f7547fec81a44d3685c4"
+
 eslint-plugin-angular@^1.4.1:
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/eslint-plugin-angular/-/eslint-plugin-angular-1.4.1.tgz#7a4279e722d45e0e419bd3629373ef5d066aa0e3"
