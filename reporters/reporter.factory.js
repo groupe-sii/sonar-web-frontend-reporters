@@ -1,6 +1,7 @@
 const ReporterType = require('./reporter.enum'),
   CSSLintReporter = require('./csslint.reporter'),
   SASSLintReporter = require('./sasslint.reporter'),
+  SASSTOSCSSLintReporter = require('./sass-to-scsslint.reporter'),
   ESLintReporter = require('./eslint.reporter'),
   ESLintAngularReporter = require('./eslint-angular.reporter'),
   JSHintReporter = require('./jshint.reporter'),
@@ -57,6 +58,11 @@ class ReporterFactory {
       case ReporterType.SASSLINT:
         opts = ReporterFactory.mergeOptions(options, SASSLintReporter.defaultOptions());
         reporter = new SASSLintReporter(opts, projectName);
+        break;
+
+      case ReporterType.SASS_TO_SCSSLINT:
+        opts = ReporterFactory.mergeOptions(options, SASSTOSCSSLintReporter.defaultOptions());
+        reporter = new SASSTOSCSSLintReporter(opts, projectName);
         break;
 
       default:

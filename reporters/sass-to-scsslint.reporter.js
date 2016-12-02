@@ -1,14 +1,15 @@
 const glob = require('glob'),
   sasslint = require('sass-lint'),
   ReporterType = require('./reporter.enum'),
-  Reporter = require('./reporter');
+  Reporter = require('./reporter'),
+  sassTranslator = require('./sassTranslator');
 
 module.exports = class SASSLintReporter extends Reporter {
 
   constructor (options, projectName) {
     super(options, projectName);
 
-    this.linterName = 'SASSLint';
+    this.linterName = 'SASS TO SCSSLint';
   }
 
   static defaultOptions () {
@@ -55,7 +56,7 @@ module.exports = class SASSLintReporter extends Reporter {
           break;
       }
 
-      this.addIssue((message.line ? message.line : null), message.message, message.message, message.ruleId || message.ruleId, severity, ReporterType.SASSLINT);
+      this.addIssue((message.line ? message.line : null), message.message, message.message, sassTranslator[message.ruleId] || message.ruleId, severity, ReporterType.SASSLINT);
 
     }
   }

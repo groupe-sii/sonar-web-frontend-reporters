@@ -34,6 +34,11 @@
     "src": "./samples/src/**/*.s+(a|c)ss",
     "report": "reports/sonar/sasslint.json",
     "rulesFile": "./samples/.sass-lint.yml"
-  }
+  },
+   "sass-to-scsslint": {
+     "src": "./samples/src/**/*.s+(a|c)ss",
+     "report": "reports/sonar/sass-to-scsslint.json",
+     "rulesFile": "./samples/.sass-lint.yml"
+   }
 
 }
