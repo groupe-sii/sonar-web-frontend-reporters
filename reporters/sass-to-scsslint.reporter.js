@@ -14,9 +14,9 @@ module.exports = class SASSLintReporter extends Reporter {
 
   static defaultOptions () {
     return {
-      src        : 'src/**/*.scss',
-      report     : 'reports/sonar/scsslint.json',
-      rulesFile  : '.sass-lint.yml'
+      src      : 'src/**/*.scss',
+      report   : 'reports/sonar/scsslint.json',
+      rulesFile: '.sass-lint.yml'
     };
   }
 

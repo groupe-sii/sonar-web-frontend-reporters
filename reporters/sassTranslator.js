@@ -65,6 +65,4 @@ module.exports = {
   'allow-element-with-attribute': 'QualifyingElement',
   'allow-element-with-class'    : 'QualifyingElement',
   'allow-element-with-id'       : 'QualifyingElement'
-}
-
-
+};
