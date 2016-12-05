@@ -51,6 +51,7 @@ module.exports = {
   NewReporter: require('./reporters/new-reporter.reporter')
 };
 ```
+1. Create related tests in `/test/reporters` folder
 1. Update README
     * **Default options** section
     * **Available reporters** section
