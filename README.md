@@ -47,6 +47,11 @@ Default options are as follows:
     "report": "reports/sonar/scsslint.json",
     "rulesFile": ".sass-lint.yml"
   },
+  "sass-to-scsslint": {
+    "src": "src/**/*.scss",
+    "report": "reports/sonar/scsslint.json",
+    "rulesFile": ".sass-lint.yml"
+  },
   "htmlhint": {
     "src": "src/**/*.html",
     "report": "reports/sonar/htmlhint.json",
