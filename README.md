@@ -138,6 +138,7 @@ cssLintReporter.launch(() => {
 
 * CSSLint
 * SASSLint
+* SASSLint to SCSSLint (convert SASSLint rules to SCSSLint rules)
 * HTMLHint
 * ESLint
 * ESLint for AngularJS
