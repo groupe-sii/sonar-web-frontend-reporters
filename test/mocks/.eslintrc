@@ -11,6 +11,7 @@
     "block-scoped-var": "error",
     "curly": "error",
     "default-case": "error",
+    "no-console": "error",
     "dot-notation": "error",
     "eqeqeq": "error",
     "no-alert": "error",
@@ -63,7 +64,7 @@
     "comma-style": "error",
     "func-names": ["error", "never"],
     "indent": ["error", 2, {
-      "SwitchCase": 1
+      "SwitchCase": 2
     }],
     "key-spacing": ["error", {
       "align": "colon"
@@ -133,9 +134,9 @@
   "env": {
     "browser": true
   },
-  "globals": {
-    "module": true,
-    "inject": true,
-    "require": true
-  }
+  "globals": [
+    "module",
+    "inject",
+    "require"
+  ]
 }

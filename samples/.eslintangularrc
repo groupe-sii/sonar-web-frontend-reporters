@@ -1,11 +1,10 @@
 {
-  "extends": "eslint:recommended",
+  "extends": ["eslint:recommended", "angular"],
   "parserOptions": {
     "ecmaVersion": 6,
     "sourceType": "module"
   },
   "rules": {
-    "angular/no-service-method": 0,
     "no-template-curly-in-string": "error",
     "no-unsafe-negation": "error",
     "block-scoped-var": "error",

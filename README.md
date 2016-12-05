@@ -1,167 +1,190 @@
-# sonar-web-frontend-reporters
+# Sonar Web Front-End Reporters
 
+[![Build Status](https://travis-ci.org/groupe-sii/sonar-web-frontend-reporters.svg?branch=develop)](https://travis-ci.org/groupe-sii/sonar-web-frontend-reporters)
 [![NPM version][npm-image]][npm-url]
 
 [npm-image]: https://badge.fury.io/js/sonar-web-frontend-reporters.svg
 [npm-url]: https://npmjs.org/package/sonar-web-frontend-reporters
 
-This is a repo for SII continuous integration build system dedicated to Front-end webapps. This repo provides all the linters reporters written by SII for the generic [Sonarqube plugin](https://github.com/groupe-sii/sonar-web-client-plugin). Usage is based on gulp.
+> `sreporter` is a Command-Line Interface to generate linters reporters for the [SonarQube](https://github.com/groupe-sii/sonar-web-frontend-plugin) plugin.
 
-# Getting started
-```bash
-npm i --save-dev sonar-web-frontend-reporters
+## Usage
+
+There is two way of using `sonar-web-frontend-reporters`:
+
+* The Command-Line Interface way
+* The NodeJS way
+
+### Installation
+
+```sh
+$ npm install sonar-web-frontend-reporters -g           // For CLI use
+$ npm install sonar-web-frontend-reporters --save-dev   // For NodeJS use
 ```
 
-# Default Usage
-```Javascript
-'use strict';
-var gulp = require('gulp'),
-    SonarWebReporters = require("sonar-web-frontend-reporters"),
-    projectName = 'sonar-web-frontend-helloworld';
+### Command-Line Interface
 
-gulp.task('lint', function() {
-    return SonarWebReporters.launchReporters({
-        project: projectName, //your project's name
-        css : true,//activate css linter with default values
-        scss : true,//activate scss linter with default values
-        html : true,//activate html linter with default values
-        js : true,//activate js linter with default values
-        eslint : true,//activate eslint for angular linter with default values
-		eslint_angular: true, //activate ESLint for Angular with default values
-        ts : true//activate tslint with default values
-    });
+Launch the CLI by calling:
+
+```sh
+$ sreporter
+```
+
+The Command-Line Interface uses a `.sreporterrc` file to define the reporters configuration. The `.sreporterrc` file is mandatory in order to use the CLI.
+
+Default options are as follows:
+
+```json
+{
+  "projectName": "Sonar Web Front-End Reporter",
+  "csslint": {
+    "src": "src/**/*.css",
+    "report": "reports/sonar/csslint.json",
+    "rulesFile": ".csslintrc"
+  },
+  "sasslint": {
+    "src": "src/**/*.scss",
+    "report": "reports/sonar/scsslint.json",
+    "rulesFile": ".sass-lint.yml"
+  },
+  "sass-to-scsslint": {
+    "src": "src/**/*.scss",
+    "report": "reports/sonar/scsslint.json",
+    "rulesFile": ".sass-lint.yml"
+  },
+  "htmlhint": {
+    "src": "src/**/*.html",
+    "report": "reports/sonar/htmlhint.json",
+    "rulesFile": ".htmlhintrc"
+  },
+  "eslint": {
+    "src": "src/**/*.js",
+    "report": "reports/sonar/eslint.json",
+    "rulesFile": ".eslintrc"
+  },
+  "eslintangular": {
+    "src": "src/**/*.js",
+    "report": "eslint-angular.json",
+    "rulesFile": ".eslintrc"
+  },
+  "jshint": {
+    "src": "src/**/*.js",
+    "report": "reports/sonar/jshint.json",
+    "rulesFile": ".jshintrc"
+  },
+  "tslint": {
+    "src": "src/**/*.ts",
+    "report": "reports/sonar/tslint.json",
+    "rulesFile": ".tslintrc"
+  }
+}
+```
+
+#### Disabling a reporter
+
+Disabling a reporter is as simple as removing it from the `.sreporterrc` file.
+
+You can also set it's property to `false`:
+
+```json
+{
+  "projectName": "Sonar Web Front-End Reporter",
+  "csslint": false
+}
+```
+
+### NodeJS
+
+You can launch all reporters:
+
+```js
+const SonarWebReporters = require('sonar-web-frontend-reporters').Reporters;
+
+let sonarWebReporters = new SonarWebReporters('Sonar Web Front-End Reporters', {
+  "csslint": {
+    "src": "src/**/*.css",
+    "report": "reports/sonar/csslint.json",
+    "rulesFile": ".csslintrc"
+  },
+  "htmlhint": {
+    "src": "src/**/*.html",
+    "report": "reports/sonar/htmlhint.json",
+    "rulesFile": ".htmlhintrc"
+  },
+  "eslint": {
+    "src": "src/**/*.js",
+    "report": "reports/sonar/eslint.json",
+    "rulesFile": ".eslintrc"
+  }
+});
+
+sonarWebReporters.launchReporters(() => {
+  console.log('All reporters have been processed');
 });
 ```
-```bash
-gulp lint
-```
-All params for launchReporters are optional, if you dont pass them, they'll skip linters. We rarely need to scan both css and scss for example.
-# Configuration
-Since not all project will match the default values, you can customize it, each reporter has params :
 
-* src : the gulp.src params to use for the task, probably the only one you'll have to override
-* report : the report json file path to use
-* rulesFile : the rules file to use
-* task : the gulp task name to use for the report
-* base : (for eslint only) the base folder for seeking sources
-* linter: the gulp linter wrapper to use for the report
+Or just one by one, e.g for CSSLint:
 
-## Default values
-```Javascript
-gulp.task('lint', function() {
-    return SonarWebReporters.launchReporters({
-        project: projectName,
-        css: {
-          src: "src/**/*.css",
-          report: "reports/sonar/csslint.json",
-          rulesFile: ".csslintrc",
-          task: "ci-csslint",
-          linter: require("gulp-csslint")
-        },
-        scss: {
-          src: "src/**/*.scss",
-          report: "reports/sonar/scsslint.json",
-          rulesFile: ".scsslintrc",
-          task: "ci-scsslint",
-          linter: require("gulp-scss-lint")
-        },
-        html: {
-          src: "src/**/*.html",
-          report: "reports/sonar/htmlhint.json",
-          rulesFile: ".htmlhintrc",
-          task: "ci-htmlhint",
-          linter: require("gulp-htmlhint")
-        },
-        js: {
-          src: "src/**/*.js",
-          report: "reports/sonar/jshint.json",
-          rulesFile: ".jshintrc",
-          task: "ci-jshint",
-          linter: require("gulp-jshint")
-        },
-        eslint: {
-          src: "src/**/*.js",
-          report: "reports/sonar/eslint.json",
-          rulesFile: ".eslintrc",
-          task: "ci-eslint",
-          base: "src",
-          linter: require("gulp-eslint")
-        },
-        eslint_angular: {
-          src: "src/**/*.js",
-          report: "reports/sonar/eslint-angular.json",
-          rulesFile: ".eslintrc",
-          task: "ci-eslint-angular",
-          base: "src",
-          linter: require("gulp-eslint")
-        },
-        ts: {
-          src: "src/**/*.ts",
-          report: "reports/sonar/tslint.json",
-          rulesFile: "tslint.json",
-          task: "ci-tslint",
-          linter: require("gulp-tslint")
-        },
-        callback: function() {
-          console.log('Linting ended !');
-        }
-    });
+```js
+const CSSLintReporter = require('sonar-web-frontend-reporters').CSSLintReporter;
+
+let cssLintReporter = new CSSLintReporter({
+  src      : 'src/**/*.css',
+  report   : 'reports/sonar/csslint.json',
+  rulesFile: '.csslintrc'
+}, 'Sonar Web Front-End Reporters');
+
+cssLintReporter.launch(() => {
+  console.log('CSSLint reporter has been generated under reports/sonar/csslint.json');
 });
 ```
 
-# Sample project with jasmine/istanbul for testing
+## Available reporters
 
-SOON
+* CSSLint
+* SASSLint
+* SASSLint to SCSSLint (convert SASSLint rules to SCSSLint rules)
+* HTMLHint
+* ESLint
+* ESLint for AngularJS
+* JSHint
+* TSLint
 
-# Sample project with intern for testing
+## Migrating from 2.x to 3.x
 
-An example project is available here : https://github.com/groupe-sii/sonar-web-frontend-helloworld
+2.x and 3.x versions aren't compatible one to another.
 
-# Informations for Sonarqube
-The export files for Sonarqube are JSON files providing all informations a Sonarqube issue might need :
+The main reasons for this **3.0** version were that:
 
-* Project Description
-  * language : The programmation(cough) language of the project (HTML, CSS, JS, whatever)
-  * project : The name of the project
-  * projectPath : The path to the sources of the project for Sonarqube parsing
-  * version : The project version
-  * violations : Object summarizing the number of violations in the project sorted by severity
-  * nbFiles : Number of scanned files in the project
-  * nbLines : Total number of lines in scanned files
-  * nbComments : Total number of commented lines in scanned files
-  * nbCloc : Total number of lines of code (non empty non comment) in scanned files
-  * files : Array of scanned files
-* File description
-  * name : File name
-  * path : File path relative to project's path
-  * nbLines : Number of lines in the file
-  * nbComments : Number of commented lines in the file
-  * nbCloc : Number of lines of code (non empty non comment) in the file
-  * violations : Object summarizing the number of violations in the file sorted by severity
-  * issues : Array of issues in the file
-* Issue description
-  * line : The line where the issue occurs in the file
-  * col : The column where the issue occurs in the line
-  * message : Summary of the issue
-  * description : Long test descrtibing the issue
-  * rulekey : The unique identifier of the issue
-  * severity : Issue severity (one of INFO,MINOR,MAJOR,CRITICAL,BLOCKER)
-  * reporter : Name of the reporter used to generate this issue
-  * creationDate : Date of issue creation
+* We wanted to remove the Gulp abstraction and create a cleaner and more reusable/maintainable code in full ES6 ;
+* We needed to use it in a Webpack project and the integration wasn't that easy.
 
-# Included Reporters
-Reporters are custom reporters written for the gulp tasks of each linter, the output is a Sonarqube compatible JSON file.
-A Reporter must be open before being passed to linter/hinter plugin, and closed after the linter/hinter plugin ended its task.
+> Warning:
+>
+> 3.x version is compatible with NodeJS version **>= 6.9.1**
 
-* [HTMLhint](http://htmlhint.com/)
-* [JShint](http://jshint.com/)
-* [CSSlint](http://csslint.net/)
-* [SCSSLint](https://github.com/brigade/scss-lint)
-* [ESLint](http://eslint.org/)
-* [ESLint for angular](https://github.com/Gillespie59/eslint-plugin-angular)
-* [TSLint](http://palantir.github.io/tslint/)
+You can still use the Gulp version by installing `sonar-web-frontend-reporters@2.1.1`.
 
-# Roadmap
-New reporters will be added over time, with new webtechnologies incoming :
+However, you can also use it with Gulp this way:
 
-* Angular2 linter / Codelyzer
+```js
+let CSSLintReporter = require('sonar-web-frontend-reporters').CSSLintReporter;
+
+gulp.task('csslint:reporter', (done) => {
+  let cssLintReporter = new CSSLintReporter({
+    src      : 'src/**/*.css',
+    report   : 'reports/sonar/csslint.json',
+    rulesFile: '.csslintrc'
+  }, 'Sonar Web Front-End Reporters');
+
+  cssLintReporter.launch(() => done());
+});
+```
+
+## [Contributing](CONTRIBUTING.md)
+
+## License
+
+ISC License
+
+Copyright (c) 2016 Groupe SII

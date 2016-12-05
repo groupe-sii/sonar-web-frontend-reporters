@@ -1,0 +1,44 @@
+{
+  "projectName": "SonarWebReporter",
+  "csslint": {
+     "src": "./samples/src/**/*.css",
+     "report": "reports/sonar/csslint.json",
+     "rulesFile": "./samples/.csslintrc"
+   },
+  "eslint": {
+    "src": "./samples/src/**/*.js",
+    "report": "reports/sonar/eslint.json",
+    "rulesFile": "./samples/.eslintrc"
+  },
+  "eslintangular": {
+    "src": "./samples/src/**/*.js",
+    "report": "reports/sonar/eslint-angular.json",
+    "rulesFile": "./samples/.eslintangularrc"
+  },
+  "jshint": {
+    "src": "./samples/src/**/*.js",
+    "report": "reports/sonar/jshint.json",
+    "rulesFile": "./samples/.jshintrc"
+  },
+  "htmlhint": {
+    "src": "./samples/src/**/*.html",
+    "report": "reports/sonar/htmlhint.json",
+    "rulesFile": "./samples/.htmlhintrc"
+  },
+  "tslint": {
+    "src": "./samples/src/**/*.ts",
+    "report": "reports/sonar/tslint.json",
+    "rulesFile": "./samples/tslint.json"
+  },
+  "sasslint": {
+    "src": "./samples/src/**/*.s+(a|c)ss",
+    "report": "reports/sonar/sasslint.json",
+    "rulesFile": "./samples/.sass-lint.yml"
+  },
+   "sass-to-scsslint": {
+     "src": "./samples/src/**/*.s+(a|c)ss",
+     "report": "reports/sonar/sass-to-scsslint.json",
+     "rulesFile": "./samples/.sass-lint.yml"
+   }
+
+}
