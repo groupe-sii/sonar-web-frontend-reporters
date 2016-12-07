@@ -1,7 +1,8 @@
 require('chai').should();
 
 const fs = require('fs'),
-  ESLintReporter = require('../../index').ESLintReporter,
+  ESLintReporter = require('../../lib/api').ESLintReporter,
+  ESLintReporterES5 = require('../../lib/api').ES5.ESLintReporter,
   readJSONFile = require('../test.utils').readJSONFile,
   esLintMock = require('./eslint.reporter.mock');
 
@@ -91,6 +92,16 @@ module.exports = () => {
 
       it('should find the rules file', () => {
         (() => new ESLintReporter(esLintMock.badRulesFileOption, 'SonarWebFrontEndReporters')).should.throw(Error);
+      });
+
+      it('should launch with ES5 backward compatibility', (done) => {
+        let reporter = new ESLintReporterES5(esLintMock.defaultOptions, 'SonarWebFrontEndReporters');
+        reporter.launch(() => {
+          let result = readJSONFile(esLintMock.defaultOptions.report);
+          result.files.length.should.be.equal(1);
+          result.nbFiles.should.be.equal(1);
+          done();
+        });
       });
 
     });

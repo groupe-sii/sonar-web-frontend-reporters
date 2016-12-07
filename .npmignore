@@ -2,3 +2,10 @@ samples/
 reports/
 node_modules/
 test/
+.editorconfig
+.eslintignore
+.eslintrc
+.travis.yml
+yarn.lock
+.git*
+.babelrc
