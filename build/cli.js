@@ -8,8 +8,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 var fs = require('fs'),
     chalk = require('chalk'),
-    ReporterType = require('../lib/reporter.enum'),
-    ReporterFactory = require('../lib/reporter.factory');
+    ReporterType = require('./reporter.enum'),
+    ReporterFactory = require('./reporter.factory');
 
 var CLIEngine = function () {
   function CLIEngine() {

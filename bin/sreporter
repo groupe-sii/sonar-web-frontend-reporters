@@ -1,8 +1,7 @@
 #!/usr/bin/env node
 
-const es5 = (process.argv.indexOf('--es5') > -1);
-
-let CLIEngine;
+var es5 = (process.argv.indexOf('--es5') > -1),
+  CLIEngine;
 
 // Use ES5 backward compatibility ?
 if (es5) {
@@ -11,5 +10,5 @@ if (es5) {
   CLIEngine = require('../lib/cli');
 }
 
-let cli = new CLIEngine();
+var cli = new CLIEngine();
 cli.launchReporters();
