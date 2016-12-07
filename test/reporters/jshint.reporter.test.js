@@ -1,7 +1,7 @@
 require('chai').should();
 
 const fs = require('fs'),
-  JSHintReporter = require('../../index').JSHintReporter,
+  JSHintReporter = require('../../lib/api').JSHintReporter,
   readJSONFile = require('../test.utils').readJSONFile,
   jsHintMock = require('./jshint.reporter.mock');
 

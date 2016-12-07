@@ -1,7 +1,7 @@
 require('chai').should();
 
 const fs = require('fs'),
-  TSLintReporter = require('../../index').TSLintReporter,
+  TSLintReporter = require('../../lib/api').TSLintReporter,
   readJSONFile = require('../test.utils').readJSONFile,
   tsLintMock = require('./tslint.reporter.mock');
 
