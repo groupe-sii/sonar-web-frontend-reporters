@@ -1,6 +1,7 @@
 const reporterFactory = require('./reporters/reporter.factory.test'),
   cssLintReporter = require('./reporters/csslint.reporter.test'),
   sassLintReporter = require('./reporters/sasslint.reporter.test'),
+  sassToScssLintReporter = require('./reporters/sass-to-scsslint.reporter.test'),
   htmlHintReporter = require('./reporters/htmlhint.reporter.test'),
   esLintReporter = require('./reporters/eslint.reporter.test'),
   esLintAngularReporter = require('./reporters/eslint-angular.reporter.test'),
@@ -10,6 +11,7 @@ const reporterFactory = require('./reporters/reporter.factory.test'),
 reporterFactory();
 cssLintReporter();
 sassLintReporter();
+sassToScssLintReporter();
 htmlHintReporter();
 esLintReporter();
 esLintAngularReporter();

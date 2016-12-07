@@ -93,6 +93,14 @@ You can also set it's property to `false`:
 }
 ```
 
+#### ES5 backward compatibility
+
+To use the CLI with older NodeJS versions, you can use the `--es5` option:
+
+```sh
+$ sreporter --es5
+```
+
 ### NodeJS
 
 You can launch all reporters:
@@ -139,11 +147,20 @@ cssLintReporter.launch(() => {
 });
 ```
 
+#### ES5 backward compatibility
+
+To use it with older NodeJS versions, you can require the reporters this way:
+
+```js
+const SonarWebReporters = require('sonar-web-frontend-reporters').ES5.Reporters;
+const CSSLintReporter = require('sonar-web-frontend-reporters').ES5.CSSLintReporter;
+```
+
 ## Available reporters
 
 * CSSLint
 * SASSLint
-* SASSLint to SCSSLint (convert SASSLint rules to SCSSLint rules)
+* SASSLint to SCSSLint (convert SASSLint rules to SCSSLint rules, because the SonarQube plugin doesn't support SASSLint rules)
 * HTMLHint
 * ESLint
 * ESLint for AngularJS
@@ -161,7 +178,7 @@ The main reasons for this **3.0** version were that:
 
 > Warning:
 >
-> 3.x version is compatible with NodeJS version **>= 6.5.0**
+> 3.x version is compatible with NodeJS version **>= 6.5.0** with ES6 support and **>= 4.4.5** with ES5 backward compatibility
 
 You can still use the Gulp version by installing `sonar-web-frontend-reporters@2.1.1`.
 
