@@ -23,34 +23,43 @@ You can launch linting with the following command:
 npm run lint
 ```
 
+## Building to ES5
+
+Launch the `npm run build` command.
+
+After writing your new reporter, you should build the library to keep the ES5 backward compatibility.
+
 ## Writing a reporter
 
 1. First of all, create a file under `reporters/` for your new reporter. It should match the following syntax: **new-reporter.reporter.js**.
 1. The new reporter must extends the `Reporter` class and implement `defaultOptions` and `launch` methods
 1. Add a new reporter type in the `reporter.enum.js` file
 
-```js
-const ReporterType = {
-  NEWREPORTER: 'newreporter'
-}
-```
+    ```js
+    const ReporterType = {
+      NEWREPORTER: 'newreporter'
+    }
+    ```
 1. Register the reporter in the `ReporterFactory`
 
-```js
-switch (type) {
-  case ReporterType.NEWREPORTER:
-    opts = ReporterFactory.mergeOptions(options, NewReporter.defaultOptions());
-    reporter = new NewReporter(opts, projectName);
-    break;
-}
-```
-1. Export the reporter so that anyone can use it (`index.js`)
+    ```js
+    switch (type) {
+      case ReporterType.NEWREPORTER:
+        opts = ReporterFactory.mergeOptions(options, NewReporter.defaultOptions());
+        reporter = new NewReporter(opts, projectName);
+        break;
+    }
+    ```
+1. Export the reporter so that anyone can use it (`lib/api.js`)
 
-```js
-module.exports = {
-  NewReporter: require('./reporters/new-reporter.reporter')
-};
-```
+    ```js
+    module.exports = {
+      NewReporter: require('./reporters/new-reporter.reporter'),
+      ES5        : {
+        NewReporter: require('../build/reporters/new-reporter.reporter')
+      }
+    };
+    ```
 1. Create related tests in `/test/reporters` folder
 1. Update README
     * **Default options** section
