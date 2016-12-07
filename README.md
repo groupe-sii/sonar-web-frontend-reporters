@@ -93,6 +93,14 @@ You can also set it's property to `false`:
 }
 ```
 
+#### ES5 backward compatibility
+
+To use the CLI with older NodeJS versions, you can use the `--es5` option:
+
+```sh
+$ sreporter --es5
+```
+
 ### NodeJS
 
 You can launch all reporters:
@@ -137,6 +145,15 @@ let cssLintReporter = new CSSLintReporter({
 cssLintReporter.launch(() => {
   console.log('CSSLint reporter has been generated under reports/sonar/csslint.json');
 });
+```
+
+#### ES5 backward compatibility
+
+To use it with older NodeJS versions, you can require the reporters this way:
+
+```js
+const SonarWebReporters = require('sonar-web-frontend-reporters').ES5.Reporters;
+const CSSLintReporter = require('sonar-web-frontend-reporters').ES5.CSSLintReporter;
 ```
 
 ## Available reporters
