@@ -47,11 +47,13 @@
     "tslint": "^4.0.2",
     "typescript": "^2.0.10"
   },
-  "engines": {
-    "node": ">=6.5.0"
-  },
   "devDependencies": {
+    "babel-cli": "^6.18.0",
+    "babel-preset-latest": "^6.16.0",
     "chai": "^3.5.0",
     "mocha": "^3.2.0"
+  },
+  "engines": {
+    "node": ">=6.5.0"
   }
 }
