@@ -1,9 +1,10 @@
 require('chai').should();
 
-const HTMLHintReporter = require('../../lib/api').HTMLHintReporter,
+const fs = require('fs'),
+  HTMLHintReporter = require('../../lib/api').HTMLHintReporter,
+  HTMLHintReporterES5 = require('../../lib/api').ES5.HTMLHintReporter,
   readJSONFile = require('../test.utils').readJSONFile,
-  htmlHintMock = require('./htmlhint.reporter.mock'),
-  fs = require('fs');
+  htmlHintMock = require('./htmlhint.reporter.mock');
 
 module.exports = () => {
 
@@ -77,6 +78,15 @@ module.exports = () => {
         (() => new HTMLHintReporter(htmlHintMock.badRulesFileOptions, 'SonarWebFrontEndReporters')).should.throw(Error);
       });
 
+      it('should launch with ES5 backward compatibility', (done) => {
+        let reporter = new HTMLHintReporterES5(htmlHintMock.defaultOptions, 'SonarWebFrontEndReporters');
+        reporter.launch(() => {
+          let result = readJSONFile(htmlHintMock.defaultOptions.report);
+          result.files.length.should.be.equal(1);
+          result.nbFiles.should.be.equal(1);
+          done();
+        });
+      });
 
     });
 

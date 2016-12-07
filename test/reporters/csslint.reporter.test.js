@@ -1,6 +1,7 @@
 require('chai').should();
 
 const CSSLintReporter = require('../../lib/api').CSSLintReporter,
+  CSSLintReporterES5 = require('../../lib/api').ES5.CSSLintReporter,
   readJSONFile = require('../test.utils').readJSONFile,
   cssLintMock = require('./csslint.reporter.mock'),
   fs = require('fs');
@@ -45,9 +46,9 @@ module.exports = () => {
         let reporter = new CSSLintReporter(cssLintMock.defaultOptions, 'SonarWebFrontEndReporters');
         reporter.launch(() => {
           let result = readJSONFile(cssLintMock.defaultOptions.report);
-          result.files[0].issues.length.should.be.equal(2);
-          let expected = ['ids', 'known-properties'];
-          result.files[0].issues.forEach((val) => {
+          result.files[ 0 ].issues.length.should.be.equal(2);
+          let expected = [ 'ids', 'known-properties' ];
+          result.files[ 0 ].issues.forEach((val) => {
             val.rulekey.should.be.oneOf(expected);
           });
           done();
@@ -58,7 +59,7 @@ module.exports = () => {
         let reporter = new CSSLintReporter(cssLintMock.defaultOptions, 'SonarWebFrontEndReporters');
         reporter.launch(() => {
           let result = readJSONFile(cssLintMock.defaultOptions.report);
-          result.files[0].nbLines.should.be.equal(4);
+          result.files[ 0 ].nbLines.should.be.equal(4);
           done();
         });
       });
@@ -77,6 +78,15 @@ module.exports = () => {
         (() => new CSSLintReporter(cssLintMock.badRulesFileOptions, 'SonarWebFrontEndReporters')).should.throw(Error);
       });
 
+      it('should launch with ES5 backward compatibility', (done) => {
+        let reporter = new CSSLintReporterES5(cssLintMock.defaultOptions, 'SonarWebFrontEndReporters');
+        reporter.launch(() => {
+          let result = readJSONFile(cssLintMock.defaultOptions.report);
+          result.files.length.should.be.equal(1);
+          result.nbFiles.should.be.equal(1);
+          done();
+        });
+      });
 
     });
 

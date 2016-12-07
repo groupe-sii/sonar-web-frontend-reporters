@@ -1,9 +1,10 @@
 require('chai').should();
 
-const SASSLintReporter = require('../../lib/api').SASSLintReporter,
+const fs = require('fs'),
+  SASSLintReporter = require('../../lib/api').SASSLintReporter,
+  SASSLintReporterES5 = require('../../lib/api').ES5.SASSLintReporter,
   readJSONFile = require('../test.utils').readJSONFile,
-  sassLintMock = require('./sasslint.reporter.mock'),
-  fs = require('fs');
+  sassLintMock = require('./sasslint.reporter.mock');
 
 module.exports = () => {
 
@@ -77,6 +78,15 @@ module.exports = () => {
         (() => new SASSLintReporter(sassLintMock.badRulesFileOptions, 'SonarWebFrontEndReporters')).should.throw(Error);
       });
 
+      it('should launch with ES5 backward compatibility', (done) => {
+        let reporter = new SASSLintReporterES5(sassLintMock.defaultOptions, 'SonarWebFrontEndReporters');
+        reporter.launch(() => {
+          let result = readJSONFile(sassLintMock.defaultOptions.report);
+          result.files.length.should.be.equal(1);
+          result.nbFiles.should.be.equal(1);
+          done();
+        });
+      });
 
     });
 
