@@ -143,7 +143,7 @@ cssLintReporter.launch(() => {
 
 * CSSLint
 * SASSLint
-* SASSLint to SCSSLint (convert SASSLint rules to SCSSLint rules)
+* SASSLint to SCSSLint (convert SASSLint rules to SCSSLint rules, because the SonarQube plugin doesn't support SASSLint rules)
 * HTMLHint
 * ESLint
 * ESLint for AngularJS
