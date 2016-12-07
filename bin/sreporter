@@ -4,8 +4,8 @@
 
 const fs = require('fs'),
   chalk = require('chalk'),
-  ReporterType = require('../reporters/reporter.enum'),
-  ReporterFactory = require('../reporters/reporter.factory');
+  ReporterType = require('../lib/reporter.enum'),
+  ReporterFactory = require('../lib/reporter.factory');
 
 class CLIEngine {
 
