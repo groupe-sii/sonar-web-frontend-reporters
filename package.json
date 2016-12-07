@@ -48,7 +48,7 @@
     "typescript": "^2.0.10"
   },
   "engines": {
-    "node": ">=6.9.1"
+    "node": ">=6.5.0"
   },
   "devDependencies": {
     "chai": "^3.5.0",

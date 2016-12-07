@@ -161,7 +161,7 @@ The main reasons for this **3.0** version were that:
 
 > Warning:
 >
-> 3.x version is compatible with NodeJS version **>= 6.9.1**
+> 3.x version is compatible with NodeJS version **>= 6.5.0**
 
 You can still use the Gulp version by installing `sonar-web-frontend-reporters@2.1.1`.
 
