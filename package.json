@@ -7,6 +7,7 @@
     "sreporter": "./bin/sreporter"
   },
   "scripts": {
+    "build": "babel lib --out-dir build",
     "lint": "eslint .",
     "test": "npm run-script lint && mocha"
   },

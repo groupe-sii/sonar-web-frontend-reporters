@@ -8,3 +8,4 @@ test/
 .travis.yml
 yarn.lock
 .git*
+.babelrc
