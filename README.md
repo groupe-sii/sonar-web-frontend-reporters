@@ -1,6 +1,6 @@
 # Sonar Web Front-End Reporters
 
-[![Build Status](https://travis-ci.org/groupe-sii/sonar-web-frontend-reporters.svg?branch=develop)](https://travis-ci.org/groupe-sii/sonar-web-frontend-reporters)
+[![Build Status](https://travis-ci.org/groupe-sii/sonar-web-frontend-reporters.svg?branch=master)](https://travis-ci.org/groupe-sii/sonar-web-frontend-reporters)
 [![NPM version][npm-image]][npm-url]
 
 [npm-image]: https://badge.fury.io/js/sonar-web-frontend-reporters.svg
