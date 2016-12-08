@@ -1,6 +1,10 @@
 #!/usr/bin/env node
 
-var es5 = (process.argv.indexOf('--es5') > -1),
+/* eslint no-console:off */
+
+var chalk = require('chalk'),
+  version = require('../package.json').version,
+  es5 = (process.argv.includes('--es5') > -1),
   CLIEngine;
 
 // Use ES5 backward compatibility ?
@@ -8,6 +12,12 @@ if (es5) {
   CLIEngine = require('../build/cli');
 } else {
   CLIEngine = require('../lib/cli');
+}
+
+// Log version number
+if (process.argv.includes('version') || process.argv.includes('--version')) {
+  console.info(chalk.bold('sreporter version v' + version));
+  process.exit(0);
 }
 
 var cli = new CLIEngine();
