@@ -32,3 +32,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Removed
 
 - Gulp abstraction
+
+[@ole]: https://github.com/liollury
+[@ValentinGot]: https://github.com/ValentinGot
