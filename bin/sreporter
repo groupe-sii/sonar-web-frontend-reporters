@@ -4,7 +4,7 @@
 
 var chalk = require('chalk'),
   version = require('../package.json').version,
-  es5 = (process.argv.includes('--es5') > -1),
+  es5 = (process.argv.indexOf('--es5') > -1),
   CLIEngine;
 
 // Use ES5 backward compatibility ?
