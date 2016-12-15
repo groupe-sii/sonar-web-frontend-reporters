@@ -15,7 +15,7 @@ if (es5) {
 }
 
 // Log version number
-if (process.argv.includes('version') || process.argv.includes('--version')) {
+if (process.argv.indexOf('version') > -1 || process.argv.indexOf('--version') > -1) {
   console.info(chalk.bold('sreporter version v' + version));
   process.exit(0);
 }
