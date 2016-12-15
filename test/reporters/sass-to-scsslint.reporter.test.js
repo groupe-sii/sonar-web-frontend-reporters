@@ -2,7 +2,7 @@ require('chai').should();
 
 const fs = require('fs'),
   SASSToSCSSLintReporter = require('../../lib/api').SASSToSCSSLintReporter,
-  SASSToSCSSLintReporterES5 = require('../../lib/api').ES5.SASSToSCSSLintReporter,
+  SASSToSCSSLintReporterES5 = require('../../build/reporters/sass-to-scsslint.reporter'),
   readJSONFile = require('../test.utils').readJSONFile,
   sasstoScssLintMock = require('./sass-to-scsslint.reporter.mock');
 

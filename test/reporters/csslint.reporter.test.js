@@ -1,7 +1,7 @@
 require('chai').should();
 
 const CSSLintReporter = require('../../lib/api').CSSLintReporter,
-  CSSLintReporterES5 = require('../../lib/api').ES5.CSSLintReporter,
+  CSSLintReporterES5 = require('../../build/reporters/csslint.reporter'),
   readJSONFile = require('../test.utils').readJSONFile,
   cssLintMock = require('./csslint.reporter.mock'),
   fs = require('fs');

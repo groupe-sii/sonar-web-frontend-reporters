@@ -2,7 +2,7 @@ require('chai').should();
 
 const fs = require('fs'),
   ESLintAngularReporter = require('../../lib/api').ESLintAngularReporter,
-  ESLintAngularReporterES5 = require('../../lib/api').ES5.ESLintAngularReporter,
+  ESLintAngularReporterES5 = require('../../build/reporters/eslint-angular.reporter'),
   readJSONFile = require('../test.utils').readJSONFile,
   esLintAngularMock = require('./eslint-angular.reporter.mock');
 

@@ -2,7 +2,7 @@ require('chai').should();
 
 const fs = require('fs'),
   TSLintReporter = require('../../lib/api').TSLintReporter,
-  TSLintReporterES5 = require('../../lib/api').ES5.TSLintReporter,
+  TSLintReporterES5 = require('../../build/reporters/tslint.reporter'),
   readJSONFile = require('../test.utils').readJSONFile,
   tsLintMock = require('./tslint.reporter.mock');
 
