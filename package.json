@@ -1,6 +1,6 @@
 {
   "name": "sonar-web-frontend-reporters",
-  "description": "This is a repo of SII continuous integration build system dedicated to Front-end webapps. This repo provides all the reporters written by SII for the generic [Sonarqube plugin](https://github.com/groupe-sii/sonar-web-client-plugin)",
+  "description": "sreporter is a Command-Line Interface to generate Front-End linters reporters for the SonarQube plugin",
   "version": "3.0.1",
   "main": "./lib/api.js",
   "bin": {
