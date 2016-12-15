@@ -22,6 +22,8 @@
     "csslint",
     "htmlhint",
     "eslint",
+    "angularjs",
+    "tslint",
     "sonar"
   ],
   "author": "Cédric Le Gallo <cedric.legallo@gmail.com> (http://www.groupe-sii.com/)",
