@@ -77,6 +77,19 @@ module.exports = () => {
         });
       });
 
+      it ('shouldn\'t match the ignored file', (done) => {
+        let reporter = new TSLintReporter(tsLintMock.multiSrcOption, 'SonarWebFrontEndReporters');
+
+        reporter.launch(() => {
+          let result = readJSONFile(tsLintMock.multiSrcOption.report);
+
+          result.files.length.should.be.equal(1);
+          result.nbFiles.should.be.equal(1);
+
+          done();
+        });
+      });
+
       it ('shouldn\'t have processed files', () => {
         let reporter = new TSLintReporter(tsLintMock.badSrcOption, 'SonarWebFrontEndReporters');
 
