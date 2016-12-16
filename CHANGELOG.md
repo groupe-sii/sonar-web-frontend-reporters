@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - **es5**: The `.ES5.*` require method couldn't work, documentation has been updated accordingly [@ValentinGot]
 - **es5**: `arr.includes()` method isn't available on ES5 (Closes [#14](https://github.com/groupe-sii/sonar-web-frontend-reporters/issues/14)) [@ValentinGot]
 - **eslint**: use the `severity` property to retrieve the severity (Closes [#16](https://github.com/groupe-sii/sonar-web-frontend-reporters/issues/16)) [@ValentinGot]
+- **eslint-angular**: use the `severity` property to retrieve the severity (Closes [#16](https://github.com/groupe-sii/sonar-web-frontend-reporters/issues/16)) [@ValentinGot]
 
 ## 3.0.0 - 09-12-2016
 
