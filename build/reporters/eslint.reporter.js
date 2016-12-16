@@ -8,7 +8,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var glob = require('glob'),
+var glob = require('glob-all'),
     CLIEngine = require('eslint').CLIEngine,
     ReporterType = require('../reporter.enum'),
     Reporter = require('../reporter');
@@ -34,7 +34,7 @@ module.exports = function (_Reporter) {
         configFile: this.options.rulesFile
       });
 
-      glob(this.options.src, function (er, files) {
+      glob(this.options.src, function (err, files) {
         _this2.processFiles(files, _this2.options);
         _this2.closeReporter(_this2.options.report);
 
