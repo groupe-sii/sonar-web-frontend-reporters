@@ -65,13 +65,13 @@ module.exports = () => {
         });
       });
 
-      it ('should be a 13 lines file', (done) => {
+      it ('should be a 14 lines file', (done) => {
         let reporter = new ESLintAngularReporter(esLintAngularMock.defaultOptions, 'SonarWebFrontEndReporters');
 
         reporter.launch(() => {
           let result = readJSONFile(esLintAngularMock.defaultOptions.report);
 
-          result.files[0].nbLines.should.be.equal(13);
+          result.files[0].nbLines.should.be.equal(14);
 
           done();
         });
