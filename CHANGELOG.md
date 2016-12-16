@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 
 - **multi-glob**: The `src` property can now take an array of globs (Closes [#15](https://github.com/groupe-sii/sonar-web-frontend-reporters/issues/15)) [@ValentinGot]
+- **cli**: Add command line usage and version number [@ValentinGot]
 
 ### Fixed
 
