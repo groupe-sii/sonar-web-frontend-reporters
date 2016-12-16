@@ -9,7 +9,7 @@ let sonarWebReporters = new SonarWebReporters('Sonar Web Reporters', {
   },
   "eslintangular": {
     "src": "samples/src/**/*.js",
-    "report": "reports/sonar/eslintangular.json",
+    "report": "reports/sonar/eslint-angular.json",
     "rulesFile": "./samples/.eslintangularrc"
   },
   "jshint": {
