@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+### Added
+
+- **multi-glob**: The `src` property can now take an array of globs
+
 ### Fixed
 
 - **es5**: The `.ES5.*` require method couldn't work, documentation has been updated accordingly (Closes [#14](https://github.com/groupe-sii/sonar-web-frontend-reporters/issues/14)) [@ValentinGot]

@@ -65,10 +65,10 @@ module.exports = () => {
         });
       });
 
-      it ('should be a one line file', () => {
+      it ('should be a one line file', (done) => {
         let reporter = new TSLintReporter(tsLintMock.defaultOptions, 'SonarWebFrontEndReporters');
 
-        reporter.launch((done) => {
+        reporter.launch(() => {
           let result = readJSONFile(tsLintMock.defaultOptions.report);
 
           result.files[0].nbLines.should.be.equal(1);
@@ -77,10 +77,23 @@ module.exports = () => {
         });
       });
 
-      it ('shouldn\'t have processed files', () => {
+      it ('shouldn\'t match the ignored file', (done) => {
+        let reporter = new TSLintReporter(tsLintMock.multiSrcOption, 'SonarWebFrontEndReporters');
+
+        reporter.launch(() => {
+          let result = readJSONFile(tsLintMock.multiSrcOption.report);
+
+          result.files.length.should.be.equal(1);
+          result.nbFiles.should.be.equal(1);
+
+          done();
+        });
+      });
+
+      it ('shouldn\'t have processed files', (done) => {
         let reporter = new TSLintReporter(tsLintMock.badSrcOption, 'SonarWebFrontEndReporters');
 
-        reporter.launch((done) => {
+        reporter.launch(() => {
           let result = readJSONFile(tsLintMock.badSrcOption.report);
 
           result.files.length.should.be.equal(0);
@@ -96,12 +109,16 @@ module.exports = () => {
 
       it('should launch with ES5 backward compatibility', (done) => {
         let reporter = new TSLintReporterES5(tsLintMock.defaultOptions, 'SonarWebFrontEndReporters');
+
         reporter.launch(() => {
           let result = readJSONFile(tsLintMock.defaultOptions.report);
+
           result.files.length.should.be.equal(1);
           result.nbFiles.should.be.equal(1);
+
           done();
         });
+
       });
 
     });
