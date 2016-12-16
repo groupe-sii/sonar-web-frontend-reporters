@@ -6,7 +6,7 @@
      "rulesFile": "./samples/.csslintrc"
    },
   "eslint": {
-    "src": "./samples/src/**/*.js",
+    "src": [ "samples/src/**/*.js", "!samples/src/bower_components/**" ],
     "report": "reports/sonar/eslint.json",
     "rulesFile": "./samples/.eslintrc"
   },
