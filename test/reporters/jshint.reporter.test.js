@@ -65,10 +65,10 @@ module.exports = () => {
         });
       });
 
-      it ('should be a one line file', () => {
+      it ('should be a one line file', (done) => {
         let reporter = new JSHintReporter(jsHintMock.defaultOptions, 'SonarWebFrontEndReporters');
 
-        reporter.launch((done) => {
+        reporter.launch(() => {
           let result = readJSONFile(jsHintMock.defaultOptions.report);
 
           result.files[0].nbLines.should.be.equal(1);
@@ -90,10 +90,10 @@ module.exports = () => {
         });
       });
 
-      it ('shouldn\'t have processed files', () => {
+      it ('shouldn\'t have processed files', (done) => {
         let reporter = new JSHintReporter(jsHintMock.badSrcOption, 'SonarWebFrontEndReporters');
 
-        reporter.launch((done) => {
+        reporter.launch(() => {
           let result = readJSONFile(jsHintMock.badSrcOption.report);
 
           result.files.length.should.be.equal(0);
@@ -109,12 +109,16 @@ module.exports = () => {
 
       it('should launch with ES5 backward compatibility', (done) => {
         let reporter = new JSHintReporterES5(jsHintMock.defaultOptions, 'SonarWebFrontEndReporters');
+
         reporter.launch(() => {
           let result = readJSONFile(jsHintMock.defaultOptions.report);
+
           result.files.length.should.be.equal(1);
           result.nbFiles.should.be.equal(1);
+
           done();
         });
+
       });
 
     });

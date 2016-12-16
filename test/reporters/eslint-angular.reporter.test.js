@@ -65,10 +65,10 @@ module.exports = () => {
         });
       });
 
-      it ('should be a 13 lines file', () => {
+      it ('should be a 13 lines file', (done) => {
         let reporter = new ESLintAngularReporter(esLintAngularMock.defaultOptions, 'SonarWebFrontEndReporters');
 
-        reporter.launch((done) => {
+        reporter.launch(() => {
           let result = readJSONFile(esLintAngularMock.defaultOptions.report);
 
           result.files[0].nbLines.should.be.equal(13);
@@ -90,10 +90,10 @@ module.exports = () => {
         });
       });
 
-      it ('shouldn\'t have processed files', () => {
+      it ('shouldn\'t have processed files', (done) => {
         let reporter = new ESLintAngularReporter(esLintAngularMock.badSrcOption, 'SonarWebFrontEndReporters');
 
-        reporter.launch((done) => {
+        reporter.launch(() => {
           let result = readJSONFile(esLintAngularMock.badSrcOption.report);
 
           result.files.length.should.be.equal(0);
@@ -109,12 +109,16 @@ module.exports = () => {
 
       it('should launch with ES5 backward compatibility', (done) => {
         let reporter = new ESLintAngularReporterES5(esLintAngularMock.defaultOptions, 'SonarWebFrontEndReporters');
+
         reporter.launch(() => {
           let result = readJSONFile(esLintAngularMock.defaultOptions.report);
+
           result.files.length.should.be.equal(1);
           result.nbFiles.should.be.equal(1);
+
           done();
         });
+
       });
 
     });
