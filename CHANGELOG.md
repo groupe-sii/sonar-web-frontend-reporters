@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+## 3.1.0 - 2016-12-19
+
 ### Added
 
 - **multi-glob**: The `src` property can now take an array of globs (Closes [#15](https://github.com/groupe-sii/sonar-web-frontend-reporters/issues/15)) [@ValentinGot]
@@ -19,15 +21,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - **eslint**: use the `severity` property to retrieve the severity (Closes [#16](https://github.com/groupe-sii/sonar-web-frontend-reporters/issues/16)) [@ValentinGot]
 - **eslint-angular**: use the `severity` property to retrieve the severity (Closes [#16](https://github.com/groupe-sii/sonar-web-frontend-reporters/issues/16)) [@ValentinGot]
 
-## 3.0.0 - 09-12-2016
+## 3.0.0 - 2016-12-09
 
 - Release first stable version
 
-## 3.0.0-beta2 - 07-12-2016
+## 3.0.0-beta2 - 2016-12-07
 
 - Add ES5 backward compatibility (Closes #13)
 
-## 3.0.0-beta - 05-12-2016
+## 3.0.0-beta - 2016-12-05
 
 ### Added
 
