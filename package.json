@@ -1,7 +1,7 @@
 {
   "name": "sonar-web-frontend-reporters",
-  "description": "This is a repo of SII continuous integration build system dedicated to Front-end webapps. This repo provides all the reporters written by SII for the generic [Sonarqube plugin](https://github.com/groupe-sii/sonar-web-client-plugin)",
-  "version": "3.0.0",
+  "description": "sreporter is a Command-Line Interface to generate Front-End linters reporters for the SonarQube plugin",
+  "version": "3.1.0",
   "main": "./lib/api.js",
   "bin": {
     "sreporter": "./bin/sreporter"
@@ -22,6 +22,8 @@
     "csslint",
     "htmlhint",
     "eslint",
+    "angularjs",
+    "tslint",
     "sonar"
   ],
   "author": "Cédric Le Gallo <cedric.legallo@gmail.com> (http://www.groupe-sii.com/)",
@@ -37,11 +39,13 @@
   "homepage": "https://github.com/groupe-sii/sonar-web-frontend-reporters#readme",
   "dependencies": {
     "chalk": "^1.1.3",
+    "commander": "^2.9.0",
     "csslint": "^1.0.4",
     "eslint": "^3.11.1",
     "eslint-config-angular": "^0.5.0",
     "eslint-plugin-angular": "^1.4.1",
     "glob": "^7.1.1",
+    "glob-all": "^3.1.0",
     "htmlhint": "^0.9.13",
     "jshint": "^2.9.4",
     "mkdirp": "^0.5.1",

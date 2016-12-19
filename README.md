@@ -152,8 +152,8 @@ cssLintReporter.launch(() => {
 To use it with older NodeJS versions, you can require the reporters this way:
 
 ```js
-const SonarWebReporters = require('sonar-web-frontend-reporters').ES5.Reporters;
-const CSSLintReporter = require('sonar-web-frontend-reporters').ES5.CSSLintReporter;
+var SonarWebReporters = require('sonar-web-frontend-reporters/build/reporters');
+var CSSLintReporter = require('sonar-web-frontend-reporters/build/reporters/csslint.reporter');
 ```
 
 ## Available reporters

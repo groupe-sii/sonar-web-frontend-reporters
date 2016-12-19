@@ -1,6 +1,6 @@
-const SonarWebReporters = require('../../lib/api').Reporters;
+var SonarWebReporters = require('../../build/reporters');
 
-let sonarWebReporters = new SonarWebReporters('Sonar Web Reporters', {
+var sonarWebReporters = new SonarWebReporters('Sonar Web Reporters', {
   "csslint": false,
   "eslint": {
     "src": "samples/src/**/*.js",
@@ -23,6 +23,6 @@ let sonarWebReporters = new SonarWebReporters('Sonar Web Reporters', {
     "rulesFile": "./samples/.htmlhintrc"
   }
 });
-sonarWebReporters.launchReporters(() => {
+sonarWebReporters.launchReporters(function () {
   console.log('All reporters have been processed');
 });

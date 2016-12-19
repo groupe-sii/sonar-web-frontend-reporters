@@ -4,21 +4,29 @@
 
 var chalk = require('chalk'),
   version = require('../package.json').version,
-  es5 = (process.argv.includes('--es5') > -1),
+  program = require('commander'),
   CLIEngine;
 
-// Use ES5 backward compatibility ?
-if (es5) {
-  CLIEngine = require('../build/cli');
-} else {
-  CLIEngine = require('../lib/cli');
-}
+var CLI = {
 
-// Log version number
-if (process.argv.includes('version') || process.argv.includes('--version')) {
-  console.info(chalk.bold('sreporter version v' + version));
-  process.exit(0);
-}
+  /**
+   * Launch reporters
+   */
+  launchReporters: function () {
+    if (program.es5) {
+      CLIEngine = require('../build/cli');
+    } else {
+      CLIEngine = require('../lib/cli');
+    }
 
-var cli = new CLIEngine();
-cli.launchReporters();
+    (new CLIEngine()).launchReporters();
+  }
+
+};
+
+program
+  .version(version)
+  .option('--es5', 'launch CLI with ES5 backward compatibility')
+  .parse(process.argv);
+
+CLI.launchReporters();
