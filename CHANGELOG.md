@@ -5,7 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/) 
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## Unreleased
+## 3.1.1 - 2017-01-11
+
+### Fixed
+
+- **es5**: for **eslint** & **eslint-angular**, use the `severity` property to retrieve the severity (Closes [#16](https://github.com/groupe-sii/sonar-web-frontend-reporters/issues/16)) [@ValentinGot]
 
 ## 3.1.0 - 2016-12-19
 
