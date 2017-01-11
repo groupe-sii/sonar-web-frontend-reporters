@@ -69,7 +69,7 @@ module.exports = function (_Reporter) {
         for (var _iterator = result.results[0].messages[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
           var message = _step.value;
 
-          switch (message.type) {
+          switch (message.severity) {
             case 2:
               severity = this.MAJOR;
               break;
