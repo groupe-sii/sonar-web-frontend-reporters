@@ -12,14 +12,22 @@ var fs = require('fs'),
     ReporterFactory = require('./reporter.factory');
 
 var CLIEngine = function () {
+
+  /**
+   * Instantiate a new CLIEngine
+   *
+   * @param {string=}  [config=./.sreporterrc]  Use configuration from this file. Defaults to ./.sreporterrc.
+   */
   function CLIEngine() {
+    var config = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : './.sreporterrc';
+
     _classCallCheck(this, CLIEngine);
 
-    if (!fs.existsSync('./.sreporterrc')) {
-      throw new Error('.sreporterrc file is missing');
+    if (!fs.existsSync(config)) {
+      throw new Error(config + ' file is missing');
     }
 
-    this.options = JSON.parse(fs.readFileSync('./.sreporterrc', 'utf8'));
+    this.options = JSON.parse(fs.readFileSync(config, 'utf8'));
   }
 
   /**

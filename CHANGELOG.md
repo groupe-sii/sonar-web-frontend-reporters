@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/) 
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## Unreleased
+
+### Added
+
+- **cli**: add a '-c, --config <path>' option (Closes [#18](https://github.com/groupe-sii/sonar-web-frontend-reporters/issues/18)) [@ValentinGot]
+
 ## 3.1.1 - 2017-01-11
 
 ### Fixed
