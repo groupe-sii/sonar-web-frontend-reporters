@@ -54,10 +54,7 @@ After writing your new reporter, you should build the library to keep the ES5 ba
 
     ```js
     module.exports = {
-      NewReporter: require('./reporters/new-reporter.reporter'),
-      ES5        : {
-        NewReporter: require('../build/reporters/new-reporter.reporter')
-      }
+      NewReporter: require('./reporters/new-reporter.reporter')
     };
     ```
 1. Create related tests in `/test/reporters` folder
