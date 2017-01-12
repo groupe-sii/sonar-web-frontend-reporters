@@ -27,10 +27,25 @@ $ npm install sonar-web-frontend-reporters --save-dev   // For NodeJS use
 Launch the CLI by calling:
 
 ```sh
-$ sreporter
+$ sreporter [options]
 ```
 
-The Command-Line Interface uses a `.sreporterrc` file to define the reporters configuration. The `.sreporterrc` file is mandatory in order to use the CLI.
+#### Options
+
+The command line utility has several options. You can view the options by running `eslint -h`.
+
+```sh
+Usage: sreporter [options]
+
+Options:
+
+  -h, --help           output usage information
+  -V, --version        output the version number
+  --es5                launch CLI with ES5 backward compatibility
+  -c, --config <path>  Use configuration from this file. Defaults to ./.sreporterrc
+```
+
+The Command-Line Interface uses a configuration file (default is `.sreporterrc`) to define the reporters configuration. The configuration file is mandatory in order to use the CLI.
 
 Default options are as follows:
 
