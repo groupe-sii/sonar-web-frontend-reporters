@@ -2,10 +2,11 @@ samples/
 reports/
 node_modules/
 test/
+.idea/
 .editorconfig
 .eslintignore
 .eslintrc
 .travis.yml
-yarn.lock
 .git*
 .babelrc
+yarn.lock
