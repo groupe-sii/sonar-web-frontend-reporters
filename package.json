@@ -9,7 +9,8 @@
   "scripts": {
     "build": "babel lib --out-dir build",
     "lint": "eslint .",
-    "test": "npm run-script lint && mocha"
+    "test": "npm run-script lint && mocha",
+    "prepublish": "npm run-script build"
   },
   "repository": {
     "type": "git",
