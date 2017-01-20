@@ -41,8 +41,8 @@ Options:
 
   -h, --help           output usage information
   -V, --version        output the version number
-  --es5                launch CLI with ES5 backward compatibility
   -c, --config <path>  Use configuration from this file. Defaults to ./.sreporterrc
+  --es5                launch CLI with ES5 backward compatibility
 ```
 
 The Command-Line Interface uses a configuration file (default is `.sreporterrc`) to define the reporters configuration. The configuration file is mandatory in order to use the CLI.

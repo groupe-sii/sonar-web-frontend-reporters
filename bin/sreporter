@@ -26,8 +26,8 @@ var CLI = {
 
 program
   .version(version)
-  .option('--es5', 'launch CLI with ES5 backward compatibility')
   .option('-c, --config <path>', 'Use configuration from this file. Defaults to ./.sreporterrc')
+  .option('--es5', 'launch CLI with ES5 backward compatibility')
   .parse(process.argv);
 
 CLI.launchReporters();
