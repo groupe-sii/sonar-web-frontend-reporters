@@ -19,13 +19,14 @@ var CLI = {
       CLIEngine = require('../lib/cli');
     }
 
-    (new CLIEngine()).launchReporters();
+    (new CLIEngine(program.config)).launchReporters();
   }
 
 };
 
 program
   .version(version)
+  .option('-c, --config <path>', 'Use configuration from this file. Defaults to ./.sreporterrc')
   .option('--es5', 'launch CLI with ES5 backward compatibility')
   .parse(process.argv);
 
