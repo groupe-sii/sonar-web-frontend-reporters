@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/) 
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## Unreleased - ?
+
+### Updated
+
+- **package.json**: upgrade `csslint`, `eslint`, `eslint-plugin-angular`, `tslint` and `typescript` versions
+
 ## 3.2.0 - 2017-01-20
 
 ### Added
