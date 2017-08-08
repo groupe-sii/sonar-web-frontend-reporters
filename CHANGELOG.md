@@ -7,9 +7,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased - ?
 
+### Added
+
+- **eslint**: allow the use of eslint-import [@NumminorihSF]
+- **eslint-angular**: allow the use of eslint-import [@ValentinGot]
+
 ### Updated
 
-- **package.json**: upgrade `csslint`, `eslint`, `eslint-plugin-angular`, `tslint` and `typescript` versions
+- **package.json**: upgrade `csslint`, `eslint`, `eslint-plugin-angular`, `jshint`, `tslint` and `typescript` versions
 
 ## 3.2.0 - 2017-01-20
 
@@ -59,5 +64,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 - Gulp abstraction
 
-[@ole]: https://github.com/liollury
 [@ValentinGot]: https://github.com/ValentinGot
+[@liollury]: https://github.com/liollury
+[@NumminorihSF]: https://github.com/NumminorihSF
