@@ -81,7 +81,8 @@ Default options are as follows:
   "eslintangular": {
     "src": "src/**/*.js",
     "report": "eslint-angular.json",
-    "rulesFile": ".eslintrc"
+    "rulesFile": ".eslintrc",
+    "ignorePath": ".eslintignore"
   },
   "jshint": {
     "src": "src/**/*.js",
