@@ -4,7 +4,14 @@ module.exports = {
     src       : 'test/mocks/eslint.js',
     report    : 'test/output/eslint.json',
     rulesFile : 'test/mocks/.eslintrc',
-    ignorePath: 'test/.eslintignore'
+    ignorePath: 'test/mocks/.eslintignore-custom'
+  },
+
+  ignorePathOptions: {
+    src       : 'test/mocks/eslint.js',
+    report    : 'test/output/eslint.json',
+    rulesFile : 'test/mocks/.eslintrc',
+    ignorePath: 'test/mocks/.eslintignore-custom'
   },
 
   multiSrcOption: {
