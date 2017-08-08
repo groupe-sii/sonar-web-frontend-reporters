@@ -133,10 +133,5 @@
   },
   "env": {
     "browser": true
-  },
-  "globals": [
-    "module",
-    "inject",
-    "require"
-  ]
+  }
 }

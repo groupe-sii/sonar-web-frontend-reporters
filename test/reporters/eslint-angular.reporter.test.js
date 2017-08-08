@@ -49,14 +49,14 @@ module.exports = () => {
         });
       });
 
-      it (`should have 3 issues`, (done) => {
+      it (`should have 2 issues`, (done) => {
         let reporter = new ESLintAngularReporter(esLintAngularMock.defaultOptions, 'SonarWebFrontEndReporters'),
-          expected = [ 'ng_controller_name', 'ng_no_service_method', 'ng_no_undef' ];
+          expected = [ 'ng_controller_name', 'ng_no_service_method' ];
 
         reporter.launch(() => {
           let result = readJSONFile(esLintAngularMock.defaultOptions.report);
 
-          result.files[0].issues.length.should.be.equal(3);
+          result.files[0].issues.length.should.be.equal(2);
           result.files[0].issues.forEach((issue) => {
             issue.rulekey.should.be.oneOf(expected);
           });
