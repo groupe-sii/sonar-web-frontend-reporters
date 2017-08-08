@@ -1,1 +1,2 @@
-if(true){var a="foo";if(false){;}}//abc
+//comment must start with a space
+var a ="foo";

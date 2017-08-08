@@ -49,14 +49,14 @@ module.exports = () => {
         });
       });
 
-      it ('should have 4 issues', (done) => {
-        let reporter = new TSLintReporter(tsLintMock.defaultOptions, 'SonarWebFrontEndReporters');
+      it ('should have 2 issues', (done) => {
+        let reporter = new TSLintReporter(tsLintMock.defaultOptions, 'SonarWebFrontEndReporters'),
+          expected = ['no-var-keyword', 'comment-format'];
 
         reporter.launch(() => {
           let result = readJSONFile(tsLintMock.defaultOptions.report);
 
-          result.files[0].issues.length.should.be.equal(4);
-          let expected = ['no-var-keyword', 'one-line', 'comment-format'];
+          result.files[0].issues.length.should.be.equal(2);
           result.files[0].issues.forEach((val) => {
             val.rulekey.should.be.oneOf(expected);
           });
@@ -65,13 +65,13 @@ module.exports = () => {
         });
       });
 
-      it ('should be a one line file', (done) => {
+      it ('should be a two lines file', (done) => {
         let reporter = new TSLintReporter(tsLintMock.defaultOptions, 'SonarWebFrontEndReporters');
 
         reporter.launch(() => {
           let result = readJSONFile(tsLintMock.defaultOptions.report);
 
-          result.files[0].nbLines.should.be.equal(1);
+          result.files[0].nbLines.should.be.equal(2);
 
           done();
         });

@@ -75,12 +75,14 @@ Default options are as follows:
   "eslint": {
     "src": "src/**/*.js",
     "report": "reports/sonar/eslint.json",
-    "rulesFile": ".eslintrc"
+    "rulesFile": ".eslintrc",
+    "ignorePath": ".eslintignore"
   },
   "eslintangular": {
     "src": "src/**/*.js",
     "report": "eslint-angular.json",
-    "rulesFile": ".eslintrc"
+    "rulesFile": ".eslintrc",
+    "ignorePath": ".eslintignore"
   },
   "jshint": {
     "src": "src/**/*.js",

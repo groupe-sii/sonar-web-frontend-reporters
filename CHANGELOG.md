@@ -5,7 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/) 
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## Unreleased
+## Unreleased - ?
+
+### Added
+
+- **eslint**: allow the use of eslint-import [@NumminorihSF]
+- **eslint-angular**: allow the use of eslint-import [@ValentinGot]
+
+### Updated
+
+- **package.json**: upgrade `csslint`, `eslint`, `eslint-plugin-angular`, `jshint`, `tslint` and `typescript` versions
+
+## 3.2.0 - 2017-01-20
 
 ### Added
 
@@ -53,5 +64,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 - Gulp abstraction
 
-[@ole]: https://github.com/liollury
 [@ValentinGot]: https://github.com/ValentinGot
+[@liollury]: https://github.com/liollury
+[@NumminorihSF]: https://github.com/NumminorihSF

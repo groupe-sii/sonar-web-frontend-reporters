@@ -8,15 +8,15 @@ const fs = require('fs'),
 
 module.exports = () => {
 
-  describe('ESLintAngularReporter', () => {
+  describe ('ESLintAngularReporter', () => {
 
-    describe('#launch', () => {
+    describe ('#launch', () => {
 
-      it('should throw an error if the project name is undefined', () => {
+      it (`should throw an error if the project name is undefined`, () => {
         (() => new ESLintAngularReporter(esLintAngularMock.defaultOptions)).should.throw(Error);
       });
 
-      it('should be the right project name', (done) => {
+      it (`should be the right project name`, (done) => {
         let reporter = new ESLintAngularReporter(esLintAngularMock.defaultOptions, 'SonarWebFrontEndReporters');
 
         reporter.launch(() => {
@@ -26,7 +26,7 @@ module.exports = () => {
         });
       });
 
-      it('should create the output file', (done) => {
+      it (`should create the output file`, (done) => {
         let reporter = new ESLintAngularReporter(esLintAngularMock.defaultOptions, 'SonarWebFrontEndReporters');
 
         reporter.launch(() => {
@@ -36,7 +36,7 @@ module.exports = () => {
         });
       });
 
-      it('should be the right number of files', (done) => {
+      it (`should be the right number of files`, (done) => {
         let reporter = new ESLintAngularReporter(esLintAngularMock.defaultOptions, 'SonarWebFrontEndReporters');
 
         reporter.launch(() => {
@@ -49,7 +49,7 @@ module.exports = () => {
         });
       });
 
-      it ('should have 4 issues', (done) => {
+      it (`should have 2 issues`, (done) => {
         let reporter = new ESLintAngularReporter(esLintAngularMock.defaultOptions, 'SonarWebFrontEndReporters'),
           expected = [ 'ng_controller_name', 'ng_no_service_method' ];
 
@@ -65,7 +65,7 @@ module.exports = () => {
         });
       });
 
-      it ('should be a 14 lines file', (done) => {
+      it (`should be a 14 lines file`, (done) => {
         let reporter = new ESLintAngularReporter(esLintAngularMock.defaultOptions, 'SonarWebFrontEndReporters');
 
         reporter.launch(() => {
@@ -77,7 +77,20 @@ module.exports = () => {
         });
       });
 
-      it ('shouldn\'t match the ignored file', (done) => {
+      it (`should ignore .eslintignore content`, (done) => {
+        let reporter = new ESLintAngularReporter(esLintAngularMock.ignorePathOptions, 'SonarWebFrontEndReporters');
+
+        reporter.launch(() => {
+          let result = readJSONFile(esLintAngularMock.ignorePathOptions.report);
+
+          result.files.length.should.be.equal(1);
+          result.files[0].name.should.be.equal('eslint-angular.js');
+
+          done();
+        });
+      });
+
+      it (`shouldn't match the ignored file`, (done) => {
         let reporter = new ESLintAngularReporter(esLintAngularMock.multiSrcOption, 'SonarWebFrontEndReporters');
 
         reporter.launch(() => {
@@ -90,7 +103,7 @@ module.exports = () => {
         });
       });
 
-      it ('shouldn\'t have processed files', (done) => {
+      it (`shouldn't have processed files`, (done) => {
         let reporter = new ESLintAngularReporter(esLintAngularMock.badSrcOption, 'SonarWebFrontEndReporters');
 
         reporter.launch(() => {
@@ -103,11 +116,11 @@ module.exports = () => {
         });
       });
 
-      it('should find the rules file', () => {
+      it (`should find the rules file`, () => {
         (() => new ESLintAngularReporter(esLintAngularMock.badRulesFileOption, 'SonarWebFrontEndReporters')).should.throw(Error);
       });
 
-      it('should launch with ES5 backward compatibility', (done) => {
+      it (`should launch with ES5 backward compatibility`, (done) => {
         let reporter = new ESLintAngularReporterES5(esLintAngularMock.defaultOptions, 'SonarWebFrontEndReporters');
 
         reporter.launch(() => {
