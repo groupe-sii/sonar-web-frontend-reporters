@@ -1,9 +1,10 @@
 module.exports = {
 
   defaultOptions: {
-    src      : 'test/mocks/eslint.js',
-    report   : 'test/output/eslint.json',
-    rulesFile: 'test/mocks/.eslintrc'
+    src       : 'test/mocks/eslint.js',
+    report    : 'test/output/eslint.json',
+    rulesFile : 'test/mocks/.eslintrc',
+    ignorePath: 'test/.eslintignore'
   },
 
   multiSrcOption: {
