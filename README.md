@@ -75,7 +75,8 @@ Default options are as follows:
   "eslint": {
     "src": "src/**/*.js",
     "report": "reports/sonar/eslint.json",
-    "rulesFile": ".eslintrc"
+    "rulesFile": ".eslintrc",
+    "ignorePath": ".eslintignore"
   },
   "eslintangular": {
     "src": "src/**/*.js",
