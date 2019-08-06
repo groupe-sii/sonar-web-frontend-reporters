@@ -5,6 +5,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/) 
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.4.0](https://github.com/groupe-sii/sonar-web-frontend-reporters/compare/3.3.0...3.4.0) - 2019-08-06
+
+- **sonar-web-frontend-reporters**: upgrade dependencies to fix security issues [@ValentinGot]
+
 ## [3.3.0](https://github.com/groupe-sii/sonar-web-frontend-reporters/compare/3.2.0...3.3.0) - 2017-08-08
 
 ### Added
