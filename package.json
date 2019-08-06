@@ -10,7 +10,7 @@
     "build": "babel lib --out-dir build",
     "lint": "eslint .",
     "test": "npm run-script lint && mocha",
-    "prepublish": "npm run-script build"
+    "prepublishOnly": "npm run-script build"
   },
   "repository": {
     "type": "git",
@@ -47,7 +47,7 @@
     "eslint-plugin-angular": "^3.0.0",
     "glob": "^7.1.2",
     "glob-all": "^3.1.0",
-    "htmlhint": "^0.9.13",
+    "htmlhint": "^0.11.0",
     "jshint": "^2.9.5",
     "mkdirp": "^0.5.1",
     "sass-lint": "^1.10.2",
@@ -55,10 +55,11 @@
     "typescript": "^2.4.2"
   },
   "devDependencies": {
-    "babel-cli": "^6.24.1",
-    "babel-preset-latest": "^6.24.1",
+    "@babel/cli": "^7.5.5",
+    "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
     "chai": "^4.1.1",
-    "mocha": "^3.5.0"
+    "mocha": "^6.2.0"
   },
   "engines": {
     "node": ">=4.4.5"
