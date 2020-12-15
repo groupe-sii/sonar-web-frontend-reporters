@@ -1,3 +1,7 @@
+# WARNING: UNMAINTAINED PROJECT
+
+This project is no longer supported or maintained. Please consider reviewing code and dependencies before using it.
+
 # Sonar Web Front-End Reporters
 
 [![Build Status](https://travis-ci.org/groupe-sii/sonar-web-frontend-reporters.svg?branch=master)](https://travis-ci.org/groupe-sii/sonar-web-frontend-reporters)
